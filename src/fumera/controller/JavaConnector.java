@@ -29,10 +29,10 @@ public class JavaConnector {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://sql2.freesqldatabase.com/" 
                     + DBname + "?user=" + DBuser + "&password=" + DBpass);
-            JOptionPane.showMessageDialog(null, "Bağlandı!");
+            JOptionPane.showMessageDialog(null, "Bağlandı!", "Sunucu Bağlantısı", JOptionPane.INFORMATION_MESSAGE, null);
             return connection;
         } catch (ClassNotFoundException | SQLException | HeadlessException e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, e, "Sunucu Bağlantısı", JOptionPane.WARNING_MESSAGE, null);
             return null;
         }
     }

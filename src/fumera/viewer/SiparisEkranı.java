@@ -8,7 +8,6 @@ import fumera.controller.JavaDBtoObj;
 import fumera.model.Siparis;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -28,33 +27,58 @@ public class SiparisEkranı extends javax.swing.JFrame {
     private void UpdateTable(){
         JavaDBtoObj dbTOobj = new JavaDBtoObj();
         ArrayList<Siparis> siparisler;
+        ArrayList<Siparis> tamamlanmisSiparisler = new ArrayList<>();
         siparisler = dbTOobj.fetchDB();
         
-        /*
         for( int i = 0; i < siparisler.size(); i++) {
-            System.out.println(siparisler.get(i).toString());
-        }*/
+            if( siparisler.get(i).getDurum().equals("Hazırlanıyor")){     //Tamamlandı
+                tamamlanmisSiparisler.add( siparisler.get(i));
+                siparisler.remove(i);
+            }
+        }
         
         System.out.println("Creating table object");
         
-        String[] colum_names = {"Sipariş ID", "Firma", "Sipariş Tarihi", "Toplam Fiyat" };
-        Object[][] liste = new Object[siparisler.size()][4];
+        String[] colum_namesAktif = {"Sipariş ID", "Firma", "Sipariş Tarihi", "Toplam Fiyat" };
+        Object[][] Aktif = new Object[siparisler.size()][4];
         for ( int i = 0; i < siparisler.size(); i++) {
-            liste[i][0] = siparisler.get(i).getSiparis_id();
-            liste[i][1] = siparisler.get(i).getFirma().getFirma_adi();
-            liste[i][2] = siparisler.get(i).getSiparis_tarih();
-            liste[i][3] = siparisler.get(i).getToplam();
+            Aktif[i][0] = siparisler.get(i).getSiparis_id();
+            Aktif[i][1] = siparisler.get(i).getFirma().getFirma_adi();
+            Aktif[i][2] = siparisler.get(i).getSiparis_tarih();
+            Aktif[i][3] = siparisler.get(i).getToplam();
         }
         System.out.println("Setting new table model");
-        DefaultTableModel tableModel = new DefaultTableModel(liste, colum_names) {
+        DefaultTableModel tableModelAktif = new DefaultTableModel(Aktif, colum_namesAktif) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 //all cells false
                 return false;
             }
         };
-        aktif_siparis_table.setModel( tableModel);
-        aktif_siparis_table.setAutoCreateRowSorter(true);
+        
+        aktif_siparis_table.setModel( tableModelAktif);
+        aktif_siparis_table.setAutoCreateRowSorter( true);
+        
+        
+        String[] colum_namesBitmis = {"Sipariş ID", "Firma", "Sipariş Tarihi", "Toplam Fiyat" };
+        Object[][] Bitmis = new Object[tamamlanmisSiparisler.size()][4];
+        for ( int i = 0; i < tamamlanmisSiparisler.size(); i++) {
+            Bitmis[i][0] = tamamlanmisSiparisler.get(i).getSiparis_id();
+            Bitmis[i][1] = tamamlanmisSiparisler.get(i).getFirma().getFirma_adi();
+            Bitmis[i][2] = tamamlanmisSiparisler.get(i).getSiparis_tarih();
+            Bitmis[i][3] = tamamlanmisSiparisler.get(i).getToplam();
+        }
+        System.out.println("Setting new table model");
+        DefaultTableModel tableModelPaisf = new DefaultTableModel(Bitmis, colum_namesBitmis) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //all cells false
+                return false;
+            }
+        };
+        
+        bitmis_siparis_table.setModel( tableModelPaisf);
+        bitmis_siparis_table.setAutoCreateRowSorter( true);
     }
 
     /**
@@ -72,10 +96,14 @@ public class SiparisEkranı extends javax.swing.JFrame {
         aktif_siparis_table = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        bitmis_siparis_table = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -119,12 +147,12 @@ public class SiparisEkranı extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Aktif Siparişler", jPanel1);
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        bitmis_siparis_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -135,7 +163,7 @@ public class SiparisEkranı extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(bitmis_siparis_table);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -145,46 +173,81 @@ public class SiparisEkranı extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Tamamlanmış Siparişler", jPanel2);
+
+        jLabel1.setText("jLabel1");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(jLabel1)
+                .addContainerGap(744, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1)
+                .addContainerGap(479, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 822, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 491, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Sipariş Görüntüle", jPanel3);
+
+        jLabel2.setText("jLabel2");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 822, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(73, 73, 73)
+                .addComponent(jLabel2)
+                .addContainerGap(715, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 491, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jLabel2)
+                .addContainerGap(462, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Sipariş Düzenle", jPanel4);
+
+        jLabel3.setText("jLabel3");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 822, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addContainerGap(778, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 491, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addContainerGap(488, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Yeni Sipariş Girişi", jPanel5);
@@ -257,7 +320,7 @@ public class SiparisEkranı extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Fumera Ar-Ge Yazılım Ltd. Şti. \n Yazılım Departmanı\nTansel Altınel\naltinel@fumera.com.tr");
+        JOptionPane.showMessageDialog(null, "Fumera Ar-Ge Yazılım Ltd. Şti. \n Yazılım Departmanı\nTansel Altınel\naltinel@fumera.com.tr", "Hakkında", JOptionPane.INFORMATION_MESSAGE, null);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
@@ -297,6 +360,10 @@ public class SiparisEkranı extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable aktif_siparis_table;
+    private javax.swing.JTable bitmis_siparis_table;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -310,9 +377,9 @@ public class SiparisEkranı extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable3;
     // End of variables declaration//GEN-END:variables
 }
