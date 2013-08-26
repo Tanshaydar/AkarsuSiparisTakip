@@ -7,6 +7,7 @@ package fumera.viewer;
 import fumera.controller.JavaDBtoObj;
 import fumera.model.Siparis;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -218,6 +219,11 @@ public class SiparisEkranı extends javax.swing.JFrame {
         jMenu4.add(jMenuItem2);
 
         jMenuItem3.setText("Hakkında");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem3);
 
         jMenuBar1.add(jMenu4);
@@ -248,6 +254,11 @@ public class SiparisEkranı extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Fumera Ar-Ge Yazılım Ltd. Şti. \n Yazılım Departmanı\nTansel Altınel\naltinel@fumera.com.tr");
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
