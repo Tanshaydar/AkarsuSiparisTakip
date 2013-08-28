@@ -7,6 +7,7 @@ package fumera.viewer;
 import fumera.controller.JavaConnector;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,7 +49,7 @@ public class GirisFormu extends javax.swing.JFrame {
         cmd_login = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sipariş Takip Sistemi Giriş");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Giriş", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 1, 18), new java.awt.Color(51, 153, 255))); // NOI18N
@@ -137,17 +138,30 @@ public class GirisFormu extends javax.swing.JFrame {
             
             if( resultset.next()){
                 JOptionPane.showMessageDialog(null, "Giriş Başarılı");
+                close();
                 SiparisEkranı se = new SiparisEkranı();
                 se.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/viewer/icon.png")));
                 this.setVisible(false);
                 se.setLocationRelativeTo( null);
-                se.setVisible( true);                
+                se.setVisible( true);
+                
             }
         } catch (SQLException | HeadlessException e) {
             JOptionPane.showMessageDialog(null, "Kullanıcı adı ya da şifre hatalı!");
+        } finally {
+            try {
+                resultset.close();
+                statement.close();
+            } catch (Exception e) {
+            }
         }
     }//GEN-LAST:event_cmd_loginActionPerformed
 
+    public void close(){
+        WindowEvent windowClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(windowClosingEvent);
+    }
+    
     /**
      * @param args the command line arguments
      */

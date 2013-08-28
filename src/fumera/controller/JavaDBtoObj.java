@@ -80,12 +80,20 @@ public class JavaDBtoObj {
             }
             System.out.println("Liste çekildi!");
             
-            return siparisListesi;
-            
         } catch (SQLException | NumberFormatException e) {
             JOptionPane.showMessageDialog(null, e);
+        } finally {
+            try {
+                resultsetF.close();
+                resultsetS.close();
+                resultsetU.close();
+                statementF.close();
+                statementS.close();
+                statementU.close();
+            } catch (Exception e) {
+            }
         }
         
-        return null;
+        return siparisListesi;
     }
 }
