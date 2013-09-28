@@ -426,11 +426,13 @@
                     <Component class="javax.swing.JTable" name="jTable3">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="4" rowCount="4">
-                            <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                            <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                            <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                            <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                          <Table columnCount="6" rowCount="4">
+                            <Column editable="true" title="No" type="java.lang.Integer"/>
+                            <Column editable="true" title="&#xdc;r&#xfc;n Ad&#x131;" type="java.lang.String"/>
+                            <Column editable="true" title="&#xdc;r&#xfc;n Fiyat&#x131;" type="java.lang.Float"/>
+                            <Column editable="true" title="&#xdc;r&#xfc;n Durumu" type="java.lang.Object"/>
+                            <Column editable="false" title="Toplam Fiyat" type="java.lang.Float"/>
+                            <Column editable="true" title="&#xdc;r&#xfc;n A&#xe7;&#x131;klamas&#x131;" type="java.lang.String"/>
                           </Table>
                         </Property>
                       </Properties>

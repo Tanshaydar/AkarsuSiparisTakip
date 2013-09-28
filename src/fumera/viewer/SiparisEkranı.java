@@ -344,15 +344,30 @@ public class SiparisEkranı extends javax.swing.JFrame {
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "No", "Ürün Adı", "Ürün Fiyatı", "Ürün Durumu", "Toplam Fiyat", "Ürün Açıklaması"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Object.class, java.lang.Float.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, true, true, true, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane9.setViewportView(jTable3);
 
         javax.swing.GroupLayout yeniSiparis_urunlerPaneliLayout = new javax.swing.GroupLayout(yeniSiparis_urunlerPaneli);
@@ -1033,18 +1048,12 @@ public class SiparisEkranı extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     private javax.swing.JButton sg_Kaydet;
-    private javax.swing.JButton sg_Kaydet1;
-    private javax.swing.JButton sg_Kaydet2;
-    private javax.swing.JButton sg_Kaydet3;
     private javax.swing.JButton sg_Kaydet4;
     private javax.swing.JLabel sg_aciklama;
     private javax.swing.JLabel sg_aciklama2;
     private javax.swing.JTextArea sg_aciklamaField;
     private javax.swing.JTextArea sg_aciklamaField2;
     private javax.swing.JButton sg_duzenle;
-    private javax.swing.JButton sg_duzenle1;
-    private javax.swing.JButton sg_duzenle2;
-    private javax.swing.JButton sg_duzenle3;
     private javax.swing.JButton sg_duzenle4;
     private javax.swing.JTextField sg_faxField;
     private javax.swing.JTextField sg_faxField2;
@@ -1057,17 +1066,11 @@ public class SiparisEkranı extends javax.swing.JFrame {
     private javax.swing.JTextField sg_mailField;
     private javax.swing.JTextField sg_mailField2;
     private javax.swing.JButton sg_sil;
-    private javax.swing.JButton sg_sil1;
-    private javax.swing.JButton sg_sil2;
-    private javax.swing.JButton sg_sil3;
     private javax.swing.JButton sg_sil4;
     private javax.swing.JTextField sg_telField;
     private javax.swing.JTextField sg_telField2;
     private javax.swing.JPanel siparisGoruntule_FirmaPaneli;
     private javax.swing.JPanel siparisGoruntule_butons;
-    private javax.swing.JPanel siparisGoruntule_butons1;
-    private javax.swing.JPanel siparisGoruntule_butons2;
-    private javax.swing.JPanel siparisGoruntule_butons3;
     private javax.swing.JPanel siparisGoruntule_urunlerPaneli;
     private javax.swing.JPanel siparisGoruntulemePaneli;
     private javax.swing.JTabbedPane siparisSekmeleri;
