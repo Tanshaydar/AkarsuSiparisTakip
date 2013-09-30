@@ -8,8 +8,11 @@ import fumera.controller.JavaDBtoObj;
 import fumera.model.Siparis;
 import java.util.ArrayList;
 import javax.swing.Box;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -22,8 +25,8 @@ public class SiparisEkranı extends javax.swing.JFrame {
     private ArrayList<Siparis> tamamlanmisSiparisler = new ArrayList<>();
     
     // GUI VARIABLES
-    private Box box;
-    
+    TableColumn urunDurumColumn;
+    JComboBox urunComboBox = new JComboBox();
     /**
      * Creates new form SiparisEkranı
      */
@@ -31,6 +34,11 @@ public class SiparisEkranı extends javax.swing.JFrame {
     // CONSTRUCTOR
     public SiparisEkranı() {
         initComponents();
+        
+        urunDurumColumn = yeniSiparis_urunTablosu.getColumnModel().getColumn(3);
+        urunComboBox.addItem("Hazırlanıyor");
+        urunComboBox.addItem("Tamamlandı");
+        urunDurumColumn.setCellEditor( new DefaultCellEditor(urunComboBox));
         UpdateTable();
     }
     
@@ -129,7 +137,7 @@ public class SiparisEkranı extends javax.swing.JFrame {
         dateChooserCombo6 = new datechooser.beans.DateChooserCombo();
         yeniSiparis_urunlerPaneli = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        yeniSiparis_urunTablosu = new javax.swing.JTable();
         yeniSiparis_butons = new javax.swing.JPanel();
         sg_duzenle4 = new javax.swing.JButton();
         sg_sil4 = new javax.swing.JButton();
@@ -342,12 +350,10 @@ public class SiparisEkranı extends javax.swing.JFrame {
 
         yeniSiparis_urunlerPaneli.setBorder(javax.swing.BorderFactory.createTitledBorder("Ürünler"));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        yeniSiparis_urunTablosu.setAutoCreateRowSorter(true);
+        yeniSiparis_urunTablosu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                { new Integer(1), null, null, null, null, null}
             },
             new String [] {
                 "No", "Ürün Adı", "Ürün Fiyatı", "Ürün Durumu", "Toplam Fiyat", "Ürün Açıklaması"
@@ -357,7 +363,7 @@ public class SiparisEkranı extends javax.swing.JFrame {
                 java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Object.class, java.lang.Float.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                true, true, true, true, false, true
+                false, true, true, true, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -368,7 +374,13 @@ public class SiparisEkranı extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane9.setViewportView(jTable3);
+        yeniSiparis_urunTablosu.setColumnSelectionAllowed(true);
+        yeniSiparis_urunTablosu.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        yeniSiparis_urunTablosu.setFillsViewportHeight(true);
+        yeniSiparis_urunTablosu.setName("Yeni Sipariş Ürünler"); // NOI18N
+        jScrollPane9.setViewportView(yeniSiparis_urunTablosu);
+        yeniSiparis_urunTablosu.getColumnModel().getColumn(0).setResizable(false);
+        yeniSiparis_urunTablosu.getColumnModel().getColumn(0).setPreferredWidth(1);
 
         javax.swing.GroupLayout yeniSiparis_urunlerPaneliLayout = new javax.swing.GroupLayout(yeniSiparis_urunlerPaneli);
         yeniSiparis_urunlerPaneli.setLayout(yeniSiparis_urunlerPaneliLayout);
@@ -1042,7 +1054,6 @@ public class SiparisEkranı extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField8;
@@ -1078,6 +1089,7 @@ public class SiparisEkranı extends javax.swing.JFrame {
     private javax.swing.JPanel yeniSiparisGirisPaneli;
     private javax.swing.JPanel yeniSiparis_FirmaPaneli;
     private javax.swing.JPanel yeniSiparis_butons;
+    private javax.swing.JTable yeniSiparis_urunTablosu;
     private javax.swing.JPanel yeniSiparis_urunlerPaneli;
     // End of variables declaration//GEN-END:variables
 }
