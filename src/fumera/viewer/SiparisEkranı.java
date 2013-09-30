@@ -7,10 +7,10 @@ package fumera.viewer;
 import fumera.controller.JavaDBtoObj;
 import fumera.model.Siparis;
 import java.util.ArrayList;
-import javax.swing.Box;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.RowSorter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -39,6 +39,10 @@ public class SiparisEkranı extends javax.swing.JFrame {
         urunComboBox.addItem("Hazırlanıyor");
         urunComboBox.addItem("Tamamlandı");
         urunDurumColumn.setCellEditor( new DefaultCellEditor(urunComboBox));
+        
+        yeniSiparis_urunTablosu.setShowVerticalLines( true);
+        yeniSiparis_urunTablosu.setShowHorizontalLines( true);
+        
         UpdateTable();
     }
     
@@ -139,9 +143,10 @@ public class SiparisEkranı extends javax.swing.JFrame {
         jScrollPane9 = new javax.swing.JScrollPane();
         yeniSiparis_urunTablosu = new javax.swing.JTable();
         yeniSiparis_butons = new javax.swing.JPanel();
-        sg_duzenle4 = new javax.swing.JButton();
-        sg_sil4 = new javax.swing.JButton();
-        sg_Kaydet4 = new javax.swing.JButton();
+        yeniSiparis_yeniUrunEkle = new javax.swing.JButton();
+        yeniSiparis_Kaydet = new javax.swing.JButton();
+        yeniSiparis_Temizle = new javax.swing.JButton();
+        yeniSiparis_iptal = new javax.swing.JButton();
         aktifSiparislerPaneli = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         aktif_siparis_table = new javax.swing.JTable();
@@ -353,7 +358,7 @@ public class SiparisEkranı extends javax.swing.JFrame {
         yeniSiparis_urunTablosu.setAutoCreateRowSorter(true);
         yeniSiparis_urunTablosu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                { new Integer(1), null, null, null, null, null}
+
             },
             new String [] {
                 "No", "Ürün Adı", "Ürün Fiyatı", "Ürün Durumu", "Toplam Fiyat", "Ürün Açıklaması"
@@ -374,10 +379,10 @@ public class SiparisEkranı extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        yeniSiparis_urunTablosu.setColumnSelectionAllowed(true);
         yeniSiparis_urunTablosu.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         yeniSiparis_urunTablosu.setFillsViewportHeight(true);
         yeniSiparis_urunTablosu.setName("Yeni Sipariş Ürünler"); // NOI18N
+        yeniSiparis_urunTablosu.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane9.setViewportView(yeniSiparis_urunTablosu);
         yeniSiparis_urunTablosu.getColumnModel().getColumn(0).setResizable(false);
         yeniSiparis_urunTablosu.getColumnModel().getColumn(0).setPreferredWidth(1);
@@ -393,21 +398,23 @@ public class SiparisEkranı extends javax.swing.JFrame {
             .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
         );
 
-        sg_duzenle4.setText("Temizle");
-        sg_duzenle4.addActionListener(new java.awt.event.ActionListener() {
+        yeniSiparis_yeniUrunEkle.setText("Yeni Ürün Ekle");
+        yeniSiparis_yeniUrunEkle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sg_duzenle4ActionPerformed(evt);
+                yeniSiparis_yeniUrunEkleActionPerformed(evt);
             }
         });
 
-        sg_sil4.setText("İptal");
+        yeniSiparis_Kaydet.setText("Kaydet");
 
-        sg_Kaydet4.setText("Kaydet");
-        sg_Kaydet4.addActionListener(new java.awt.event.ActionListener() {
+        yeniSiparis_Temizle.setText("Temizle");
+        yeniSiparis_Temizle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sg_Kaydet4ActionPerformed(evt);
+                yeniSiparis_TemizleActionPerformed(evt);
             }
         });
+
+        yeniSiparis_iptal.setText("İptal");
 
         javax.swing.GroupLayout yeniSiparis_butonsLayout = new javax.swing.GroupLayout(yeniSiparis_butons);
         yeniSiparis_butons.setLayout(yeniSiparis_butonsLayout);
@@ -415,21 +422,27 @@ public class SiparisEkranı extends javax.swing.JFrame {
             yeniSiparis_butonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(yeniSiparis_butonsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(sg_duzenle4)
-                .addGap(18, 18, 18)
-                .addComponent(sg_sil4)
-                .addGap(18, 18, 18)
-                .addComponent(sg_Kaydet4)
+                .addComponent(yeniSiparis_yeniUrunEkle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(yeniSiparis_Kaydet)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(yeniSiparis_Temizle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(yeniSiparis_iptal)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        yeniSiparis_butonsLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {yeniSiparis_Kaydet, yeniSiparis_Temizle, yeniSiparis_iptal, yeniSiparis_yeniUrunEkle});
+
         yeniSiparis_butonsLayout.setVerticalGroup(
             yeniSiparis_butonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(yeniSiparis_butonsLayout.createSequentialGroup()
                 .addGap(1, 1, 1)
                 .addGroup(yeniSiparis_butonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(sg_duzenle4)
-                    .addComponent(sg_sil4)
-                    .addComponent(sg_Kaydet4))
+                    .addComponent(yeniSiparis_yeniUrunEkle)
+                    .addComponent(yeniSiparis_Kaydet)
+                    .addComponent(yeniSiparis_Temizle)
+                    .addComponent(yeniSiparis_iptal))
                 .addGap(1, 1, 1))
         );
 
@@ -929,13 +942,16 @@ public class SiparisEkranı extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField9ActionPerformed
 
-    private void sg_duzenle4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sg_duzenle4ActionPerformed
+    private void yeniSiparis_yeniUrunEkleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yeniSiparis_yeniUrunEkleActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_sg_duzenle4ActionPerformed
+        DefaultTableModel model = (DefaultTableModel) yeniSiparis_urunTablosu.getModel();
+        model.insertRow(yeniSiparis_urunTablosu.getRowCount(), new Object[]{yeniSiparis_urunTablosu.getRowCount()+1,0,0,0,0,""});
+        yeniSiparis_urunTablosu.revalidate();
+    }//GEN-LAST:event_yeniSiparis_yeniUrunEkleActionPerformed
 
-    private void sg_Kaydet4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sg_Kaydet4ActionPerformed
+    private void yeniSiparis_TemizleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yeniSiparis_TemizleActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_sg_Kaydet4ActionPerformed
+    }//GEN-LAST:event_yeniSiparis_TemizleActionPerformed
 
     private void siparisGoruntule( String id, boolean aktif){
         int i = Integer.parseInt(id);
@@ -991,13 +1007,7 @@ public class SiparisEkranı extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SiparisEkranı.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SiparisEkranı.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SiparisEkranı.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(SiparisEkranı.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -1059,13 +1069,11 @@ public class SiparisEkranı extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     private javax.swing.JButton sg_Kaydet;
-    private javax.swing.JButton sg_Kaydet4;
     private javax.swing.JLabel sg_aciklama;
     private javax.swing.JLabel sg_aciklama2;
     private javax.swing.JTextArea sg_aciklamaField;
     private javax.swing.JTextArea sg_aciklamaField2;
     private javax.swing.JButton sg_duzenle;
-    private javax.swing.JButton sg_duzenle4;
     private javax.swing.JTextField sg_faxField;
     private javax.swing.JTextField sg_faxField2;
     private javax.swing.JTextField sg_firmaField;
@@ -1077,7 +1085,6 @@ public class SiparisEkranı extends javax.swing.JFrame {
     private javax.swing.JTextField sg_mailField;
     private javax.swing.JTextField sg_mailField2;
     private javax.swing.JButton sg_sil;
-    private javax.swing.JButton sg_sil4;
     private javax.swing.JTextField sg_telField;
     private javax.swing.JTextField sg_telField2;
     private javax.swing.JPanel siparisGoruntule_FirmaPaneli;
@@ -1088,8 +1095,12 @@ public class SiparisEkranı extends javax.swing.JFrame {
     private javax.swing.JPanel tamamlanmısSiparisPaneli;
     private javax.swing.JPanel yeniSiparisGirisPaneli;
     private javax.swing.JPanel yeniSiparis_FirmaPaneli;
+    private javax.swing.JButton yeniSiparis_Kaydet;
+    private javax.swing.JButton yeniSiparis_Temizle;
     private javax.swing.JPanel yeniSiparis_butons;
+    private javax.swing.JButton yeniSiparis_iptal;
     private javax.swing.JTable yeniSiparis_urunTablosu;
     private javax.swing.JPanel yeniSiparis_urunlerPaneli;
+    private javax.swing.JButton yeniSiparis_yeniUrunEkle;
     // End of variables declaration//GEN-END:variables
 }

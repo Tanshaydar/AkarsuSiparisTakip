@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.6" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
@@ -427,10 +427,8 @@
                       <Properties>
                         <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="6" rowCount="1">
-                            <Column editable="false" title="No" type="java.lang.Integer">
-                              <Data value="1"/>
-                            </Column>
+                          <Table columnCount="6" rowCount="0">
+                            <Column editable="false" title="No" type="java.lang.Integer"/>
                             <Column editable="true" title="&#xdc;r&#xfc;n Ad&#x131;" type="java.lang.String"/>
                             <Column editable="true" title="&#xdc;r&#xfc;n Fiyat&#x131;" type="java.lang.Float"/>
                             <Column editable="true" title="&#xdc;r&#xfc;n Durumu" type="java.lang.Object"/>
@@ -472,12 +470,14 @@
                             </Column>
                           </TableColumnModel>
                         </Property>
-                        <Property name="columnSelectionAllowed" type="boolean" value="true"/>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                           <Color id="Text Cursor"/>
                         </Property>
                         <Property name="fillsViewportHeight" type="boolean" value="true"/>
                         <Property name="name" type="java.lang.String" value="Yeni Sipari&#x15f; &#xdc;r&#xfc;nler" noResource="true"/>
+                        <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
+                          <JTableSelectionModel selectionMode="0"/>
+                        </Property>
                         <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                         </Property>
@@ -492,13 +492,15 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="sg_duzenle4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="sg_sil4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="sg_Kaydet4" min="-2" max="-2" attributes="0"/>
+                          <Component id="yeniSiparis_yeniUrunEkle" linkSize="4" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="yeniSiparis_Kaydet" linkSize="4" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="yeniSiparis_Temizle" linkSize="4" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="yeniSiparis_iptal" linkSize="4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -508,9 +510,10 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="sg_duzenle4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="sg_sil4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="sg_Kaydet4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="yeniSiparis_yeniUrunEkle" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="yeniSiparis_Kaydet" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="yeniSiparis_Temizle" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="yeniSiparis_iptal" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                       </Group>
@@ -518,26 +521,31 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JButton" name="sg_duzenle4">
+                <Component class="javax.swing.JButton" name="yeniSiparis_yeniUrunEkle">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Yeni &#xdc;r&#xfc;n Ekle"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="yeniSiparis_yeniUrunEkleActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="yeniSiparis_Kaydet">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Kaydet"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="yeniSiparis_Temizle">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Temizle"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sg_duzenle4ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="yeniSiparis_TemizleActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="sg_sil4">
+                <Component class="javax.swing.JButton" name="yeniSiparis_iptal">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&#x130;ptal"/>
                   </Properties>
-                </Component>
-                <Component class="javax.swing.JButton" name="sg_Kaydet4">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Kaydet"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sg_Kaydet4ActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
