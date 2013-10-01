@@ -117,28 +117,28 @@ public class SiparisEkranı extends javax.swing.JFrame {
         yeniSiparisGirisPaneli = new javax.swing.JPanel();
         yeniSiparis_FirmaPaneli = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
-        sg_aciklamaField2 = new javax.swing.JTextArea();
-        sg_telField2 = new javax.swing.JTextField();
-        sg_faxField2 = new javax.swing.JTextField();
-        sg_ilgiliField2 = new javax.swing.JTextField();
+        yeniSiparis_siparisAciklamasi = new javax.swing.JTextArea();
+        yeniSiparis_telefon = new javax.swing.JTextField();
+        yeniSiparis_fax = new javax.swing.JTextField();
+        yeniSiparis_ilgiliAdi = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         sg_aciklama2 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        sg_mailField2 = new javax.swing.JTextField();
+        yeniSiparis_ePosta = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        sg_gsmField2 = new javax.swing.JTextField();
-        sg_firmaField2 = new javax.swing.JTextField();
+        yeniSiparis_gsm = new javax.swing.JTextField();
+        yeniSiparis_firmaAdi = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        dateChooserCombo5 = new datechooser.beans.DateChooserCombo();
-        dateChooserCombo6 = new datechooser.beans.DateChooserCombo();
+        yeniSiparis_siparisiIsteyen = new javax.swing.JTextField();
+        yeniSiparis_siparisiAlan = new javax.swing.JTextField();
+        yeniSiparis_siparisTarihi = new datechooser.beans.DateChooserCombo();
+        yeniSiparis_siparisIstenenTarih = new datechooser.beans.DateChooserCombo();
         yeniSiparis_urunlerPaneli = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
         yeniSiparis_urunTablosu = new javax.swing.JTable();
@@ -200,21 +200,21 @@ public class SiparisEkranı extends javax.swing.JFrame {
 
         yeniSiparis_FirmaPaneli.setBorder(javax.swing.BorderFactory.createTitledBorder("Sipariş Bilgileri"));
 
-        sg_aciklamaField2.setColumns(20);
-        sg_aciklamaField2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        sg_aciklamaField2.setRows(5);
-        sg_aciklamaField2.setText("Bu bir açıklama örneğidir.");
-        sg_aciklamaField2.setMinimumSize(new java.awt.Dimension(200, 19));
-        jScrollPane8.setViewportView(sg_aciklamaField2);
+        yeniSiparis_siparisAciklamasi.setColumns(20);
+        yeniSiparis_siparisAciklamasi.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        yeniSiparis_siparisAciklamasi.setRows(5);
+        yeniSiparis_siparisAciklamasi.setText("Bu bir açıklama örneğidir.");
+        yeniSiparis_siparisAciklamasi.setMinimumSize(new java.awt.Dimension(200, 19));
+        jScrollPane8.setViewportView(yeniSiparis_siparisAciklamasi);
 
-        sg_telField2.setText("03122270408");
+        yeniSiparis_telefon.setText("03122270408");
 
-        sg_faxField2.setText("03122270409");
+        yeniSiparis_fax.setText("03122270409");
 
-        sg_ilgiliField2.setText("Tansel Altınel");
-        sg_ilgiliField2.addActionListener(new java.awt.event.ActionListener() {
+        yeniSiparis_ilgiliAdi.setText("Tansel Altınel");
+        yeniSiparis_ilgiliAdi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sg_ilgiliField2ActionPerformed(evt);
+                yeniSiparis_ilgiliAdiActionPerformed(evt);
             }
         });
 
@@ -224,7 +224,7 @@ public class SiparisEkranı extends javax.swing.JFrame {
 
         jLabel20.setText("<html><b>Tel:</b></html>");
 
-        sg_mailField2.setText("altinel@fumera.com.tr");
+        yeniSiparis_ePosta.setText("altinel@fumera.com.tr");
 
         jLabel21.setText("<html><b>E-Posta:</b></html>");
 
@@ -234,13 +234,13 @@ public class SiparisEkranı extends javax.swing.JFrame {
 
         jLabel24.setText("<html><b>GSM:</b></html>");
 
-        sg_gsmField2.setText("05312831924");
+        yeniSiparis_gsm.setText("05312831924");
 
-        sg_firmaField2.setText("Fumera Ar-Ge Yazılım Ltd. Şti.");
-        sg_firmaField2.setMinimumSize(new java.awt.Dimension(200, 20));
-        sg_firmaField2.addActionListener(new java.awt.event.ActionListener() {
+        yeniSiparis_firmaAdi.setText("Fumera Ar-Ge Yazılım Ltd. Şti.");
+        yeniSiparis_firmaAdi.setMinimumSize(new java.awt.Dimension(200, 20));
+        yeniSiparis_firmaAdi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sg_firmaField2ActionPerformed(evt);
+                yeniSiparis_firmaAdiActionPerformed(evt);
             }
         });
 
@@ -250,612 +250,666 @@ public class SiparisEkranı extends javax.swing.JFrame {
 
         jLabel29.setText("<html><b>Sipariş Tarihi:</b></html>");
 
-        jLabel30.setText("<html><b>İstenilen Teslim Tarihi:</b></html>");
+        jLabel30.setText("<html><b>İstenen Teslim Tarihi:</b></html>");
 
-        jTextField8.setText("Tansel Altınel");
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        yeniSiparis_siparisiIsteyen.setText("Tansel Altınel");
+        yeniSiparis_siparisiIsteyen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                yeniSiparis_siparisiIsteyenActionPerformed(evt);
             }
         });
 
-        jTextField9.setText("Mustafa Akarsu");
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+        yeniSiparis_siparisiAlan.setText("Mustafa Akarsu");
+        yeniSiparis_siparisiAlan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField9ActionPerformed(evt);
+                yeniSiparis_siparisiAlanActionPerformed(evt);
             }
         });
 
-        dateChooserCombo5.setLocale(new java.util.Locale("tr", "TR", ""));
+        yeniSiparis_siparisTarihi.setCurrentView(new datechooser.view.appearance.AppearancesList("Swing",
+            new datechooser.view.appearance.ViewAppearance("custom",
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
+                    new java.awt.Color(0, 0, 0),
+                    new java.awt.Color(0, 0, 255),
+                    false,
+                    true,
+                    new datechooser.view.appearance.swing.ButtonPainter()),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
+                    new java.awt.Color(0, 0, 0),
+                    new java.awt.Color(0, 0, 255),
+                    true,
+                    true,
+                    new datechooser.view.appearance.swing.ButtonPainter()),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
+                    new java.awt.Color(0, 0, 255),
+                    new java.awt.Color(0, 0, 255),
+                    false,
+                    true,
+                    new datechooser.view.appearance.swing.ButtonPainter()),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
+                    new java.awt.Color(128, 128, 128),
+                    new java.awt.Color(0, 0, 255),
+                    false,
+                    true,
+                    new datechooser.view.appearance.swing.LabelPainter()),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
+                    new java.awt.Color(0, 0, 0),
+                    new java.awt.Color(0, 0, 255),
+                    false,
+                    true,
+                    new datechooser.view.appearance.swing.LabelPainter()),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
+                    new java.awt.Color(0, 0, 0),
+                    new java.awt.Color(255, 0, 0),
+                    false,
+                    false,
+                    new datechooser.view.appearance.swing.ButtonPainter()),
+                (datechooser.view.BackRenderer)null,
+                false,
+                true)));
+    yeniSiparis_siparisTarihi.setCalendarPreferredSize(new java.awt.Dimension(350, 350));
+    yeniSiparis_siparisTarihi.setLocale(new java.util.Locale("tr", "TR", ""));
+    yeniSiparis_siparisTarihi.setBehavior(datechooser.model.multiple.MultyModelBehavior.SELECT_SINGLE);
+    yeniSiparis_siparisTarihi.setShowOneMonth(true);
 
-        dateChooserCombo6.setLocale(new java.util.Locale("tr", "TR", ""));
+    yeniSiparis_siparisIstenenTarih.setLocale(new java.util.Locale("tr", "TR", ""));
+    yeniSiparis_siparisIstenenTarih.setBehavior(datechooser.model.multiple.MultyModelBehavior.SELECT_SINGLE);
+    yeniSiparis_siparisIstenenTarih.setShowOneMonth(true);
 
-        javax.swing.GroupLayout yeniSiparis_FirmaPaneliLayout = new javax.swing.GroupLayout(yeniSiparis_FirmaPaneli);
-        yeniSiparis_FirmaPaneli.setLayout(yeniSiparis_FirmaPaneliLayout);
-        yeniSiparis_FirmaPaneliLayout.setHorizontalGroup(
-            yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(yeniSiparis_FirmaPaneliLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sg_aciklama2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dateChooserCombo5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dateChooserCombo6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
-                    .addComponent(jTextField9)
-                    .addComponent(jTextField8)
-                    .addComponent(sg_faxField2)
-                    .addComponent(sg_gsmField2)
-                    .addComponent(sg_telField2)
-                    .addComponent(sg_mailField2)
-                    .addComponent(sg_ilgiliField2)
-                    .addComponent(sg_firmaField2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, 0))
-        );
-        yeniSiparis_FirmaPaneliLayout.setVerticalGroup(
-            yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(yeniSiparis_FirmaPaneliLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sg_firmaField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sg_ilgiliField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sg_mailField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sg_telField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sg_gsmField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sg_faxField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dateChooserCombo5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dateChooserCombo6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sg_aciklama2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+    javax.swing.GroupLayout yeniSiparis_FirmaPaneliLayout = new javax.swing.GroupLayout(yeniSiparis_FirmaPaneli);
+    yeniSiparis_FirmaPaneli.setLayout(yeniSiparis_FirmaPaneliLayout);
+    yeniSiparis_FirmaPaneliLayout.setHorizontalGroup(
+        yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(yeniSiparis_FirmaPaneliLayout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sg_aciklama2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(18, 18, 18)
+            .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(yeniSiparis_siparisTarihi, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(yeniSiparis_siparisIstenenTarih, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 678, Short.MAX_VALUE)
+                .addComponent(yeniSiparis_siparisiAlan)
+                .addComponent(yeniSiparis_siparisiIsteyen)
+                .addComponent(yeniSiparis_fax)
+                .addComponent(yeniSiparis_gsm)
+                .addComponent(yeniSiparis_telefon)
+                .addComponent(yeniSiparis_ePosta)
+                .addComponent(yeniSiparis_ilgiliAdi)
+                .addComponent(yeniSiparis_firmaAdi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addContainerGap())
+    );
+
+    yeniSiparis_FirmaPaneliLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel19, jLabel20, jLabel21, jLabel22, jLabel23, jLabel24, jLabel27, jLabel28, jLabel29, jLabel30, sg_aciklama2});
+
+    yeniSiparis_FirmaPaneliLayout.setVerticalGroup(
+        yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(yeniSiparis_FirmaPaneliLayout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(yeniSiparis_firmaAdi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(yeniSiparis_ilgiliAdi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(yeniSiparis_ePosta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(yeniSiparis_telefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(yeniSiparis_gsm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(yeniSiparis_fax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(yeniSiparis_siparisiIsteyen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(yeniSiparis_siparisiAlan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(yeniSiparis_siparisTarihi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(yeniSiparis_siparisIstenenTarih, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(yeniSiparis_FirmaPaneliLayout.createSequentialGroup()
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2))
-        );
+                .addGroup(yeniSiparis_FirmaPaneliLayout.createSequentialGroup()
+                    .addGap(18, 18, 18)
+                    .addComponent(sg_aciklama2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addContainerGap())
+    );
 
-        yeniSiparis_urunlerPaneli.setBorder(javax.swing.BorderFactory.createTitledBorder("Ürünler"));
+    yeniSiparis_FirmaPaneliLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel19, jLabel20, jLabel21, jLabel22, jLabel23, jLabel24, jLabel27, jLabel28, jLabel29, jLabel30, sg_aciklama2});
 
-        yeniSiparis_urunTablosu.setAutoCreateRowSorter(true);
-        yeniSiparis_urunTablosu.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+    yeniSiparis_urunlerPaneli.setBorder(javax.swing.BorderFactory.createTitledBorder("Ürünler"));
 
-            },
-            new String [] {
-                "No", "Ürün Adı", "Ürün Fiyatı", "Ürün Durumu", "Toplam Fiyat", "Ürün Açıklaması"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Object.class, java.lang.Float.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, true, true, true, false, true
-            };
+    yeniSiparis_urunTablosu.setAutoCreateRowSorter(true);
+    yeniSiparis_urunTablosu.setModel(new javax.swing.table.DefaultTableModel(
+        new Object [][] {
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
+        },
+        new String [] {
+            "No", "Ürün Adı", "Ürün Fiyatı", "Ürün Durumu", "Toplam Fiyat", "Ürün Açıklaması"
+        }
+    ) {
+        Class[] types = new Class [] {
+            java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Object.class, java.lang.Float.class, java.lang.String.class
+        };
+        boolean[] canEdit = new boolean [] {
+            false, true, true, true, false, true
+        };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        yeniSiparis_urunTablosu.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        yeniSiparis_urunTablosu.setFillsViewportHeight(true);
-        yeniSiparis_urunTablosu.setName("Yeni Sipariş Ürünler"); // NOI18N
-        yeniSiparis_urunTablosu.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane9.setViewportView(yeniSiparis_urunTablosu);
-        yeniSiparis_urunTablosu.getColumnModel().getColumn(0).setResizable(false);
-        yeniSiparis_urunTablosu.getColumnModel().getColumn(0).setPreferredWidth(1);
+        public Class getColumnClass(int columnIndex) {
+            return types [columnIndex];
+        }
 
-        javax.swing.GroupLayout yeniSiparis_urunlerPaneliLayout = new javax.swing.GroupLayout(yeniSiparis_urunlerPaneli);
-        yeniSiparis_urunlerPaneli.setLayout(yeniSiparis_urunlerPaneliLayout);
-        yeniSiparis_urunlerPaneliLayout.setHorizontalGroup(
-            yeniSiparis_urunlerPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
-        );
-        yeniSiparis_urunlerPaneliLayout.setVerticalGroup(
-            yeniSiparis_urunlerPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
-        );
+        public boolean isCellEditable(int rowIndex, int columnIndex) {
+            return canEdit [columnIndex];
+        }
+    });
+    yeniSiparis_urunTablosu.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+    yeniSiparis_urunTablosu.setFillsViewportHeight(true);
+    yeniSiparis_urunTablosu.setName("Yeni Sipariş Ürünler"); // NOI18N
+    yeniSiparis_urunTablosu.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+    jScrollPane9.setViewportView(yeniSiparis_urunTablosu);
+    yeniSiparis_urunTablosu.getColumnModel().getColumn(0).setResizable(false);
+    yeniSiparis_urunTablosu.getColumnModel().getColumn(0).setPreferredWidth(1);
 
-        yeniSiparis_yeniUrunEkle.setText("Yeni Ürün Ekle");
-        yeniSiparis_yeniUrunEkle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                yeniSiparis_yeniUrunEkleActionPerformed(evt);
-            }
-        });
+    javax.swing.GroupLayout yeniSiparis_urunlerPaneliLayout = new javax.swing.GroupLayout(yeniSiparis_urunlerPaneli);
+    yeniSiparis_urunlerPaneli.setLayout(yeniSiparis_urunlerPaneliLayout);
+    yeniSiparis_urunlerPaneliLayout.setHorizontalGroup(
+        yeniSiparis_urunlerPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
+    );
+    yeniSiparis_urunlerPaneliLayout.setVerticalGroup(
+        yeniSiparis_urunlerPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+    );
 
-        yeniSiparis_Kaydet.setText("Kaydet");
+    yeniSiparis_yeniUrunEkle.setText("Yeni Ürün Ekle");
+    yeniSiparis_yeniUrunEkle.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            yeniSiparis_yeniUrunEkleActionPerformed(evt);
+        }
+    });
 
-        yeniSiparis_Temizle.setText("Temizle");
-        yeniSiparis_Temizle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                yeniSiparis_TemizleActionPerformed(evt);
-            }
-        });
+    yeniSiparis_Kaydet.setText("Kaydet");
 
-        yeniSiparis_iptal.setText("İptal");
+    yeniSiparis_Temizle.setText("Temizle");
+    yeniSiparis_Temizle.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            yeniSiparis_TemizleActionPerformed(evt);
+        }
+    });
 
-        javax.swing.GroupLayout yeniSiparis_butonsLayout = new javax.swing.GroupLayout(yeniSiparis_butons);
-        yeniSiparis_butons.setLayout(yeniSiparis_butonsLayout);
-        yeniSiparis_butonsLayout.setHorizontalGroup(
-            yeniSiparis_butonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(yeniSiparis_butonsLayout.createSequentialGroup()
-                .addContainerGap()
+    yeniSiparis_iptal.setText("İptal");
+
+    javax.swing.GroupLayout yeniSiparis_butonsLayout = new javax.swing.GroupLayout(yeniSiparis_butons);
+    yeniSiparis_butons.setLayout(yeniSiparis_butonsLayout);
+    yeniSiparis_butonsLayout.setHorizontalGroup(
+        yeniSiparis_butonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(yeniSiparis_butonsLayout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(yeniSiparis_yeniUrunEkle)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(yeniSiparis_Kaydet)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(yeniSiparis_Temizle)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(yeniSiparis_iptal)
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+    );
+
+    yeniSiparis_butonsLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {yeniSiparis_Kaydet, yeniSiparis_Temizle, yeniSiparis_iptal, yeniSiparis_yeniUrunEkle});
+
+    yeniSiparis_butonsLayout.setVerticalGroup(
+        yeniSiparis_butonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(yeniSiparis_butonsLayout.createSequentialGroup()
+            .addGap(1, 1, 1)
+            .addGroup(yeniSiparis_butonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(yeniSiparis_yeniUrunEkle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(yeniSiparis_Kaydet)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(yeniSiparis_Temizle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(yeniSiparis_iptal)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                .addComponent(yeniSiparis_iptal))
+            .addGap(1, 1, 1))
+    );
 
-        yeniSiparis_butonsLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {yeniSiparis_Kaydet, yeniSiparis_Temizle, yeniSiparis_iptal, yeniSiparis_yeniUrunEkle});
+    javax.swing.GroupLayout yeniSiparisGirisPaneliLayout = new javax.swing.GroupLayout(yeniSiparisGirisPaneli);
+    yeniSiparisGirisPaneli.setLayout(yeniSiparisGirisPaneliLayout);
+    yeniSiparisGirisPaneliLayout.setHorizontalGroup(
+        yeniSiparisGirisPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(yeniSiparisGirisPaneliLayout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(yeniSiparisGirisPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(yeniSiparis_FirmaPaneli, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(yeniSiparis_urunlerPaneli, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(yeniSiparis_butons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addContainerGap())
+    );
+    yeniSiparisGirisPaneliLayout.setVerticalGroup(
+        yeniSiparisGirisPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(yeniSiparisGirisPaneliLayout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(yeniSiparis_FirmaPaneli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(18, 18, 18)
+            .addComponent(yeniSiparis_urunlerPaneli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(18, 18, 18)
+            .addComponent(yeniSiparis_butons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap())
+    );
 
-        yeniSiparis_butonsLayout.setVerticalGroup(
-            yeniSiparis_butonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(yeniSiparis_butonsLayout.createSequentialGroup()
-                .addGap(1, 1, 1)
-                .addGroup(yeniSiparis_butonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(yeniSiparis_yeniUrunEkle)
-                    .addComponent(yeniSiparis_Kaydet)
-                    .addComponent(yeniSiparis_Temizle)
-                    .addComponent(yeniSiparis_iptal))
-                .addGap(1, 1, 1))
-        );
+    siparisSekmeleri.addTab("Yeni Sipariş Girişi", yeniSiparisGirisPaneli);
 
-        javax.swing.GroupLayout yeniSiparisGirisPaneliLayout = new javax.swing.GroupLayout(yeniSiparisGirisPaneli);
-        yeniSiparisGirisPaneli.setLayout(yeniSiparisGirisPaneliLayout);
-        yeniSiparisGirisPaneliLayout.setHorizontalGroup(
-            yeniSiparisGirisPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(yeniSiparisGirisPaneliLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(yeniSiparisGirisPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(yeniSiparis_FirmaPaneli, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(yeniSiparis_urunlerPaneli, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(yeniSiparis_butons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        yeniSiparisGirisPaneliLayout.setVerticalGroup(
-            yeniSiparisGirisPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(yeniSiparisGirisPaneliLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(yeniSiparis_FirmaPaneli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(yeniSiparis_urunlerPaneli, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(7, 7, 7)
-                .addComponent(yeniSiparis_butons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+    aktif_siparis_table.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            aktif_siparis_tableMouseClicked(evt);
+        }
+    });
+    jScrollPane1.setViewportView(aktif_siparis_table);
+    aktif_siparis_table.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        siparisSekmeleri.addTab("Yeni Sipariş Girişi", yeniSiparisGirisPaneli);
+    javax.swing.GroupLayout aktifSiparislerPaneliLayout = new javax.swing.GroupLayout(aktifSiparislerPaneli);
+    aktifSiparislerPaneli.setLayout(aktifSiparislerPaneliLayout);
+    aktifSiparislerPaneliLayout.setHorizontalGroup(
+        aktifSiparislerPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 870, Short.MAX_VALUE)
+    );
+    aktifSiparislerPaneliLayout.setVerticalGroup(
+        aktifSiparislerPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 817, Short.MAX_VALUE)
+    );
 
-        aktif_siparis_table.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                aktif_siparis_tableMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(aktif_siparis_table);
-        aktif_siparis_table.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+    siparisSekmeleri.addTab("Aktif Siparişler", aktifSiparislerPaneli);
 
-        javax.swing.GroupLayout aktifSiparislerPaneliLayout = new javax.swing.GroupLayout(aktifSiparislerPaneli);
-        aktifSiparislerPaneli.setLayout(aktifSiparislerPaneliLayout);
-        aktifSiparislerPaneliLayout.setHorizontalGroup(
-            aktifSiparislerPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 870, Short.MAX_VALUE)
-        );
-        aktifSiparislerPaneliLayout.setVerticalGroup(
-            aktifSiparislerPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 785, Short.MAX_VALUE)
-        );
+    bitmis_siparis_table.setModel(new javax.swing.table.DefaultTableModel(
+        new Object [][] {
+            {null, null, null, null},
+            {null, null, null, null},
+            {null, null, null, null},
+            {null, null, null, null}
+        },
+        new String [] {
+            "Title 1", "Title 2", "Title 3", "Title 4"
+        }
+    ));
+    bitmis_siparis_table.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            bitmis_siparis_tableMouseClicked(evt);
+        }
+    });
+    jScrollPane3.setViewportView(bitmis_siparis_table);
 
-        siparisSekmeleri.addTab("Aktif Siparişler", aktifSiparislerPaneli);
+    javax.swing.GroupLayout tamamlanmısSiparisPaneliLayout = new javax.swing.GroupLayout(tamamlanmısSiparisPaneli);
+    tamamlanmısSiparisPaneli.setLayout(tamamlanmısSiparisPaneliLayout);
+    tamamlanmısSiparisPaneliLayout.setHorizontalGroup(
+        tamamlanmısSiparisPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 870, Short.MAX_VALUE)
+    );
+    tamamlanmısSiparisPaneliLayout.setVerticalGroup(
+        tamamlanmısSiparisPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 817, Short.MAX_VALUE)
+    );
 
-        bitmis_siparis_table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        bitmis_siparis_table.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bitmis_siparis_tableMouseClicked(evt);
-            }
-        });
-        jScrollPane3.setViewportView(bitmis_siparis_table);
+    siparisSekmeleri.addTab("Tamamlanmış Siparişler", tamamlanmısSiparisPaneli);
 
-        javax.swing.GroupLayout tamamlanmısSiparisPaneliLayout = new javax.swing.GroupLayout(tamamlanmısSiparisPaneli);
-        tamamlanmısSiparisPaneli.setLayout(tamamlanmısSiparisPaneliLayout);
-        tamamlanmısSiparisPaneliLayout.setHorizontalGroup(
-            tamamlanmısSiparisPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 870, Short.MAX_VALUE)
-        );
-        tamamlanmısSiparisPaneliLayout.setVerticalGroup(
-            tamamlanmısSiparisPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 785, Short.MAX_VALUE)
-        );
+    siparisGoruntule_FirmaPaneli.setBorder(javax.swing.BorderFactory.createTitledBorder("Sipariş Bilgileri"));
 
-        siparisSekmeleri.addTab("Tamamlanmış Siparişler", tamamlanmısSiparisPaneli);
+    sg_aciklamaField.setEditable(false);
+    sg_aciklamaField.setColumns(20);
+    sg_aciklamaField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+    sg_aciklamaField.setRows(5);
+    sg_aciklamaField.setText("Bu bir açıklama örneğidir.");
+    sg_aciklamaField.setMinimumSize(new java.awt.Dimension(200, 19));
+    jScrollPane4.setViewportView(sg_aciklamaField);
 
-        siparisGoruntule_FirmaPaneli.setBorder(javax.swing.BorderFactory.createTitledBorder("Sipariş Bilgileri"));
+    sg_telField.setEditable(false);
+    sg_telField.setText("03122270408");
 
-        sg_aciklamaField.setEditable(false);
-        sg_aciklamaField.setColumns(20);
-        sg_aciklamaField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        sg_aciklamaField.setRows(5);
-        sg_aciklamaField.setText("Bu bir açıklama örneğidir.");
-        sg_aciklamaField.setMinimumSize(new java.awt.Dimension(200, 19));
-        jScrollPane4.setViewportView(sg_aciklamaField);
+    sg_faxField.setEditable(false);
+    sg_faxField.setText("03122270409");
 
-        sg_telField.setEditable(false);
-        sg_telField.setText("03122270408");
+    sg_ilgiliField.setEditable(false);
+    sg_ilgiliField.setText("Tansel Altınel");
+    sg_ilgiliField.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            sg_ilgiliFieldActionPerformed(evt);
+        }
+    });
 
-        sg_faxField.setEditable(false);
-        sg_faxField.setText("03122270409");
+    jLabel1.setText("<html><b>Firma:</b></html>");
 
-        sg_ilgiliField.setEditable(false);
-        sg_ilgiliField.setText("Tansel Altınel");
-        sg_ilgiliField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sg_ilgiliFieldActionPerformed(evt);
-            }
-        });
+    sg_aciklama.setText("<html><b>Açıklama</b><html>");
 
-        jLabel1.setText("<html><b>Firma:</b></html>");
+    jLabel4.setText("<html><b>Tel:</b></html>");
 
-        sg_aciklama.setText("<html><b>Açıklama</b><html>");
+    sg_mailField.setEditable(false);
+    sg_mailField.setText("altinel@fumera.com.tr");
 
-        jLabel4.setText("<html><b>Tel:</b></html>");
+    jLabel3.setText("<html><b>E-Posta:</b></html>");
 
-        sg_mailField.setEditable(false);
-        sg_mailField.setText("altinel@fumera.com.tr");
+    jLabel6.setText("<html><b>Fax:</b></html>");
 
-        jLabel3.setText("<html><b>E-Posta:</b></html>");
+    jLabel2.setText("<html><b>İlgili:</b></html>");
 
-        jLabel6.setText("<html><b>Fax:</b></html>");
+    jLabel5.setText("<html><b>GSM:</b></html>");
 
-        jLabel2.setText("<html><b>İlgili:</b></html>");
+    sg_gsmField.setEditable(false);
+    sg_gsmField.setText("05312831924");
 
-        jLabel5.setText("<html><b>GSM:</b></html>");
+    sg_firmaField.setEditable(false);
+    sg_firmaField.setText("Fumera Ar-Ge Yazılım Ltd. Şti.");
+    sg_firmaField.setMinimumSize(new java.awt.Dimension(200, 20));
+    sg_firmaField.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            sg_firmaFieldActionPerformed(evt);
+        }
+    });
 
-        sg_gsmField.setEditable(false);
-        sg_gsmField.setText("05312831924");
+    jLabel8.setText("<html><b>Siparişi İsteyen:</b></html>");
 
-        sg_firmaField.setEditable(false);
-        sg_firmaField.setText("Fumera Ar-Ge Yazılım Ltd. Şti.");
-        sg_firmaField.setMinimumSize(new java.awt.Dimension(200, 20));
-        sg_firmaField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sg_firmaFieldActionPerformed(evt);
-            }
-        });
+    jLabel9.setText("<html><b>Siparişi Alan:</b></html>");
 
-        jLabel8.setText("<html><b>Siparişi İsteyen:</b></html>");
+    jLabel10.setText("<html><b>Sipariş Tarihi:</b></html>");
 
-        jLabel9.setText("<html><b>Siparişi Alan:</b></html>");
+    jLabel11.setText("<html><b>İstenilen Teslim Tarihi:</b></html>");
 
-        jLabel10.setText("<html><b>Sipariş Tarihi:</b></html>");
+    jTextField4.setEditable(false);
+    jTextField4.setText("Tansel Altınel");
+    jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jTextField4ActionPerformed(evt);
+        }
+    });
 
-        jLabel11.setText("<html><b>İstenilen Teslim Tarihi:</b></html>");
+    jTextField6.setEditable(false);
+    jTextField6.setText("Mustafa Akarsu");
+    jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jTextField6ActionPerformed(evt);
+        }
+    });
 
-        jTextField4.setEditable(false);
-        jTextField4.setText("Tansel Altınel");
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
-            }
-        });
+    dateChooserCombo1.setLocale(new java.util.Locale("tr", "TR", ""));
 
-        jTextField6.setEditable(false);
-        jTextField6.setText("Mustafa Akarsu");
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
-            }
-        });
+    dateChooserCombo2.setLocale(new java.util.Locale("tr", "TR", ""));
 
-        dateChooserCombo1.setLocale(new java.util.Locale("tr", "TR", ""));
+    javax.swing.GroupLayout siparisGoruntule_FirmaPaneliLayout = new javax.swing.GroupLayout(siparisGoruntule_FirmaPaneli);
+    siparisGoruntule_FirmaPaneli.setLayout(siparisGoruntule_FirmaPaneliLayout);
+    siparisGoruntule_FirmaPaneliLayout.setHorizontalGroup(
+        siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(siparisGoruntule_FirmaPaneliLayout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sg_aciklama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dateChooserCombo2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
+                .addComponent(jTextField6)
+                .addComponent(jTextField4)
+                .addComponent(sg_faxField)
+                .addComponent(sg_gsmField)
+                .addComponent(sg_telField)
+                .addComponent(sg_mailField)
+                .addComponent(sg_ilgiliField)
+                .addComponent(sg_firmaField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 0, 0))
+    );
 
-        dateChooserCombo2.setLocale(new java.util.Locale("tr", "TR", ""));
+    siparisGoruntule_FirmaPaneliLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel10, jLabel11, jLabel2, jLabel3, jLabel4, jLabel5, jLabel6, jLabel8, jLabel9, sg_aciklama});
 
-        javax.swing.GroupLayout siparisGoruntule_FirmaPaneliLayout = new javax.swing.GroupLayout(siparisGoruntule_FirmaPaneli);
-        siparisGoruntule_FirmaPaneli.setLayout(siparisGoruntule_FirmaPaneliLayout);
-        siparisGoruntule_FirmaPaneliLayout.setHorizontalGroup(
-            siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(siparisGoruntule_FirmaPaneliLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sg_aciklama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dateChooserCombo2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
-                    .addComponent(jTextField6)
-                    .addComponent(jTextField4)
-                    .addComponent(sg_faxField)
-                    .addComponent(sg_gsmField)
-                    .addComponent(sg_telField)
-                    .addComponent(sg_mailField)
-                    .addComponent(sg_ilgiliField)
-                    .addComponent(sg_firmaField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, 0))
-        );
+    siparisGoruntule_FirmaPaneliLayout.setVerticalGroup(
+        siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(siparisGoruntule_FirmaPaneliLayout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sg_firmaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sg_ilgiliField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sg_mailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sg_telField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sg_gsmField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sg_faxField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dateChooserCombo2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(sg_aciklama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(2, 2, 2))
+    );
 
-        siparisGoruntule_FirmaPaneliLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel10, jLabel11, jLabel2, jLabel3, jLabel4, jLabel5, jLabel6, jLabel8, jLabel9, sg_aciklama});
+    siparisGoruntule_FirmaPaneliLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, jLabel10, jLabel11, jLabel2, jLabel3, jLabel4, jLabel5, jLabel6, jLabel8, jLabel9, sg_aciklama});
 
-        siparisGoruntule_FirmaPaneliLayout.setVerticalGroup(
-            siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(siparisGoruntule_FirmaPaneliLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sg_firmaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sg_ilgiliField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sg_mailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sg_telField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sg_gsmField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sg_faxField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dateChooserCombo2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sg_aciklama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2))
-        );
+    siparisGoruntule_urunlerPaneli.setBorder(javax.swing.BorderFactory.createTitledBorder("Ürünler"));
 
-        siparisGoruntule_FirmaPaneliLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, jLabel10, jLabel11, jLabel2, jLabel3, jLabel4, jLabel5, jLabel6, jLabel8, jLabel9, sg_aciklama});
+    jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        new Object [][] {
+            {null, null, null, null},
+            {null, null, null, null},
+            {null, null, null, null},
+            {null, null, null, null}
+        },
+        new String [] {
+            "Title 1", "Title 2", "Title 3", "Title 4"
+        }
+    ));
+    jScrollPane5.setViewportView(jTable1);
 
-        siparisGoruntule_urunlerPaneli.setBorder(javax.swing.BorderFactory.createTitledBorder("Ürünler"));
+    javax.swing.GroupLayout siparisGoruntule_urunlerPaneliLayout = new javax.swing.GroupLayout(siparisGoruntule_urunlerPaneli);
+    siparisGoruntule_urunlerPaneli.setLayout(siparisGoruntule_urunlerPaneliLayout);
+    siparisGoruntule_urunlerPaneliLayout.setHorizontalGroup(
+        siparisGoruntule_urunlerPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
+    );
+    siparisGoruntule_urunlerPaneliLayout.setVerticalGroup(
+        siparisGoruntule_urunlerPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+    );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane5.setViewportView(jTable1);
+    sg_duzenle.setText("Düzenle");
+    sg_duzenle.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            sg_duzenleActionPerformed(evt);
+        }
+    });
 
-        javax.swing.GroupLayout siparisGoruntule_urunlerPaneliLayout = new javax.swing.GroupLayout(siparisGoruntule_urunlerPaneli);
-        siparisGoruntule_urunlerPaneli.setLayout(siparisGoruntule_urunlerPaneliLayout);
-        siparisGoruntule_urunlerPaneliLayout.setHorizontalGroup(
-            siparisGoruntule_urunlerPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
-        );
-        siparisGoruntule_urunlerPaneliLayout.setVerticalGroup(
-            siparisGoruntule_urunlerPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
-        );
+    sg_sil.setText("Sil");
 
-        sg_duzenle.setText("Düzenle");
-        sg_duzenle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sg_duzenleActionPerformed(evt);
-            }
-        });
+    sg_Kaydet.setText("Kaydet");
+    sg_Kaydet.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            sg_KaydetActionPerformed(evt);
+        }
+    });
 
-        sg_sil.setText("Sil");
+    javax.swing.GroupLayout siparisGoruntule_butonsLayout = new javax.swing.GroupLayout(siparisGoruntule_butons);
+    siparisGoruntule_butons.setLayout(siparisGoruntule_butonsLayout);
+    siparisGoruntule_butonsLayout.setHorizontalGroup(
+        siparisGoruntule_butonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(siparisGoruntule_butonsLayout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(sg_duzenle)
+            .addGap(18, 18, 18)
+            .addComponent(sg_sil)
+            .addGap(18, 18, 18)
+            .addComponent(sg_Kaydet)
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+    );
 
-        sg_Kaydet.setText("Kaydet");
-        sg_Kaydet.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sg_KaydetActionPerformed(evt);
-            }
-        });
+    siparisGoruntule_butonsLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {sg_Kaydet, sg_duzenle, sg_sil});
 
-        javax.swing.GroupLayout siparisGoruntule_butonsLayout = new javax.swing.GroupLayout(siparisGoruntule_butons);
-        siparisGoruntule_butons.setLayout(siparisGoruntule_butonsLayout);
-        siparisGoruntule_butonsLayout.setHorizontalGroup(
-            siparisGoruntule_butonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(siparisGoruntule_butonsLayout.createSequentialGroup()
-                .addContainerGap()
+    siparisGoruntule_butonsLayout.setVerticalGroup(
+        siparisGoruntule_butonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(siparisGoruntule_butonsLayout.createSequentialGroup()
+            .addGap(1, 1, 1)
+            .addGroup(siparisGoruntule_butonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(sg_duzenle)
-                .addGap(18, 18, 18)
                 .addComponent(sg_sil)
-                .addGap(18, 18, 18)
-                .addComponent(sg_Kaydet)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                .addComponent(sg_Kaydet))
+            .addGap(1, 1, 1))
+    );
 
-        siparisGoruntule_butonsLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {sg_Kaydet, sg_duzenle, sg_sil});
+    javax.swing.GroupLayout siparisGoruntulemePaneliLayout = new javax.swing.GroupLayout(siparisGoruntulemePaneli);
+    siparisGoruntulemePaneli.setLayout(siparisGoruntulemePaneliLayout);
+    siparisGoruntulemePaneliLayout.setHorizontalGroup(
+        siparisGoruntulemePaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(siparisGoruntulemePaneliLayout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(siparisGoruntulemePaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(siparisGoruntule_FirmaPaneli, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(siparisGoruntule_urunlerPaneli, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(siparisGoruntule_butons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addContainerGap())
+    );
+    siparisGoruntulemePaneliLayout.setVerticalGroup(
+        siparisGoruntulemePaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(siparisGoruntulemePaneliLayout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(siparisGoruntule_FirmaPaneli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(siparisGoruntule_urunlerPaneli, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(7, 7, 7)
+            .addComponent(siparisGoruntule_butons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap())
+    );
 
-        siparisGoruntule_butonsLayout.setVerticalGroup(
-            siparisGoruntule_butonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(siparisGoruntule_butonsLayout.createSequentialGroup()
-                .addGap(1, 1, 1)
-                .addGroup(siparisGoruntule_butonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(sg_duzenle)
-                    .addComponent(sg_sil)
-                    .addComponent(sg_Kaydet))
-                .addGap(1, 1, 1))
-        );
+    siparisSekmeleri.addTab("Sipariş Görüntüle", siparisGoruntulemePaneli);
 
-        javax.swing.GroupLayout siparisGoruntulemePaneliLayout = new javax.swing.GroupLayout(siparisGoruntulemePaneli);
-        siparisGoruntulemePaneli.setLayout(siparisGoruntulemePaneliLayout);
-        siparisGoruntulemePaneliLayout.setHorizontalGroup(
-            siparisGoruntulemePaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(siparisGoruntulemePaneliLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(siparisGoruntulemePaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(siparisGoruntule_FirmaPaneli, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(siparisGoruntule_urunlerPaneli, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(siparisGoruntule_butons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        siparisGoruntulemePaneliLayout.setVerticalGroup(
-            siparisGoruntulemePaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(siparisGoruntulemePaneliLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(siparisGoruntule_FirmaPaneli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(siparisGoruntule_urunlerPaneli, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(7, 7, 7)
-                .addComponent(siparisGoruntule_butons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+    javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+    jPanel2.setLayout(jPanel2Layout);
+    jPanel2Layout.setHorizontalGroup(
+        jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 870, Short.MAX_VALUE)
+    );
+    jPanel2Layout.setVerticalGroup(
+        jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 817, Short.MAX_VALUE)
+    );
 
-        siparisSekmeleri.addTab("Sipariş Görüntüle", siparisGoruntulemePaneli);
+    siparisSekmeleri.addTab("Silinmiş Siparişler", jPanel2);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 870, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 785, Short.MAX_VALUE)
-        );
+    jMenu1.setText("Dosya");
 
-        siparisSekmeleri.addTab("Silinmiş Siparişler", jPanel2);
+    jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
+    jMenuItem1.setLabel("Çıkış");
+    jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItem1ActionPerformed(evt);
+        }
+    });
+    jMenu1.add(jMenuItem1);
 
-        jMenu1.setText("Dosya");
+    jMenuBar1.add(jMenu1);
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItem1.setLabel("Çıkış");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem1);
+    jMenu2.setText("Kullanıcılar");
+    jMenuBar1.add(jMenu2);
 
-        jMenuBar1.add(jMenu1);
+    jMenu3.setText("Ayarlar");
+    jMenuBar1.add(jMenu3);
 
-        jMenu2.setText("Kullanıcılar");
-        jMenuBar1.add(jMenu2);
+    jMenu4.setText("Yardım");
 
-        jMenu3.setText("Ayarlar");
-        jMenuBar1.add(jMenu3);
+    jMenuItem2.setText("Yardım");
+    jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItem2ActionPerformed(evt);
+        }
+    });
+    jMenu4.add(jMenuItem2);
 
-        jMenu4.setText("Yardım");
+    jMenuItem3.setText("Hakkında");
+    jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItem3ActionPerformed(evt);
+        }
+    });
+    jMenu4.add(jMenuItem3);
 
-        jMenuItem2.setText("Yardım");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem2);
+    jMenuBar1.add(jMenu4);
 
-        jMenuItem3.setText("Hakkında");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem3);
+    setJMenuBar(jMenuBar1);
 
-        jMenuBar1.add(jMenu4);
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(siparisSekmeleri)
+    );
+    layout.setVerticalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(siparisSekmeleri)
+    );
 
-        setJMenuBar(jMenuBar1);
+    siparisSekmeleri.getAccessibleContext().setAccessibleName("Aktif Siparişler");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(siparisSekmeleri)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(siparisSekmeleri)
-        );
-
-        siparisSekmeleri.getAccessibleContext().setAccessibleName("Aktif Siparişler");
-
-        pack();
+    pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -926,21 +980,21 @@ public class SiparisEkranı extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_sg_ilgiliFieldActionPerformed
 
-    private void sg_ilgiliField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sg_ilgiliField2ActionPerformed
+    private void yeniSiparis_ilgiliAdiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yeniSiparis_ilgiliAdiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_sg_ilgiliField2ActionPerformed
+    }//GEN-LAST:event_yeniSiparis_ilgiliAdiActionPerformed
 
-    private void sg_firmaField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sg_firmaField2ActionPerformed
+    private void yeniSiparis_firmaAdiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yeniSiparis_firmaAdiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_sg_firmaField2ActionPerformed
+    }//GEN-LAST:event_yeniSiparis_firmaAdiActionPerformed
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+    private void yeniSiparis_siparisiIsteyenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yeniSiparis_siparisiIsteyenActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
+    }//GEN-LAST:event_yeniSiparis_siparisiIsteyenActionPerformed
 
-    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+    private void yeniSiparis_siparisiAlanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yeniSiparis_siparisiAlanActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField9ActionPerformed
+    }//GEN-LAST:event_yeniSiparis_siparisiAlanActionPerformed
 
     private void yeniSiparis_yeniUrunEkleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yeniSiparis_yeniUrunEkleActionPerformed
         // TODO add your handling code here:
@@ -1026,8 +1080,6 @@ public class SiparisEkranı extends javax.swing.JFrame {
     private javax.swing.JTable bitmis_siparis_table;
     private datechooser.beans.DateChooserCombo dateChooserCombo1;
     private datechooser.beans.DateChooserCombo dateChooserCombo2;
-    private datechooser.beans.DateChooserCombo dateChooserCombo5;
-    private datechooser.beans.DateChooserCombo dateChooserCombo6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1066,27 +1118,18 @@ public class SiparisEkranı extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JButton sg_Kaydet;
     private javax.swing.JLabel sg_aciklama;
     private javax.swing.JLabel sg_aciklama2;
     private javax.swing.JTextArea sg_aciklamaField;
-    private javax.swing.JTextArea sg_aciklamaField2;
     private javax.swing.JButton sg_duzenle;
     private javax.swing.JTextField sg_faxField;
-    private javax.swing.JTextField sg_faxField2;
     private javax.swing.JTextField sg_firmaField;
-    private javax.swing.JTextField sg_firmaField2;
     private javax.swing.JTextField sg_gsmField;
-    private javax.swing.JTextField sg_gsmField2;
     private javax.swing.JTextField sg_ilgiliField;
-    private javax.swing.JTextField sg_ilgiliField2;
     private javax.swing.JTextField sg_mailField;
-    private javax.swing.JTextField sg_mailField2;
     private javax.swing.JButton sg_sil;
     private javax.swing.JTextField sg_telField;
-    private javax.swing.JTextField sg_telField2;
     private javax.swing.JPanel siparisGoruntule_FirmaPaneli;
     private javax.swing.JPanel siparisGoruntule_butons;
     private javax.swing.JPanel siparisGoruntule_urunlerPaneli;
@@ -1098,7 +1141,18 @@ public class SiparisEkranı extends javax.swing.JFrame {
     private javax.swing.JButton yeniSiparis_Kaydet;
     private javax.swing.JButton yeniSiparis_Temizle;
     private javax.swing.JPanel yeniSiparis_butons;
+    private javax.swing.JTextField yeniSiparis_ePosta;
+    private javax.swing.JTextField yeniSiparis_fax;
+    private javax.swing.JTextField yeniSiparis_firmaAdi;
+    private javax.swing.JTextField yeniSiparis_gsm;
+    private javax.swing.JTextField yeniSiparis_ilgiliAdi;
     private javax.swing.JButton yeniSiparis_iptal;
+    private javax.swing.JTextArea yeniSiparis_siparisAciklamasi;
+    private datechooser.beans.DateChooserCombo yeniSiparis_siparisIstenenTarih;
+    private datechooser.beans.DateChooserCombo yeniSiparis_siparisTarihi;
+    private javax.swing.JTextField yeniSiparis_siparisiAlan;
+    private javax.swing.JTextField yeniSiparis_siparisiIsteyen;
+    private javax.swing.JTextField yeniSiparis_telefon;
     private javax.swing.JTable yeniSiparis_urunTablosu;
     private javax.swing.JPanel yeniSiparis_urunlerPaneli;
     private javax.swing.JButton yeniSiparis_yeniUrunEkle;
