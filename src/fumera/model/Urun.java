@@ -48,8 +48,13 @@ public class Urun {
         this.urunFiyati = urunFiyati;
     }
 
-    public String getUrunDurumu() {
-        return urunDurumu;
+    public int getUrunDurumu() {
+        if( urunDurumu.equals("Hazırlanıyor"))
+            return 1;
+        else if( urunDurumu.equals("Tamamlandı"))
+            return 2;
+        else
+            return 0;
     }
 
     public void setUrunDurumu(String urunDurumu) {

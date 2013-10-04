@@ -32,7 +32,7 @@ public class JavaDBtoObj {
     PreparedStatement statementF = null;
     PreparedStatement statementU = null;
     
-    private String sqlSiparis = "SELECT * FROM siparis"; //WHERE durum = Hazırlanıyor
+    private String sqlSiparis = "SELECT * FROM siparis";
     private String sqlFirma = "SELECT * FROM firma WHERE siparis_id=?";
     private String sqlUrun = "SELECT * FROM urun WHERE siparis_id=?";
     
@@ -53,6 +53,7 @@ public class JavaDBtoObj {
                     statementF.setString(1, resultsetS.getString("siparis_id"));
                     resultsetF = statementF.executeQuery();
                     if( resultsetF.next()) {
+                        //String firma_adi, String ilgili_adi, String mail, String tel, String gsm, String fax)
                         firma = new Firma( resultsetF.getString("firma_adi"), resultsetF.getString("ilgili_adi"), resultsetF.getString("mail"),
                                 resultsetF.getString("tel"), resultsetF.getString("gsm"), resultsetF.getString("fax"));
                     } else {
@@ -69,7 +70,8 @@ public class JavaDBtoObj {
                     statementU.setString(1, resultsetS.getString("siparis_id"));
                     resultsetU = statementU.executeQuery();
                     while( resultsetU.next()) {
-                        urunler.add( new Urun( resultsetU.getString("urun_adi"), resultsetU.getDouble("urun_fiyati"),resultsetU.getInt("urun_adedi"), resultsetU.getString("urun_durumu"), resultsetU.getString("urun_aciklamasi")));
+                        //Urun(String urunAdi, double urunFiyati, int urunAdedi, String urunDurumu, String urunAciklamasi)
+                        urunler.add( new Urun( resultsetU.getString("urun_adi"), resultsetU.getDouble("urun_fiyati"), resultsetU.getInt("urun_adedi"), resultsetU.getString("urun_durumu"), resultsetU.getString("urun_aciklamasi")));
                     }
                     
                 } catch (Exception e) {
@@ -77,6 +79,10 @@ public class JavaDBtoObj {
                 }
                 
                siparisListesi.add( 
+                       /*
+                        * (int siparis_id, String durum, String siparisi_isteyen, String siparisi_alan, String aciklama, Date siparis_tarih, Date siparis_istenen_tarih,
+            Date bitis_tarih, Firma firma, ArrayList<Urun> urunler, double toplam)
+                        */
                        new Siparis(resultsetS.getInt("siparis_id"), resultsetS.getString("durum"), resultsetS.getString("siparisi_isteyen"), resultsetS.getString("siparisi_alan"),
                        resultsetS.getString("aciklama"), resultsetS.getDate("siparis_tarih"), resultsetS.getDate("istenen_tarih"), resultsetS.getDate("bitis_tarih"),
                        firma, urunler, resultsetS.getDouble("toplam")));
@@ -132,6 +138,9 @@ public class JavaDBtoObj {
         PreparedStatement statement = null;
         
         try {
+        /*
+         * INSERT INTO `sql27141`.`siparis` (`siparis_id`, `siparisi_isteyen`, `siparisi_alan`, `durum`, `aciklama`, `siparis_tarih`, `istenen_tarih`, `bitis_tarih`, `toplam`) VALUES (NULL, 'Umutcan Batı', 'Mustafa Akarsu', 'Hazırlanıyor', NULL, '2013-10-05', '2013-10-31', NULL, '13548');
+         */
             statement = connection.prepareStatement( "INSERT INTO sql27141.siparis "
                     + "( siparis_id, siparisi_isteyen, siparisi_alan, durum, aciklama, siparis_tarih, istenen_tarih, bitis_tarih, toplam) VALUES"
                     + "(?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -154,8 +163,80 @@ public class JavaDBtoObj {
             } catch (Exception e) {
             }
         }
-        /*
-         * INSERT INTO `sql27141`.`siparis` (`siparis_id`, `siparisi_isteyen`, `siparisi_alan`, `durum`, `aciklama`, `siparis_tarih`, `istenen_tarih`, `bitis_tarih`, `toplam`) VALUES (NULL, 'Umutcan Batı', 'Mustafa Akarsu', 'Hazırlanıyor', NULL, '2013-10-05', '2013-10-31', NULL, '13548');
-         */
+        
+        try {
+            /*
+             * INSERT INTO  `sql27141`.`firma` (
+                `firma_adi` ,
+                `ilgili_adi` ,
+                `mail` ,
+                `tel` ,
+                `gsm` ,
+                `fax` ,
+                `siparis_id`
+                )
+                VALUES (
+                'Neokodera',  'Tansel ALTINEL',  'alirsin@gmail.com',  '03125734686',  '05312831924',  '03122270409',  '259'
+                );
+
+             */
+            statement = connection.prepareStatement( "INSERT INTO sql27141.firma "
+                    + "( firma_adi, ilgili_adi, mail, tel, gsm, fax, siparis_id) VALUES"
+                    + "(?, ?, ?, ?, ?, ?, ?)");
+            statement.setString(1, siparis.getFirma().getFirma_adi());
+            statement.setString(2, siparis.getFirma().getIlgili_adi());
+            statement.setString(3, siparis.getFirma().getMail());
+            statement.setString(4, siparis.getFirma().getTel());
+            statement.setString(5, siparis.getFirma().getGsm());
+            statement.setString(6, siparis.getFirma().getFax());
+            statement.setInt(7, siparis.getSiparis_id());
+            
+            statement.executeUpdate();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        } finally {
+            try {
+                statement.close();
+            } catch (Exception e) {
+            }
+        }
+        for( int i = 0; i < siparis.getUrunler().size(); i++){
+            Urun urun = siparis.getUrunler().get(i);
+            try {
+
+                /*
+                 * INSERT INTO  `sql27141`.`urun` (
+                    `urun_adi` ,
+                    `urun_fiyati` ,
+                    `urun_adedi` ,
+                    `urun_durumu` ,
+                    `urun_aciklamasi` ,
+                    `siparis_id`
+                    )
+                    VALUES (
+                    'Sipariş Takip Programı',  '2500,00',  '1',  'Hazırlanıyor',  'İşbu program hazırlanmaktadır.',  '259'
+                    );
+                 */
+                statement = connection.prepareStatement( "INSERT INTO sql27141.urun "
+                        + "( urun_adi, urun_fiyati, urun_adedi, urun_durumu, urun_aciklamasi, siparis_id) VALUES"
+                        + "(?, ?, ?, ?, ?, ?)");
+                statement.setString(1, urun.getUrunAdi());
+                statement.setDouble(2, urun.getUrunFiyati());
+                statement.setInt(3, urun.getUrunAdedi());
+                statement.setInt(4, urun.getUrunDurumu());
+                statement.setString(5, urun.getUrunAciklamasi());
+                statement.setInt(6, siparis.getSiparis_id());
+
+                statement.executeUpdate();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            } finally {
+                try {
+                    statement.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+ 
     }
 }

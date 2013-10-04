@@ -25,6 +25,8 @@ public class JavaConnector {
         
         try {
             Class.forName("com.mysql.jdbc.Driver");
+/*            Connection connection = DriverManager.getConnection("jdbc:mysql://sql2.freesqldatabase.com/" + DBname + "?useUnicode=true&characterEncoding=UTF-8",
+                    DBuser, DBpass);*/
             Connection connection = DriverManager.getConnection("jdbc:mysql://sql2.freesqldatabase.com/" 
                     + DBname + "?user=" + DBuser + "&password=" + DBpass);
             //JOptionPane.showMessageDialog(null, "Bağlandı!", "Sunucu Bağlantısı", JOptionPane.INFORMATION_MESSAGE, null);
