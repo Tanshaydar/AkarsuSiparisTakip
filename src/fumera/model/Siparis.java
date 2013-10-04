@@ -12,22 +12,29 @@ import java.util.Date;
  * @author Tansel
  */
 public class Siparis {
-    
+
     private int siparis_id;
     private String durum;
+    private String siparisi_isteyen;
+    private String siparisi_alan;
     private String aciklama;
     private Date siparis_tarih;
+    private Date siparis_istenen_tarih;
     private Date bitis_tarih;
     private double toplam;
     
     private Firma firma;
     private ArrayList<Urun> urunler;
 
-    public Siparis(int siparis_id, String durum, String aciklama, Date siparis_tarih, Date bitis_tarih, Firma firma, ArrayList<Urun> urunler, double toplam) {
+    public Siparis(int siparis_id, String durum, String siparisi_isteyen, String siparisi_alan, String aciklama, Date siparis_tarih, Date siparis_istenen_tarih,
+            Date bitis_tarih, Firma firma, ArrayList<Urun> urunler, double toplam) {
         this.siparis_id = siparis_id;
         this.durum = durum;
+        this.siparisi_isteyen = siparisi_isteyen;
+        this.siparisi_alan = siparisi_alan;
         this.aciklama = aciklama;
         this.siparis_tarih = siparis_tarih;
+        this.siparis_istenen_tarih = siparis_istenen_tarih;
         this.bitis_tarih = bitis_tarih;
         this.firma = firma;
         this.urunler = urunler;
@@ -97,16 +104,45 @@ public class Siparis {
     public void setUrunler(double toplam) {
         this.toplam = toplam;
     }
+        public String getSiparisi_isteyen() {
+        return siparisi_isteyen;
+    }
+
+    public void setSiparisi_isteyen(String siparisi_isteyen) {
+        this.siparisi_isteyen = siparisi_isteyen;
+    }
+
+    public String getSiparisi_alan() {
+        return siparisi_alan;
+    }
+
+    public void setSiparisi_alan(String siparisi_alan) {
+        this.siparisi_alan = siparisi_alan;
+    }
+
+    public Date getSiparis_istenen_tarih() {
+        return siparis_istenen_tarih;
+    }
+
+    public void setSiparis_istenen_tarih(Date siparis_istenen_tarih) {
+        this.siparis_istenen_tarih = siparis_istenen_tarih;
+    }
     
     @Override
     public String toString(){
-        String str =  "ID: " + siparis_id + " Durum: " + durum
-                + " Açıklama: " + aciklama + " S. Tarih: " + siparis_tarih
-                + " B.Tarih: " + bitis_tarih + " Firma: " + firma.toString();
+        String str =  "ID: " + siparis_id + "\n"
+                + " Durum: " + durum + "\n"
+                + " Siparişi İsteyen: " + siparisi_isteyen + "\n"
+                + " Siparişi Alan: " + siparisi_alan + "\n"
+                + " Açıklama: " + aciklama + "\n"
+                + " S. Tarih: " + siparis_tarih + "\n"
+                + " S. İstenen Tarih: " + siparis_istenen_tarih + "\n"
+                + " S. Bitiş Tarihi: " + bitis_tarih + "\n"
+                + " Firma: " + firma.toString();
         for( int i = 0; i < urunler.size(); i++){
             str += urunler.get(i);
         }
-        
+
         return str;
     }
 }

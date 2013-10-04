@@ -76,8 +76,11 @@ public class Firma {
     
     @Override
     public String toString(){
-        return  "Firma: " + firma_adi + " İlgili: " + ilgili_adi 
-                + " Mail: " + mail + " Tel: " + tel
-                + " GSM: " + gsm + " Fax: " + fax;
+        return  "Firma: " + firma_adi + "\n"
+                + " İlgili: " + ilgili_adi + "\n"
+                + " Mail: " + mail + "\n"
+                + " Tel: " + tel + "\n"
+                + " GSM: " + gsm + "\n"
+                + " Fax: " + fax + "\n";
     }    
 }

@@ -11,13 +11,15 @@ package fumera.model;
 public class Urun {
     
     private String urunAdi;
+    private int urunAdedi;
     private double urunFiyati;
     private String urunDurumu;
     private String urunAciklamasi;
 
-    public Urun(String urunAdi, double urunFiyati, String urunDurumu, String urunAciklamasi) {
+    public Urun(String urunAdi, double urunFiyati, int urunAdedi, String urunDurumu, String urunAciklamasi) {
         this.urunAdi = urunAdi;
         this.urunFiyati = urunFiyati;
+        this.urunAdedi = urunAdedi;
         this.urunDurumu = urunDurumu;
         this.urunAciklamasi = urunAciklamasi;
     }
@@ -30,6 +32,14 @@ public class Urun {
         this.urunAdi = urunAdi;
     }
 
+    public int getUrunAdedi() {
+        return urunAdedi;
+    }
+
+    public void setUrunAdedi(int urunAdedi) {
+        this.urunAdedi = urunAdedi;
+    }
+    
     public double getUrunFiyati() {
         return urunFiyati;
     }
@@ -56,7 +66,10 @@ public class Urun {
     
     @Override
     public String toString(){
-        return  "Ürun: " + urunAdi + " Fiyat: " + urunFiyati 
-                + " Durumu: " + urunDurumu + " Açıklama: " + urunAciklamasi;
+        return  "Ürun: " + urunAdi + "\n"
+                + "Fiyat: " + urunFiyati + "\n"
+                + "Adet: " + urunAdedi + "\n"
+                + "Durumu: " + urunDurumu + "\n"
+                + "Açıklama: " + urunAciklamasi + "\n";
     }
 }
