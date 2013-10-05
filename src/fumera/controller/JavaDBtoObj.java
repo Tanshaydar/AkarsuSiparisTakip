@@ -252,4 +252,27 @@ public class JavaDBtoObj {
         }
  
     }
+    
+    public void SiparisiSil( int siparisID){
+        connection = JavaConnector.ConnectDB();
+        
+        PreparedStatement statement = null;
+        
+        try {
+        /*
+         * UPDATE  `sql27141`.`siparis` SET  `durum` =  'Silindi' WHERE  `siparis`.`siparis_id` =259;
+         */
+            statement = connection.prepareStatement( "UPDATE siparis SET durum = 'Silindi' WHERE siparis.siparis_id=?;");
+            statement.setInt(1, siparisID);
+            
+            statement.executeUpdate();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        } finally {
+            try {
+                statement.close();
+            } catch (Exception e) {
+            }
+        }
+    }
 }
