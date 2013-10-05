@@ -20,37 +20,40 @@ import javax.swing.JOptionPane;
  * @author Tansel
  */
 public class JavaDBtoObj {
-    private ArrayList<Siparis> siparisListesi = new ArrayList<>();
-    private Firma firma;
-    private ArrayList<Urun> urunler = new ArrayList<>();
     
     Connection connection = null;
-    ResultSet resultsetS = null;
-    ResultSet resultsetF = null;
-    ResultSet resultsetU = null;
-    PreparedStatement statementS = null;
-    PreparedStatement statementF = null;
-    PreparedStatement statementU = null;
-    
-    private String sqlSiparis = "SELECT * FROM siparis";
-    private String sqlFirma = "SELECT * FROM firma WHERE siparis_id=?";
-    private String sqlUrun = "SELECT * FROM urun WHERE siparis_id=?";
     
     public ArrayList<Siparis> fetchDB(){
         connection = JavaConnector.ConnectDB();
+        ResultSet resultsetS = null;
+        ResultSet resultsetF = null;
+        ResultSet resultsetU = null;
+        PreparedStatement statementS = null;
+        PreparedStatement statementF = null;
+        PreparedStatement statementU = null;
+
+        String sqlSiparis = "SELECT * FROM siparis";
+        String sqlFirma = "SELECT * FROM firma WHERE siparis_id=?";
+        String sqlUrun = "SELECT * FROM urun WHERE siparis_id=?";
+        
+        
+        ArrayList<Siparis> siparisListesi = new ArrayList<>();
+        
         try {
             statementS = connection.prepareStatement( sqlSiparis);
             resultsetS = statementS.executeQuery();
             
             while( resultsetS.next()) {
 
+                Firma firma = null;
+                ArrayList<Urun> urunler = new ArrayList<>();
                 /*System.out.println(resultsetS.getInt("siparis_id") + resultsetS.getString("durum") 
                         + resultsetS.getString("aciklama") + resultsetS.getDate("siparis_tarih") + resultsetS.getDate("bitis_tarih") + resultsetS.getDouble("toplam") );*/
-                System.out.println(resultsetS.getString("siparis_id"));
+                System.out.println(resultsetS.getInt("siparis_id"));
                 try {
                     
                     statementF = connection.prepareStatement(sqlFirma);
-                    statementF.setString(1, resultsetS.getString("siparis_id"));
+                    statementF.setInt(1, resultsetS.getInt("siparis_id"));
                     resultsetF = statementF.executeQuery();
                     if( resultsetF.next()) {
                         //String firma_adi, String ilgili_adi, String mail, String tel, String gsm, String fax)
@@ -61,21 +64,35 @@ public class JavaDBtoObj {
                     }
                 } catch (SQLException | HeadlessException e) {
                     JOptionPane.showMessageDialog(null, e);
+                } finally {
+                    try {
+                        resultsetF.close();
+                        statementF.close();
+                    } catch (Exception e) {
+                    }
                 }
                 
                 
                 try {
                     
                     statementU = connection.prepareStatement(sqlUrun);
-                    statementU.setString(1, resultsetS.getString("siparis_id"));
+                    statementU.setInt(1, resultsetS.getInt("siparis_id"));
                     resultsetU = statementU.executeQuery();
+
                     while( resultsetU.next()) {
                         //Urun(String urunAdi, double urunFiyati, int urunAdedi, String urunDurumu, String urunAciklamasi)
                         urunler.add( new Urun( resultsetU.getString("urun_adi"), resultsetU.getDouble("urun_fiyati"), resultsetU.getInt("urun_adedi"), resultsetU.getString("urun_durumu"), resultsetU.getString("urun_aciklamasi")));
+                        System.out.println();
                     }
                     
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Ürün bulunamadı!");
+                } finally{
+                    try {
+                        resultsetU.close();
+                        statementU.close();
+                    } catch (Exception e) {
+                    }
                 }
                 
                siparisListesi.add( 
@@ -94,12 +111,8 @@ public class JavaDBtoObj {
             JOptionPane.showMessageDialog(null, e);
         } finally {
             try {
-                resultsetF.close();
                 resultsetS.close();
-                resultsetU.close();
-                statementF.close();
                 statementS.close();
-                statementU.close();
             } catch (Exception e) {
             }
         }

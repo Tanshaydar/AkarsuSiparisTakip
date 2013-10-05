@@ -62,18 +62,29 @@ public class SiparisEkranı extends javax.swing.JFrame {
         UpdateTable();
     }
     
+    private void SiparisleriSifirla(){
+        siparisler.clear();
+        aktifSiparisler.clear();
+        tamamlanmisSiparisler.clear();
+        silinmisSiparisler.clear();
+    }
+    
     private void SiparisleriAyir(){
         
         JavaDBtoObj dbTOobj = new JavaDBtoObj();
         siparisler = dbTOobj.fetchDB();
         
         for( int i = 0; i < siparisler.size(); i++){
-            if( siparisler.get(i).getDurum().equals("Hazırlanıyor")){
-                aktifSiparisler.add( siparisler.get(i));
-            } else if( siparisler.get(i).getDurum().equals("Tamamlandı")){
-                tamamlanmisSiparisler.add( siparisler.get(i));
-            } else if( siparisler.get(i).getDurum().equals("Silindi")){
-                silinmisSiparisler.add( siparisler.get(i));
+            switch (siparisler.get(i).getDurum()) {
+                case "Hazırlanıyor":
+                    aktifSiparisler.add( siparisler.get(i));
+                    break;
+                case "Tamamlandı":
+                    tamamlanmisSiparisler.add( siparisler.get(i));
+                    break;
+                case "Silindi":
+                    silinmisSiparisler.add( siparisler.get(i));
+                    break;
             }
         }
     }
@@ -853,6 +864,10 @@ public class SiparisEkranı extends javax.swing.JFrame {
         
         System.out.println( yeniSiparis);
         new JavaDBtoObj().InsertDB(yeniSiparis);
+        
+        SiparisleriSifirla();
+        SiparisleriAyir();
+        UpdateTable();
     }//GEN-LAST:event_yeniSiparis_KaydetActionPerformed
 
     private void tamamlanmisSiparis_tablosuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tamamlanmisSiparis_tablosuMouseClicked
