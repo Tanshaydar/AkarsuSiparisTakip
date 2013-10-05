@@ -289,7 +289,7 @@ public class SiparisEkranı extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Akarsu Sipariş Takip Sistemi");
 
-        siparisSekmeleri.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        siparisSekmeleri.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
 
         yeniSiparis_FirmaPaneli.setBorder(javax.swing.BorderFactory.createTitledBorder("Sipariş Bilgileri"));
         yeniSiparis_FirmaPaneli.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -306,7 +306,7 @@ public class SiparisEkranı extends javax.swing.JFrame {
             }
         });
 
-        jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel19.setText("<html><b>Firma:</b></html>");
 
         sg_aciklama2.setText("<html><b>Açıklama</b><html>");
@@ -323,6 +323,7 @@ public class SiparisEkranı extends javax.swing.JFrame {
 
         jLabel22.setText("<html><b>Fax:</b></html>");
 
+        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel23.setText("<html><b>İlgili:</b></html>");
 
         jLabel24.setText("<html><b>GSM:</b></html>");
@@ -493,6 +494,9 @@ public class SiparisEkranı extends javax.swing.JFrame {
 
     yeniSiparis_FirmaPaneliLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel19, jLabel20, jLabel21, jLabel22, jLabel23, jLabel24, jLabel27, jLabel28, jLabel29, jLabel30, sg_aciklama2});
 
+    jLabel19.getAccessibleContext().setAccessibleName("Firma:");
+    jLabel23.getAccessibleContext().setAccessibleName("İlgili:");
+
     yeniSiparis_urunlerPaneli.setBorder(javax.swing.BorderFactory.createTitledBorder("Ürünler"));
 
     yeniSiparis_urunTablosu.setAutoCreateRowSorter(true);
@@ -532,7 +536,7 @@ public class SiparisEkranı extends javax.swing.JFrame {
     );
     yeniSiparis_urunlerPaneliLayout.setVerticalGroup(
         yeniSiparis_urunlerPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+        .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
     );
 
     yeniSiparis_yeniUrunEkle.setText("Yeni Ürün Ekle");
@@ -661,7 +665,7 @@ public class SiparisEkranı extends javax.swing.JFrame {
     );
     aktifSiparislerPaneliLayout.setVerticalGroup(
         aktifSiparislerPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(aktifSiparisScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 820, Short.MAX_VALUE)
+        .addComponent(aktifSiparisScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 821, Short.MAX_VALUE)
     );
 
     siparisSekmeleri.addTab("Aktif Siparişler", aktifSiparislerPaneli);
@@ -706,7 +710,7 @@ public class SiparisEkranı extends javax.swing.JFrame {
     );
     tamamlanmısSiparisPaneliLayout.setVerticalGroup(
         tamamlanmısSiparisPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(tamamlanmisSiparisScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 820, Short.MAX_VALUE)
+        .addComponent(tamamlanmisSiparisScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 821, Short.MAX_VALUE)
     );
 
     siparisSekmeleri.addTab("Tamamlanmış Siparişler", tamamlanmısSiparisPaneli);
@@ -982,7 +986,7 @@ siparisGoruntule_FirmaPaneliLayout.setHorizontalGroup(
     );
     siparisGoruntule_urunlerPaneliLayout.setVerticalGroup(
         siparisGoruntule_urunlerPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+        .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
     );
 
     siparisGoruntule_yeniUrunEkle.setText("Yeni Ürün Ekle");
@@ -1128,7 +1132,7 @@ siparisGoruntule_FirmaPaneliLayout.setHorizontalGroup(
     );
     silinmisSiparisPaneliLayout.setVerticalGroup(
         silinmisSiparisPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(silinmisSiparisScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 820, Short.MAX_VALUE)
+        .addComponent(silinmisSiparisScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 821, Short.MAX_VALUE)
     );
 
     siparisSekmeleri.addTab("Silinmiş Siparişler", silinmisSiparisPaneli);
