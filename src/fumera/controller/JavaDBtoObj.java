@@ -20,11 +20,9 @@ import javax.swing.JOptionPane;
  * @author Tansel
  */
 public class JavaDBtoObj {
-    
-    Connection connection = null;
-    
-    public ArrayList<Siparis> fetchDB(){
-        connection = JavaConnector.ConnectDB();
+
+    public static ArrayList<Siparis> getSiparislerFromDB(){
+        Connection connection = JavaConnector.ConnectDB();
         ResultSet resultsetS = null;
         ResultSet resultsetF = null;
         ResultSet resultsetU = null;
@@ -68,7 +66,8 @@ public class JavaDBtoObj {
                     try {
                         resultsetF.close();
                         statementF.close();
-                    } catch (Exception e) {
+                    } catch (SQLException e) {
+                        System.out.println(e);
                     }
                 }
                 
@@ -85,13 +84,14 @@ public class JavaDBtoObj {
                         System.out.println();
                     }
                     
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Ürün bulunamadı!");
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, e);
                 } finally{
                     try {
                         resultsetU.close();
                         statementU.close();
-                    } catch (Exception e) {
+                    } catch (SQLException e) {
+                        System.out.println(e);
                     }
                 }
                 
@@ -113,15 +113,16 @@ public class JavaDBtoObj {
             try {
                 resultsetS.close();
                 statementS.close();
-            } catch (Exception e) {
+            } catch (SQLException e) {
+                System.out.println(e);
             }
         }
         
         return siparisListesi;
     }
     
-    public int getNewID(){
-        connection = JavaConnector.ConnectDB();
+    public static int getNewID(){
+        Connection connection = JavaConnector.ConnectDB();
 
         int id = 0;
         PreparedStatement statement = null;
@@ -139,14 +140,15 @@ public class JavaDBtoObj {
             try {
                 resultSet.close();
                 statement.close();
-            } catch (Exception e) {
+            } catch (SQLException e) {
+                System.out.println(e);
             }
         }
         return (id+1);
     }
     
-    public void InsertDB( Siparis siparis){
-        connection = JavaConnector.ConnectDB();
+    public static void insertYeniSiparisToDB( Siparis siparis){
+        Connection connection = JavaConnector.ConnectDB();
         
         PreparedStatement statement = null;
         
@@ -154,7 +156,7 @@ public class JavaDBtoObj {
         /*
          * INSERT INTO `sql27141`.`siparis` (`siparis_id`, `siparisi_isteyen`, `siparisi_alan`, `durum`, `aciklama`, `siparis_tarih`, `istenen_tarih`, `bitis_tarih`, `toplam`) VALUES (NULL, 'Umutcan Batı', 'Mustafa Akarsu', 'Hazırlanıyor', NULL, '2013-10-05', '2013-10-31', NULL, '13548');
          */
-            statement = connection.prepareStatement( "INSERT INTO sql27141.siparis "
+            statement = connection.prepareStatement( "INSERT INTO " + JavaConnector.DBname() + ".siparis "
                     + "( siparis_id, siparisi_isteyen, siparisi_alan, durum, aciklama, siparis_tarih, istenen_tarih, bitis_tarih, toplam) VALUES"
                     + "(?, ?, ?, ?, ?, ?, ?, ?, ?)");
             statement.setNull(1, java.sql.Types.INTEGER);
@@ -168,12 +170,13 @@ public class JavaDBtoObj {
             statement.setDouble(9, siparis.getToplam());
             
             statement.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         } finally {
             try {
                 statement.close();
-            } catch (Exception e) {
+            } catch (SQLException e) {
+                System.out.println(e);
             }
         }
         
@@ -193,7 +196,7 @@ public class JavaDBtoObj {
                 );
 
              */
-            statement = connection.prepareStatement( "INSERT INTO sql27141.firma "
+            statement = connection.prepareStatement( "INSERT INTO " + JavaConnector.DBname() + ".firma "
                     + "( firma_adi, ilgili_adi, mail, tel, gsm, fax, siparis_id) VALUES"
                     + "(?, ?, ?, ?, ?, ?, ?)");
             statement.setString(1, siparis.getFirma().getFirma_adi());
@@ -205,12 +208,12 @@ public class JavaDBtoObj {
             statement.setInt(7, siparis.getSiparis_id());
             
             statement.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         } finally {
             try {
                 statement.close();
-            } catch (Exception e) {
+            } catch (SQLException e) {
             }
         }
         for( int i = 0; i < siparis.getUrunler().size(); i++){
@@ -230,7 +233,7 @@ public class JavaDBtoObj {
                     'Sipariş Takip Programı',  '2500,00',  '1',  'Hazırlanıyor',  'İşbu program hazırlanmaktadır.',  '259'
                     );
                  */
-                statement = connection.prepareStatement( "INSERT INTO sql27141.urun "
+                statement = connection.prepareStatement( "INSERT INTO " + JavaConnector.DBname() + ".urun "
                         + "( urun_adi, urun_fiyati, urun_adedi, urun_durumu, urun_aciklamasi, siparis_id) VALUES"
                         + "(?, ?, ?, ?, ?, ?)");
                 statement.setString(1, urun.getUrunAdi());
@@ -241,20 +244,126 @@ public class JavaDBtoObj {
                 statement.setInt(6, siparis.getSiparis_id());
 
                 statement.executeUpdate();
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, e);
             } finally {
                 try {
                     statement.close();
-                } catch (Exception e) {
+                } catch (SQLException e) {
+                    System.out.println(e);
                 }
             }
         }
  
     }
     
-    public void SiparisiSil( int siparisID){
-        connection = JavaConnector.ConnectDB();
+    public static void updateSiparisToDB( Siparis siparis){
+        Connection connection = JavaConnector.ConnectDB();
+        
+        PreparedStatement statement = null;
+        
+        try {
+        /*
+            UPDATE  `siparis`.`siparis` SET  `siparisi_isteyen` =  'İsmail DALAMAZ' WHERE  `siparis`.`siparis_id` =271;
+         *  INSERT INTO `sql27141`.`siparis` (`siparis_id`, `siparisi_isteyen`, `siparisi_alan`, `durum`, `aciklama`, `siparis_tarih`, `istenen_tarih`, 
+            `bitis_tarih`, `toplam`) VALUES (NULL, 'Umutcan Batı', 'Mustafa Akarsu', 'Hazırlanıyor', NULL, '2013-10-05', '2013-10-31', NULL, '13548');
+         */
+            statement = connection.prepareStatement( "UPDATE " + JavaConnector.DBname() + ".siparis SET siparisi_isteyen=?, siparisi_alan=?,"
+                    + " durum=?, aciklama=?, siparis_tarih=?, istenen_tarih=?, bitis_tarih=?, toplam=? WHERE siparis.siparis_id=?;");
+            statement.setString(1, siparis.getSiparisi_isteyen());
+            statement.setString(2, siparis.getSiparisi_alan());
+            statement.setInt(3, siparis.getDurumInt());
+            statement.setString(4, siparis.getAciklama());
+            statement.setDate(5, new java.sql.Date(siparis.getSiparis_tarih().getYear(), siparis.getSiparis_tarih().getMonth(), siparis.getSiparis_tarih().getDay()));
+            statement.setDate(6, new java.sql.Date(siparis.getSiparis_istenen_tarih().getYear(), siparis.getSiparis_istenen_tarih().getMonth(), siparis.getSiparis_istenen_tarih().getDay()));
+            if( siparis.getDurumInt() == 2)
+                statement.setDate(7, new java.sql.Date( siparis.getBitis_tarih().getYear(), siparis.getBitis_tarih().getMonth(), siparis.getBitis_tarih().getDay()));
+            else
+                statement.setNull(7, java.sql.Types.DATE);
+            statement.setDouble(8, siparis.getToplam());
+            statement.setInt(9, siparis.getSiparis_id());
+            
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        } finally {
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+        }
+        
+        //Firma Duzenle
+        try {
+            /*
+             */
+            statement = connection.prepareStatement( "UPDATE " + JavaConnector.DBname() + ".firma SET firma_adi=?, ilgili_adi=?, mail=?, tel=?, gsm=?, fax=? WHERE firma.siparis_id=?;");
+            statement.setString(1, siparis.getFirma().getFirma_adi());
+            statement.setString(2, siparis.getFirma().getIlgili_adi());
+            statement.setString(3, siparis.getFirma().getMail());
+            statement.setString(4, siparis.getFirma().getTel());
+            statement.setString(5, siparis.getFirma().getGsm());
+            statement.setString(6, siparis.getFirma().getFax());
+            statement.setInt(7, siparis.getSiparis_id());
+            
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        } finally {
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+        }
+        
+        // Var olan urunleri silip yerine yenilerini ekle
+        // ÖNCE SİL
+        try {
+            statement = connection.prepareStatement( "DELETE FROM urun WHERE urun.siparis_id=?;");
+            statement.setInt(1, siparis.getSiparis_id());           
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        } finally {
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+        }
+        
+        // URUNLERI YERLESTIR
+        for( int i = 0; i < siparis.getUrunler().size(); i++){
+            Urun urun = siparis.getUrunler().get(i);
+            try {
+                statement = connection.prepareStatement( "INSERT INTO " + JavaConnector.DBname() + ".urun "
+                        + "( urun_adi, urun_fiyati, urun_adedi, urun_durumu, urun_aciklamasi, siparis_id) VALUES"
+                        + "(?, ?, ?, ?, ?, ?)");
+                statement.setString(1, urun.getUrunAdi());
+                statement.setDouble(2, urun.getUrunFiyati());
+                statement.setInt(3, urun.getUrunAdedi());
+                //statement.setInt(4, urun.getUrunDurumu());
+                statement.setString(4, urun.getUrunDurumuStr());
+                statement.setString(5, urun.getUrunAciklamasi());
+                statement.setInt(6, siparis.getSiparis_id());
+
+                statement.executeUpdate();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e);
+            } finally {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
+        }
+    }
+    
+    public static void SiparisiSil( int siparisID){
+        Connection connection = JavaConnector.ConnectDB();
         
         PreparedStatement statement = null;
         
@@ -266,12 +375,13 @@ public class JavaDBtoObj {
             statement.setInt(1, siparisID);
             
             statement.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         } finally {
             try {
                 statement.close();
-            } catch (Exception e) {
+            } catch (SQLException e) {
+                System.out.println(e);
             }
         }
     }

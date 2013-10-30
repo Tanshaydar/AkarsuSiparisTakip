@@ -56,7 +56,11 @@ public class Urun {
         else
             return 0;
     }
-
+    
+    public String getUrunDurumuStr(){
+        return urunDurumu;
+    }
+            
     public void setUrunDurumu(String urunDurumu) {
         this.urunDurumu = urunDurumu;
     }

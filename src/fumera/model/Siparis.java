@@ -56,6 +56,26 @@ public class Siparis {
     public void setDurum(String durum) {
         this.durum = durum;
     }
+    
+    public int getDurumInt(){
+        int durumInt = 0;
+        switch ( durum) {
+            case "Hazırlanıyor":
+                durumInt = 1;
+                break;
+            case "Tamamlandı":
+                durumInt = 2;
+                break;
+            case "Silindi":
+                durumInt = 3;
+                break;
+            case "Teklif":
+                durumInt = 4;
+                break;
+        }
+        
+        return durumInt;
+    }
 
     public String getAciklama() {
         return aciklama;

@@ -137,7 +137,8 @@ public class GirisFormu extends javax.swing.JFrame {
             resultset = statement.executeQuery();
             
             if( resultset.next()){
-                JOptionPane.showMessageDialog(null, "Giriş Başarılı");
+                Object[] options = {"Tamam"};
+                JOptionPane.showOptionDialog(null, "Giriş Başarılı!", "Giriş Onayı", JOptionPane.INFORMATION_MESSAGE, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
                 close();
                 SiparisEkranı se = new SiparisEkranı();
                 se.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/viewer/icon.png")));

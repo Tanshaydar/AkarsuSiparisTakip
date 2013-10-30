@@ -9,6 +9,7 @@ import fumera.model.Firma;
 import fumera.model.Siparis;
 import fumera.model.Urun;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -79,19 +80,18 @@ public class SiparisEkranı extends javax.swing.JFrame {
     }
     
     private void SiparisleriAyir(){
-        
-        JavaDBtoObj dbTOobj = new JavaDBtoObj();
-        siparisler = dbTOobj.fetchDB();
+
+        siparisler = JavaDBtoObj.getSiparislerFromDB();
         
         for( int i = 0; i < siparisler.size(); i++){
-            switch (siparisler.get(i).getDurum()) {
-                case "Hazırlanıyor":
+            switch (siparisler.get(i).getDurumInt()) {
+                case 1:
                     aktifSiparisler.add( siparisler.get(i));
                     break;
-                case "Tamamlandı":
+                case 2:
                     tamamlanmisSiparisler.add( siparisler.get(i));
                     break;
-                case "Silindi":
+                case 3:
                     silinmisSiparisler.add( siparisler.get(i));
                     break;
             }
@@ -106,7 +106,7 @@ public class SiparisEkranı extends javax.swing.JFrame {
             
             String urunStr = "";
             for( int j = 0; j < aktifSiparisler.get(i).getUrunler().size(); j++){
-                urunStr += aktifSiparisler.get(i).getUrunler().get(j).getUrunAdi() + " \n ";
+                urunStr += aktifSiparisler.get(i).getUrunler().get(j).getUrunAdi() + " \r\n ";
             }
             
             modelAktif.insertRow(aktifSiparis_tablosu.getRowCount(), new Object[]{
@@ -172,6 +172,7 @@ public class SiparisEkranı extends javax.swing.JFrame {
         yeniSiparis_siparisiAlan.setText("");
         yeniSiparis_siparisAciklamasi.setText("");
     }
+    
     private void siparisGoruntuleTemizle(){
         DefaultTableModel urunler = (DefaultTableModel) siparisGoruntule_urunTablosu.getModel();
         urunler.setRowCount(0);
@@ -199,11 +200,16 @@ public class SiparisEkranı extends javax.swing.JFrame {
         siparisGoruntule_siparisTarihi.setEnabled( ayar);
         siparisGoruntule_siparisIstenenTarih.setEnabled( ayar);
         siparisGoruntule_Durum.setEnabled( ayar);
+        siparisGoruntule_urunTablosu.setEnabled( ayar);
         siparisGoruntule_siparisAciklamasi.setEditable( ayar);
         siparisGoruntule_yeniUrunEkle.setEnabled( ayar);
         siparisGoruntule_UrunSil.setEnabled( ayar);
         siparisGoruntule_Temizle.setEnabled( ayar);
         siparisGoruntule_Kaydet.setEnabled( ayar);
+        
+        if( !ayar) {
+            siparisGoruntule_siparisTamamlanmaTarihi.setEnabled(ayar);
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -663,7 +669,7 @@ public class SiparisEkranı extends javax.swing.JFrame {
         }
     ) {
         Class[] types = new Class [] {
-            java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
+            java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
         };
         boolean[] canEdit = new boolean [] {
             false, false, false, false, false, false
@@ -677,6 +683,7 @@ public class SiparisEkranı extends javax.swing.JFrame {
             return canEdit [columnIndex];
         }
     });
+    aktifSiparis_tablosu.setColumnSelectionAllowed(true);
     aktifSiparis_tablosu.setRowHeight(20);
     aktifSiparis_tablosu.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
     aktifSiparis_tablosu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -887,7 +894,7 @@ siparisGoruntule_siparisTamamlanmaTarihi.setShowOneMonth(true);
 
 jLabel40.setText("<html><b>Sipariş Durumui:</b></html>");
 
-siparisGoruntule_Durum.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Hazırlanıyor", "Tamamlandı", "Silindi" }));
+siparisGoruntule_Durum.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Hazırlanıyor", "Tamamlandı", "Silindi", "Teklif" }));
 
 siparisGoruntule_Durum.setEnabled(false);
 siparisGoruntule_Durum.addItemListener(new java.awt.event.ItemListener() {
@@ -1021,6 +1028,7 @@ siparisGoruntule_Durum.addItemListener(new java.awt.event.ItemListener() {
         }
     });
     siparisGoruntule_urunTablosu.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+    siparisGoruntule_urunTablosu.setEnabled(false);
     siparisGoruntule_urunTablosu.setFillsViewportHeight(true);
     siparisGoruntule_urunTablosu.setName("Yeni Sipariş Ürünler"); // NOI18N
     jScrollPane11.setViewportView(siparisGoruntule_urunTablosu);
@@ -1302,8 +1310,9 @@ siparisGoruntule_Durum.addItemListener(new java.awt.event.ItemListener() {
         int result  = JOptionPane.showOptionDialog(null, "Yeni Sipariş Girdilerini"
                 + " 'Temizlemek' İstediğinize Emin misiniz?", "Sipariş Girdilerini Temizle!", 
                 JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[1]);
-        if( result == 0)
+        if( result == 0) {
             yeniSiparisTemizle();
+        }
     }//GEN-LAST:event_yeniSiparis_TemizleActionPerformed
 
     private void yeniSiparis_ePostaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yeniSiparis_ePostaActionPerformed
@@ -1312,10 +1321,16 @@ siparisGoruntule_Durum.addItemListener(new java.awt.event.ItemListener() {
 
     private void yeniSiparis_UrunSilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yeniSiparis_UrunSilActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) yeniSiparis_urunTablosu.getModel();
-        if( yeniSiparis_urunTablosu.getSelectedRow() != -1)
-            model.removeRow( yeniSiparis_urunTablosu.getSelectedRow());
-        yeniSiparis_urunTablosu.revalidate();
+        Object[] options = {"Evet, sil!", "Hayır, silme!"};
+        int result  = JOptionPane.showOptionDialog(null, "Yeni Sipariş Girdilerini"
+                + " 'Temizlemek' İstediğinize Emin misiniz?", "Sipariş Girdilerini Temizle!", 
+                JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[1]);
+        if( result == 0) {
+            DefaultTableModel model = (DefaultTableModel) yeniSiparis_urunTablosu.getModel();
+            if( yeniSiparis_urunTablosu.getSelectedRow() != -1)
+                model.removeRow( yeniSiparis_urunTablosu.getSelectedRow());
+            yeniSiparis_urunTablosu.revalidate();
+        }
     }//GEN-LAST:event_yeniSiparis_UrunSilActionPerformed
 
     private void yeniSiparis_KaydetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yeniSiparis_KaydetActionPerformed
@@ -1345,7 +1360,7 @@ siparisGoruntule_Durum.addItemListener(new java.awt.event.ItemListener() {
             Date bitis_tarih, Firma firma, ArrayList<Urun> urunler, double toplam)
          */
         yeniSiparis = new Siparis(
-                new JavaDBtoObj().getNewID(),
+                JavaDBtoObj.getNewID(),
                 null,
                 yeniSiparis_siparisiIsteyen.getText(),
                 yeniSiparis_siparisiAlan.getText(), 
@@ -1358,7 +1373,7 @@ siparisGoruntule_Durum.addItemListener(new java.awt.event.ItemListener() {
                 toplam);
         
         System.out.println( yeniSiparis);
-        new JavaDBtoObj().InsertDB(yeniSiparis);
+        JavaDBtoObj.insertYeniSiparisToDB(yeniSiparis);
         
         yeniSiparisTemizle();
         
@@ -1411,20 +1426,120 @@ siparisGoruntule_Durum.addItemListener(new java.awt.event.ItemListener() {
 
     private void siparisGoruntule_TemizleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siparisGoruntule_TemizleActionPerformed
         // TODO add your handling code here:
+        Object[] options = {"Evet, temizle!", "Hayır, temizleme!"};
+        int result  = JOptionPane.showOptionDialog(null, "Yeni Sipariş Girdilerini"
+                + " 'Temizlemek' İstediğinize Emin misiniz?", "Sipariş Girdilerini Temizle!", 
+                JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[1]);
+        if( result == 0) {
+            siparisGoruntuleTemizle();
+        }
     }//GEN-LAST:event_siparisGoruntule_TemizleActionPerformed
 
     private void siparisGoruntule_KaydetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siparisGoruntule_KaydetActionPerformed
         // TODO add your handling code here:
+        Siparis siparisDuzenle;
+        Firma firmaDuzenle;
+        ArrayList<Urun> urunlerDuzenle = new ArrayList<Urun>();
+        double toplamDuzenle = 0;
+        firmaDuzenle = new Firma( siparisGoruntule_firmaAdi.getText(), siparisGoruntule_ilgiliAdi.getText(),
+                siparisGoruntule_ePosta.getText(), siparisGoruntule_telefon.getText(), siparisGoruntule_gsm.getText(), siparisGoruntule_fax.getText());
+        
+        //System.out.println( yeniFirma.toString());
+        
+        for( int i = 0; i < siparisGoruntule_urunTablosu.getRowCount(); i++){
+            urunlerDuzenle.add( new Urun( 
+                    siparisGoruntule_urunTablosu.getValueAt(i, 0).toString(),
+                    Double.parseDouble(siparisGoruntule_urunTablosu.getValueAt(i, 1).toString()), 
+                    Integer.parseInt(siparisGoruntule_urunTablosu.getValueAt(i, 3).toString()),
+                    siparisGoruntule_urunTablosu.getValueAt(i, 2).toString(), 
+                    siparisGoruntule_urunTablosu.getValueAt(i, 5).toString()));
+                    toplamDuzenle += Double.parseDouble(siparisGoruntule_urunTablosu.getValueAt(i, 4).toString());
+            //System.out.println(yeniUrunler.get(i).toString());
+        }
+        
+        /*
+         * Siparis(int siparis_id, String durum, String siparisi_isteyen, String siparisi_alan, String aciklama, Date siparis_tarih, Date siparis_istenen_tarih,
+            Date bitis_tarih, Firma firma, ArrayList<Urun> urunler, double toplam)
+         */
+        String yeniDurum = null;
+        switch( siparisGoruntule_Durum.getSelectedIndex()){
+            case 0:
+                yeniDurum = "Hazırlanıyor";
+                break;
+            case 1:
+                yeniDurum = "Tamamlandı";
+                break;
+            case 2:
+                yeniDurum = "Silindi";
+                break;
+            case 3:
+                yeniDurum = "Teklif";
+                break;
+        }
+        if( siparisGoruntule_Durum.getSelectedIndex() == 1) {
+            siparisDuzenle = new Siparis(
+                    currentSiparis,
+                    yeniDurum,
+                    siparisGoruntule_siparisiIsteyen.getText(),
+                    siparisGoruntule_siparisiAlan.getText(), 
+                    siparisGoruntule_siparisAciklamasi.getText(),
+                    siparisGoruntule_siparisTarihi.getCurrent().getTime(),
+                    siparisGoruntule_siparisIstenenTarih.getCurrent().getTime(), 
+                    siparisGoruntule_siparisTamamlanmaTarihi.getCurrent().getTime(),
+                    firmaDuzenle,
+                    urunlerDuzenle,
+                    toplamDuzenle);
+        } else {
+            siparisDuzenle = new Siparis(
+                    currentSiparis,
+                    yeniDurum,
+                    siparisGoruntule_siparisiIsteyen.getText(),
+                    siparisGoruntule_siparisiAlan.getText(), 
+                    siparisGoruntule_siparisAciklamasi.getText(),
+                    siparisGoruntule_siparisTarihi.getCurrent().getTime(),
+                    siparisGoruntule_siparisIstenenTarih.getCurrent().getTime(), 
+                    null,
+                    firmaDuzenle,
+                    urunlerDuzenle,
+                    toplamDuzenle);
+        }
+        
+        System.out.println( siparisDuzenle);
+        JavaDBtoObj.updateSiparisToDB(siparisDuzenle);
+        
+        siparisGoruntuleTemizle();
+        SiparisleriSifirla();
+        SiparisleriAyir();
+        UpdateTable();
+        
+        switch(siparisDuzenle.getDurumInt()){
+            case 1:
+                siparisSekmeleri.setSelectedIndex(1);
+                break;
+            case 2:
+                siparisSekmeleri.setSelectedIndex(2);
+                break;
+            case 3:
+                siparisSekmeleri.setSelectedIndex(4);
+                break;
+            case 4:
+                break;
+        }
+        siparisGoruntuleEnable( false);
     }//GEN-LAST:event_siparisGoruntule_KaydetActionPerformed
 
     private void siparisGoruntule_SilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siparisGoruntule_SilActionPerformed
         // TODO add your handling code here:
-        new JavaDBtoObj().SiparisiSil( currentSiparis);
-        SiparisleriSifirla();
-        SiparisleriAyir();
-        UpdateTable();
-        siparisGoruntuleTemizle();
-        siparisSekmeleri.setSelectedIndex(4);
+        Object[] options = {"Evet, sil", "Hayır, silme"};
+        int sonuc = JOptionPane.showOptionDialog(null, "Siparişi Silmek İstediğinize Emin misiniz?", "Sipariş Silme Onayı", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[1]);
+        if( sonuc == 0){
+            JavaDBtoObj.SiparisiSil( currentSiparis);
+            SiparisleriSifirla();
+            SiparisleriAyir();
+            UpdateTable();
+            siparisGoruntuleTemizle();
+            siparisSekmeleri.setSelectedIndex(4);
+        }
     }//GEN-LAST:event_siparisGoruntule_SilActionPerformed
 
     private void siparisGoruntule_DuzenleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siparisGoruntule_DuzenleActionPerformed
@@ -1436,6 +1551,8 @@ siparisGoruntule_Durum.addItemListener(new java.awt.event.ItemListener() {
         // TODO add your handling code here:
         if( siparisGoruntule_Durum.getSelectedIndex() == 1){
             siparisGoruntule_siparisTamamlanmaTarihi.setEnabled( true);
+        } else {
+            siparisGoruntule_siparisTamamlanmaTarihi.setEnabled( false);
         }
     }//GEN-LAST:event_siparisGoruntule_DurumItemStateChanged
 
@@ -1467,6 +1584,15 @@ siparisGoruntule_Durum.addItemListener(new java.awt.event.ItemListener() {
         siparisGoruntule_fax.setText( siparis.getFirma().getFax());
         siparisGoruntule_siparisiIsteyen.setText( siparis.getSiparisi_isteyen());
         siparisGoruntule_siparisiAlan.setText( siparis.getSiparisi_alan());
+            Calendar myCalendar = Calendar.getInstance();
+            myCalendar.setTime( siparis.getSiparis_istenen_tarih());
+        siparisGoruntule_siparisTarihi.setCurrent(myCalendar);
+            myCalendar.setTime( siparis.getSiparis_istenen_tarih());
+        siparisGoruntule_siparisIstenenTarih.setCurrent( myCalendar);
+        if( siparis.getDurumInt() == 2){
+            myCalendar.setTime( siparis.getBitis_tarih());
+            siparisGoruntule_siparisTamamlanmaTarihi.setCurrent(myCalendar);
+        }
         siparisGoruntule_Durum.setSelectedIndex( type-1);
         
         siparisGoruntule_siparisAciklamasi.setText( siparis.getAciklama());
