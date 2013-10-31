@@ -7,6 +7,7 @@ package fumera.viewer;
 import fumera.controller.JavaConnector;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -54,11 +55,19 @@ public class GirisFormu extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Giriş", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 1, 18), new java.awt.Color(51, 153, 255))); // NOI18N
 
+        password_field.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                password_fieldKeyPressed(evt);
+            }
+        });
+
         jLabel1.setText("Kullanıcı Adı:");
 
         jLabel2.setText("Şifre:");
 
         cmd_login.setText("Giriş");
+        cmd_login.setToolTipText("Kullanıcı adınızı ve şifrenizi girdikten sonra giriş yapabilirsiniz.");
+        cmd_login.setSelected(true);
         cmd_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmd_loginActionPerformed(evt);
@@ -157,6 +166,41 @@ public class GirisFormu extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_cmd_loginActionPerformed
+
+    private void password_fieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_password_fieldKeyPressed
+        // TODO add your handling code here:
+        if( evt.getKeyCode() == KeyEvent.VK_ENTER){
+            String sql = "SELECT * FROM users WHERE username=? AND password=?";
+
+            try {
+                statement = connection.prepareStatement(sql);
+                statement.setString(1, username_field.getText());
+                statement.setString(2, password_field.getText());
+
+                resultset = statement.executeQuery();
+
+                if( resultset.next()){
+                    Object[] options = {"Tamam"};
+                    JOptionPane.showOptionDialog(null, "Giriş Başarılı!", "Giriş Onayı", JOptionPane.INFORMATION_MESSAGE, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+                    close();
+                    SiparisEkranı se = new SiparisEkranı();
+                    se.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/viewer/icon.png")));
+                    this.setVisible(false);
+                    se.setLocationRelativeTo( null);
+                    se.setVisible( true);
+
+                }
+            } catch (SQLException | HeadlessException e) {
+                JOptionPane.showMessageDialog(null, "Kullanıcı adı ya da şifre hatalı!");
+            } finally {
+                try {
+                    resultset.close();
+                    statement.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+    }//GEN-LAST:event_password_fieldKeyPressed
 
     public void close(){
         WindowEvent windowClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);

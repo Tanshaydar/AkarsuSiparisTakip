@@ -105,7 +105,7 @@ public class JavaDBtoObj {
                        firma, urunler, resultsetS.getDouble("toplam")));
                
             }
-            System.out.println("Liste çekildi!");
+            //System.out.println("Liste çekildi!");
             
         } catch (SQLException | NumberFormatException e) {
             JOptionPane.showMessageDialog(null, e);
