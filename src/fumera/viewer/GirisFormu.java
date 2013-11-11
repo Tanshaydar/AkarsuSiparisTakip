@@ -147,7 +147,7 @@ public class GirisFormu extends javax.swing.JFrame {
             
             if( resultset.next()){
                 Object[] options = {"Tamam"};
-                JOptionPane.showOptionDialog(null, "Giriş Başarılı!", "Giriş Onayı", JOptionPane.INFORMATION_MESSAGE, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+                JOptionPane.showOptionDialog( GirisFormu.this, "Giriş Başarılı!", "Giriş Onayı", JOptionPane.INFORMATION_MESSAGE, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
                 close();
                 SiparisEkranı se = new SiparisEkranı();
                 se.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/viewer/icon.png")));
@@ -157,7 +157,7 @@ public class GirisFormu extends javax.swing.JFrame {
                 
             }
         } catch (SQLException | HeadlessException e) {
-            JOptionPane.showMessageDialog(null, "Kullanıcı adı ya da şifre hatalı!");
+            JOptionPane.showMessageDialog( GirisFormu.this, "Kullanıcı adı ya da şifre hatalı!");
         } finally {
             try {
                 resultset.close();
@@ -181,7 +181,7 @@ public class GirisFormu extends javax.swing.JFrame {
 
                 if( resultset.next()){
                     Object[] options = {"Tamam"};
-                    JOptionPane.showOptionDialog(null, "Giriş Başarılı!", "Giriş Onayı", JOptionPane.INFORMATION_MESSAGE, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+                    JOptionPane.showOptionDialog( GirisFormu.this, "Giriş Başarılı!", "Giriş Onayı", JOptionPane.INFORMATION_MESSAGE, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
                     close();
                     SiparisEkranı se = new SiparisEkranı();
                     se.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/icons/favicon.png")));
@@ -191,7 +191,7 @@ public class GirisFormu extends javax.swing.JFrame {
 
                 }
             } catch (SQLException | HeadlessException e) {
-                JOptionPane.showMessageDialog(null, "Kullanıcı adı ya da şifre hatalı!");
+                JOptionPane.showMessageDialog( GirisFormu.this, "Kullanıcı adı ya da şifre hatalı!");
             } finally {
                 try {
                     resultset.close();

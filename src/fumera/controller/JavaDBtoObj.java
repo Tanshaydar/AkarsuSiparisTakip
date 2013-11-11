@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -171,6 +172,7 @@ public class JavaDBtoObj {
         return siparisListesi;
     }
     
+    /*
     public static int getNewID(){
         Connection connection = JavaConnector.ConnectDB();
 
@@ -196,11 +198,12 @@ public class JavaDBtoObj {
         }
         return (id+1);
     }
-    
+    */
     public static void insertYeniSiparisToDB( Siparis siparis){
         Connection connection = JavaConnector.ConnectDB();
-        
+        ResultSet resultsetLastId = null;
         PreparedStatement statement = null;
+        int lastID = 0;
         
         try {
         /*
@@ -209,7 +212,7 @@ public class JavaDBtoObj {
          */
             statement = connection.prepareStatement( "INSERT INTO " + JavaConnector.DBname() + ".siparis "
                     + "( siparis_id, siparisi_isteyen, siparisi_alan, durum, aciklama, siparis_tarih, istenen_tarih, bitis_tarih, toplam) VALUES"
-                    + "(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    + "(?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             statement.setNull(1, java.sql.Types.INTEGER);
             statement.setString(2, siparis.getSiparisi_isteyen());
             statement.setString(3, siparis.getSiparisi_alan());
@@ -222,6 +225,15 @@ public class JavaDBtoObj {
             statement.setDouble(9, siparis.getToplam());
             
             statement.executeUpdate();
+            resultsetLastId = statement.getGeneratedKeys();
+            if( resultsetLastId.next()) {
+                lastID = resultsetLastId.getInt( 1);
+                resultsetLastId.close();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Veritabanına Kaydedilemedi!", "Hata!", JOptionPane.WARNING_MESSAGE, null);
+            }
+            
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         } finally {
@@ -257,7 +269,7 @@ public class JavaDBtoObj {
             statement.setString(4, siparis.getFirma().getTel());
             statement.setString(5, siparis.getFirma().getGsm());
             statement.setString(6, siparis.getFirma().getFax());
-            statement.setInt(7, siparis.getSiparis_id());
+            statement.setInt(7, lastID);
             
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -293,7 +305,7 @@ public class JavaDBtoObj {
                 statement.setInt(3, urun.getUrunAdedi());
                 statement.setInt(4, urun.getUrunDurumu());
                 statement.setString(5, urun.getUrunAciklamasi());
-                statement.setInt(6, siparis.getSiparis_id());
+                statement.setInt(6, lastID);
 
                 statement.executeUpdate();
             } catch (SQLException e) {

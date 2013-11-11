@@ -24,14 +24,15 @@ import javax.swing.table.TableColumn;
 public class SiparisEkranı extends javax.swing.JFrame {
 
     // DATA LAYER
-    private ArrayList<Siparis> siparisler = new ArrayList<>();
-    private ArrayList<Siparis> aktifSiparisler = new ArrayList<>();
-    private ArrayList<Siparis> tamamlanmisSiparisler = new ArrayList<>();
-    private ArrayList<Siparis> silinmisSiparisler = new ArrayList<>();
+    private static ArrayList<Siparis> siparisler = new ArrayList<>();
+    private static ArrayList<Siparis> aktifSiparisler = new ArrayList<>();
+    private static ArrayList<Siparis> tamamlanmisSiparisler = new ArrayList<>();
+    private static ArrayList<Siparis> silinmisSiparisler = new ArrayList<>();
     
     //================================================
     // GUI VARIABLES
     JComboBox urunComboBox = new JComboBox();
+    ProgressMonitor progressMonitor = new ProgressMonitor( SiparisEkranı.this, "Kaydediliyor...", " NOT! ", 0, 100);
     //================================================
     
     private int currentSiparis = 0;
@@ -44,36 +45,51 @@ public class SiparisEkranı extends javax.swing.JFrame {
     public SiparisEkranı() {
         initComponents();
         SiparisleriAyir();
+        SetTablePropertiesAndEdits();
+        UpdateTable();
+    }
+    
+    // This function sets the table and their editable cells' properties
+    private void SetTablePropertiesAndEdits() {
         
+        // Ürün düzenleme kısmında ürünün Hazırlanıyor mu yoksa Tamamlanmış mı olduğunu ayarlamak için ComboBox
         urunComboBox.addItem("Hazırlanıyor");
         urunComboBox.addItem("Tamamlandı");
         
+        // Ürün girerken ve Düzenlerken bu combobox'u tabloya ekliyoruz
         yeniSiparis_urunTablosu.getColumnModel().getColumn(2).setCellEditor( new DefaultCellEditor(urunComboBox));
         siparisGoruntule_urunTablosu.getColumnModel().getColumn(2).setCellEditor( new DefaultCellEditor(urunComboBox)); 
        
-        
-        
+        // Ürün tablolarının kutucuklarını göster
         yeniSiparis_urunTablosu.setShowVerticalLines( true);
         yeniSiparis_urunTablosu.setShowHorizontalLines( true);
         siparisGoruntule_urunTablosu.setShowVerticalLines( true);
         siparisGoruntule_urunTablosu.setShowHorizontalLines( true);
         
+        // Aktif Siparişleri gösterirken
+        // kutucukları göster,
+        // Sadece satır seçimi yaptır
+        // Ürünleri alt alta göster
         aktifSiparis_tablosu.setShowHorizontalLines( true);
         aktifSiparis_tablosu.setShowVerticalLines( true);
         aktifSiparis_tablosu.setRowSelectionAllowed( true);
         aktifSiparis_tablosu.getColumnModel().getColumn( 5).setCellRenderer( new MultiLineTableCellRenderer());
-        
+        // Tamamlanmış Siparişleri gösterirken
+        // kutucukları göster,
+        // Sadece satır seçimi yaptır
+        // Ürünleri alt alta göster
         tamamlanmisSiparis_tablosu.setShowHorizontalLines( true);
         tamamlanmisSiparis_tablosu.setShowVerticalLines( true);
         tamamlanmisSiparis_tablosu.setRowSelectionAllowed(true);
         tamamlanmisSiparis_tablosu.getColumnModel().getColumn( 5).setCellRenderer( new MultiLineTableCellRenderer());
-        
+        // Silinmiş Siparişleri gösterirken
+        // kutucukları göster,
+        // Sadece satır seçimi yaptır
+        // Ürünleri alt alta göster
         silinmisSiparis_tablosu.setShowHorizontalLines( true);
         silinmisSiparis_tablosu.setShowVerticalLines( true);
         silinmisSiparis_tablosu.setRowSelectionAllowed( true);
         silinmisSiparis_tablosu.getColumnModel().getColumn( 5).setCellRenderer( new MultiLineTableCellRenderer());
-        
-        UpdateTable();
     }
     
     private void SiparisleriSifirla(){
@@ -1465,7 +1481,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
 
     private void yeniSiparis_KaydetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yeniSiparis_KaydetActionPerformed
         // TODO add your handling code here:
-        ProgressMonitor progressMonitor = new ProgressMonitor( null, "Kaydediliyor...", " NOT! ", 0, 1);
+        progressMonitor.setMaximum( 100);
         Siparis yeniSiparis;
         Firma yeniFirma;
         ArrayList<Urun> yeniUrunler = new ArrayList<Urun>();
@@ -1491,7 +1507,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
             Date bitis_tarih, Firma firma, ArrayList<Urun> urunler, double toplam)
          */
         yeniSiparis = new Siparis(
-                JavaDBtoObj.getNewID(),
+                0,
                 null,
                 yeniSiparis_siparisiIsteyen.getText(),
                 yeniSiparis_siparisiAlan.getText(), 
@@ -1511,6 +1527,8 @@ new datechooser.view.appearance.ViewAppearance("custom",
         SiparisleriSifirla();
         SiparisleriAyir();
         UpdateTable();
+
+        progressMonitor.setProgress(0);
     }//GEN-LAST:event_yeniSiparis_KaydetActionPerformed
 
     private void tamamlanmisSiparis_tablosuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tamamlanmisSiparis_tablosuMouseClicked
