@@ -7,7 +7,6 @@ package fumera.controller;
 import fumera.model.Firma;
 import fumera.model.Siparis;
 import fumera.model.Urun;
-import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,20 +22,77 @@ public class JavaDBtoObj {
 
     public static ArrayList<Siparis> getSiparislerFromDB(){
         Connection connection = JavaConnector.ConnectDB();
-        ResultSet resultsetS = null;
-        ResultSet resultsetF = null;
-        ResultSet resultsetU = null;
-        PreparedStatement statementS = null;
-        PreparedStatement statementF = null;
-        PreparedStatement statementU = null;
+        ResultSet resultsetSiparis = null;
+//        ResultSet resultsetFirma = null;
+        ResultSet resultsetUrun = null;
+        PreparedStatement statementSiparis = null;
+//        PreparedStatement statementFirma = null;
+        PreparedStatement statementUrun = null;
 
-        String sqlSiparis = "SELECT * FROM siparis";
-        String sqlFirma = "SELECT * FROM firma WHERE siparis_id=?";
+//        String sqlSiparis = "SELECT * FROM siparis";
+//        String sqlFirma = "SELECT * FROM firma WHERE siparis_id=?";
+        String sqlSiparisAndFirma = "SELECT * FROM siparis LEFT JOIN firma ON siparis.siparis_id = firma.siparis_id";
         String sqlUrun = "SELECT * FROM urun WHERE siparis_id=?";
         
-        
         ArrayList<Siparis> siparisListesi = new ArrayList<>();
+
+        ///////
+        // SIPARISLER
+        //////
+        try{
+            statementSiparis = connection.prepareStatement( sqlSiparisAndFirma);
+            resultsetSiparis = statementSiparis.executeQuery();
+            
+            while (resultsetSiparis.next()) {
+                siparisListesi.add( new Siparis( resultsetSiparis.getInt("siparis_id"), resultsetSiparis.getString("durum"), resultsetSiparis.getString("siparisi_isteyen"),
+                        resultsetSiparis.getString("siparisi_alan"), resultsetSiparis.getString("aciklama"), resultsetSiparis.getDate("siparis_tarih"),
+                        resultsetSiparis.getDate("istenen_tarih"), resultsetSiparis.getDate("bitis_tarih"),
+                        new Firma( resultsetSiparis.getString("firma_adi"), resultsetSiparis.getString("ilgili_adi"), resultsetSiparis.getString("mail"),
+                        resultsetSiparis.getString("tel"), resultsetSiparis.getString("gsm"), resultsetSiparis.getString("fax")),
+                        null, resultsetSiparis.getDouble("toplam")));
+            }
+            
+        } catch (SQLException e){
+            JOptionPane.showMessageDialog(null, e);
+        } finally {
+            try {
+                resultsetSiparis.close();
+                statementSiparis.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
         
+        ///////
+        // URUNLER
+        //////
+        for( Siparis siparis : siparisListesi){
+            ArrayList<Urun> urunListesi = new ArrayList<>();
+            try {
+                statementUrun = connection.prepareStatement(sqlUrun);
+                statementUrun.setInt(1, siparis.getSiparis_id());
+                resultsetUrun = statementUrun.executeQuery();
+                
+                while ( resultsetUrun.next()) {
+                    urunListesi.add( new Urun( resultsetUrun.getString("urun_adi"), resultsetUrun.getDouble("urun_fiyati"),
+                            resultsetUrun.getInt("urun_adedi"), resultsetUrun.getString("urun_durumu"), resultsetUrun.getString("urun_aciklamasi")));
+                }
+                
+                siparis.setUrunler(urunListesi);
+                
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            } finally {
+                try {
+                    resultsetUrun.close();
+                    statementUrun.close();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+            }
+        }
+        
+        /*
         try {
             statementS = connection.prepareStatement( sqlSiparis);
             resultsetS = statementS.executeQuery();
@@ -45,8 +101,6 @@ public class JavaDBtoObj {
 
                 Firma firma = null;
                 ArrayList<Urun> urunler = new ArrayList<>();
-                /*System.out.println(resultsetS.getInt("siparis_id") + resultsetS.getString("durum") 
-                        + resultsetS.getString("aciklama") + resultsetS.getDate("siparis_tarih") + resultsetS.getDate("bitis_tarih") + resultsetS.getDouble("toplam") );*/
                 System.out.println(resultsetS.getInt("siparis_id"));
                 try {
                     
@@ -79,8 +133,8 @@ public class JavaDBtoObj {
                     resultsetU = statementU.executeQuery();
 
                     while( resultsetU.next()) {
-                        //Urun(String urunAdi, double urunFiyati, int urunAdedi, String urunDurumu, String urunAciklamasi)
-                        urunler.add( new Urun( resultsetU.getString("urun_adi"), resultsetU.getDouble("urun_fiyati"), resultsetU.getInt("urun_adedi"), resultsetU.getString("urun_durumu"), resultsetU.getString("urun_aciklamasi")));
+                        urunler.add( new Urun( resultsetU.getString("urun_adi"), resultsetU.getDouble("urun_fiyati"), resultsetU.getInt("urun_adedi"),
+                        resultsetU.getString("urun_durumu"), resultsetU.getString("urun_aciklamasi")));
                         System.out.println();
                     }
                     
@@ -96,16 +150,12 @@ public class JavaDBtoObj {
                 }
                 
                siparisListesi.add( 
-                       /*
-                        * (int siparis_id, String durum, String siparisi_isteyen, String siparisi_alan, String aciklama, Date siparis_tarih, Date siparis_istenen_tarih,
-            Date bitis_tarih, Firma firma, ArrayList<Urun> urunler, double toplam)
-                        */
+
                        new Siparis(resultsetS.getInt("siparis_id"), resultsetS.getString("durum"), resultsetS.getString("siparisi_isteyen"), resultsetS.getString("siparisi_alan"),
                        resultsetS.getString("aciklama"), resultsetS.getDate("siparis_tarih"), resultsetS.getDate("istenen_tarih"), resultsetS.getDate("bitis_tarih"),
                        firma, urunler, resultsetS.getDouble("toplam")));
                
             }
-            //System.out.println("Liste çekildi!");
             
         } catch (SQLException | NumberFormatException e) {
             JOptionPane.showMessageDialog(null, e);
@@ -117,7 +167,7 @@ public class JavaDBtoObj {
                 System.out.println(e);
             }
         }
-        
+        */
         return siparisListesi;
     }
     
@@ -154,7 +204,8 @@ public class JavaDBtoObj {
         
         try {
         /*
-         * INSERT INTO `sql27141`.`siparis` (`siparis_id`, `siparisi_isteyen`, `siparisi_alan`, `durum`, `aciklama`, `siparis_tarih`, `istenen_tarih`, `bitis_tarih`, `toplam`) VALUES (NULL, 'Umutcan Batı', 'Mustafa Akarsu', 'Hazırlanıyor', NULL, '2013-10-05', '2013-10-31', NULL, '13548');
+         * INSERT INTO `sql27141`.`siparis` (`siparis_id`, `siparisi_isteyen`, `siparisi_alan`, `durum`, `aciklama`, `siparis_tarih`, `istenen_tarih`,
+            `bitis_tarih`, `toplam`) VALUES (NULL, 'Umutcan Batı', 'Mustafa Akarsu', 'Hazırlanıyor', NULL, '2013-10-05', '2013-10-31', NULL, '13548');
          */
             statement = connection.prepareStatement( "INSERT INTO " + JavaConnector.DBname() + ".siparis "
                     + "( siparis_id, siparisi_isteyen, siparisi_alan, durum, aciklama, siparis_tarih, istenen_tarih, bitis_tarih, toplam) VALUES"
@@ -165,7 +216,8 @@ public class JavaDBtoObj {
             statement.setInt(4, 1);
             statement.setString(5, siparis.getAciklama());
             statement.setDate(6, new java.sql.Date(siparis.getSiparis_tarih().getYear(), siparis.getSiparis_tarih().getMonth(), siparis.getSiparis_tarih().getDay()));
-            statement.setDate(7, new java.sql.Date(siparis.getSiparis_istenen_tarih().getYear(), siparis.getSiparis_istenen_tarih().getMonth(), siparis.getSiparis_istenen_tarih().getDay()));
+            statement.setDate(7, new java.sql.Date(siparis.getSiparis_istenen_tarih().getYear(),
+                    siparis.getSiparis_istenen_tarih().getMonth(), siparis.getSiparis_istenen_tarih().getDay()));
             statement.setNull(8, java.sql.Types.DATE);
             statement.setDouble(9, siparis.getToplam());
             

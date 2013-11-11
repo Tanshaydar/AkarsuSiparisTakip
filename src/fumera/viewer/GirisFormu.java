@@ -108,7 +108,7 @@ public class GirisFormu extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/viewer/logo.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/logo/logo.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -184,7 +184,7 @@ public class GirisFormu extends javax.swing.JFrame {
                     JOptionPane.showOptionDialog(null, "Giriş Başarılı!", "Giriş Onayı", JOptionPane.INFORMATION_MESSAGE, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
                     close();
                     SiparisEkranı se = new SiparisEkranı();
-                    se.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/viewer/icon.png")));
+                    se.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/icons/favicon.png")));
                     this.setVisible(false);
                     se.setLocationRelativeTo( null);
                     se.setVisible( true);
@@ -239,7 +239,7 @@ public class GirisFormu extends javax.swing.JFrame {
             @Override
             public void run() {
                 GirisFormu girisFormu = new GirisFormu();
-                girisFormu.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/viewer/icon.png")));
+                girisFormu.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/icons/favicon.png")));
                 girisFormu.setLocationRelativeTo( null);
                 girisFormu.setVisible(true);
             }

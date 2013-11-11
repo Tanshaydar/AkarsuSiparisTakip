@@ -8,8 +8,6 @@ import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,16 +17,21 @@ import javax.swing.JOptionPane;
 public class JavaConnector {
 
     Connection connection = null;
-    
+    /*
     private static final String DBaddr = "sql2.freesqldatabase.com";
     private static final String DBname = "sql27141";
     private static final String DBuser = "sql27141";
-    private static final String DBpass = "jS1*rN2%25";
+    private static final String DBpass = "jS1*rN2%25";*/
     /*
     private static final String DBaddr = "localhost";
     private static final String DBname = "siparis";
     private static final String DBuser = "root";
     private static final String DBpass = "";*/
+    
+    private static final String DBaddr = "localhost";
+    private static final String DBname = "siparis_takip";
+    private static final String DBuser = "root";
+    private static final String DBpass = "";
     
     /*
     private static Connection conn = null; //Bağlantı nesnemiz
