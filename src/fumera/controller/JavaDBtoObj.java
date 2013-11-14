@@ -92,131 +92,29 @@ public class JavaDBtoObj {
                 }
             }
         }
-        
-        /*
-        try {
-            statementS = connection.prepareStatement( sqlSiparis);
-            resultsetS = statementS.executeQuery();
-            
-            while( resultsetS.next()) {
 
-                Firma firma = null;
-                ArrayList<Urun> urunler = new ArrayList<>();
-                System.out.println(resultsetS.getInt("siparis_id"));
-                try {
-                    
-                    statementF = connection.prepareStatement(sqlFirma);
-                    statementF.setInt(1, resultsetS.getInt("siparis_id"));
-                    resultsetF = statementF.executeQuery();
-                    if( resultsetF.next()) {
-                        //String firma_adi, String ilgili_adi, String mail, String tel, String gsm, String fax)
-                        firma = new Firma( resultsetF.getString("firma_adi"), resultsetF.getString("ilgili_adi"), resultsetF.getString("mail"),
-                                resultsetF.getString("tel"), resultsetF.getString("gsm"), resultsetF.getString("fax"));
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Firma bulunamadı!");
-                    }
-                } catch (SQLException | HeadlessException e) {
-                    JOptionPane.showMessageDialog(null, e);
-                } finally {
-                    try {
-                        resultsetF.close();
-                        statementF.close();
-                    } catch (SQLException e) {
-                        System.out.println(e);
-                    }
-                }
-                
-                
-                try {
-                    
-                    statementU = connection.prepareStatement(sqlUrun);
-                    statementU.setInt(1, resultsetS.getInt("siparis_id"));
-                    resultsetU = statementU.executeQuery();
-
-                    while( resultsetU.next()) {
-                        urunler.add( new Urun( resultsetU.getString("urun_adi"), resultsetU.getDouble("urun_fiyati"), resultsetU.getInt("urun_adedi"),
-                        resultsetU.getString("urun_durumu"), resultsetU.getString("urun_aciklamasi")));
-                        System.out.println();
-                    }
-                    
-                } catch (SQLException e) {
-                    JOptionPane.showMessageDialog(null, e);
-                } finally{
-                    try {
-                        resultsetU.close();
-                        statementU.close();
-                    } catch (SQLException e) {
-                        System.out.println(e);
-                    }
-                }
-                
-               siparisListesi.add( 
-
-                       new Siparis(resultsetS.getInt("siparis_id"), resultsetS.getString("durum"), resultsetS.getString("siparisi_isteyen"), resultsetS.getString("siparisi_alan"),
-                       resultsetS.getString("aciklama"), resultsetS.getDate("siparis_tarih"), resultsetS.getDate("istenen_tarih"), resultsetS.getDate("bitis_tarih"),
-                       firma, urunler, resultsetS.getDouble("toplam")));
-               
-            }
-            
-        } catch (SQLException | NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, e);
-        } finally {
-            try {
-                resultsetS.close();
-                statementS.close();
-            } catch (SQLException e) {
-                System.out.println(e);
-            }
-        }
-        */
         return siparisListesi;
     }
     
-    /*
-    public static int getNewID(){
-        Connection connection = JavaConnector.ConnectDB();
 
-        int id = 0;
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-        
-        try {
-            statement = connection.prepareStatement( "SELECT MAX( siparis_id ) AS id FROM siparis");
-            resultSet = statement.executeQuery();
-            if( resultSet.next()){
-                id = resultSet.getInt(1);
-            }
-        } catch (SQLException | NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, e);
-        } finally {
-            try {
-                resultSet.close();
-                statement.close();
-            } catch (SQLException e) {
-                System.out.println(e);
-            }
-        }
-        return (id+1);
-    }
-    */
-    public static void insertYeniSiparisToDB( Siparis siparis){
+    public static void insertYeniSiparisToDB( Siparis siparis, int durum){
         Connection connection = JavaConnector.ConnectDB();
         ResultSet resultsetLastId = null;
         PreparedStatement statement = null;
         int lastID = 0;
         
         try {
-        /*
-         * INSERT INTO `sql27141`.`siparis` (`siparis_id`, `siparisi_isteyen`, `siparisi_alan`, `durum`, `aciklama`, `siparis_tarih`, `istenen_tarih`,
-            `bitis_tarih`, `toplam`) VALUES (NULL, 'Umutcan Batı', 'Mustafa Akarsu', 'Hazırlanıyor', NULL, '2013-10-05', '2013-10-31', NULL, '13548');
-         */
+
             statement = connection.prepareStatement( "INSERT INTO " + JavaConnector.DBname() + ".siparis "
                     + "( siparis_id, siparisi_isteyen, siparisi_alan, durum, aciklama, siparis_tarih, istenen_tarih, bitis_tarih, toplam) VALUES"
                     + "(?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             statement.setNull(1, java.sql.Types.INTEGER);
             statement.setString(2, siparis.getSiparisi_isteyen());
             statement.setString(3, siparis.getSiparisi_alan());
-            statement.setInt(4, 1);
+            if( durum == 0)
+                statement.setInt(4, 1);     // Hazırlanıyor
+            else 
+                statement.setInt(4, 4);     // Teklif
             statement.setString(5, siparis.getAciklama());
             statement.setDate(6, new java.sql.Date(siparis.getSiparis_tarih().getYear(), siparis.getSiparis_tarih().getMonth(), siparis.getSiparis_tarih().getDay()));
             statement.setDate(7, new java.sql.Date(siparis.getSiparis_istenen_tarih().getYear(),
@@ -245,21 +143,7 @@ public class JavaDBtoObj {
         }
         
         try {
-            /*
-             * INSERT INTO  `sql27141`.`firma` (
-                `firma_adi` ,
-                `ilgili_adi` ,
-                `mail` ,
-                `tel` ,
-                `gsm` ,
-                `fax` ,
-                `siparis_id`
-                )
-                VALUES (
-                'Neokodera',  'Tansel ALTINEL',  'alirsin@gmail.com',  '03125734686',  '05312831924',  '03122270409',  '259'
-                );
 
-             */
             statement = connection.prepareStatement( "INSERT INTO " + JavaConnector.DBname() + ".firma "
                     + "( firma_adi, ilgili_adi, mail, tel, gsm, fax, siparis_id) VALUES"
                     + "(?, ?, ?, ?, ?, ?, ?)");
@@ -283,20 +167,6 @@ public class JavaDBtoObj {
         for( int i = 0; i < siparis.getUrunler().size(); i++){
             Urun urun = siparis.getUrunler().get(i);
             try {
-
-                /*
-                 * INSERT INTO  `sql27141`.`urun` (
-                    `urun_adi` ,
-                    `urun_fiyati` ,
-                    `urun_adedi` ,
-                    `urun_durumu` ,
-                    `urun_aciklamasi` ,
-                    `siparis_id`
-                    )
-                    VALUES (
-                    'Sipariş Takip Programı',  '2500,00',  '1',  'Hazırlanıyor',  'İşbu program hazırlanmaktadır.',  '259'
-                    );
-                 */
                 statement = connection.prepareStatement( "INSERT INTO " + JavaConnector.DBname() + ".urun "
                         + "( urun_adi, urun_fiyati, urun_adedi, urun_durumu, urun_aciklamasi, siparis_id) VALUES"
                         + "(?, ?, ?, ?, ?, ?)");
@@ -408,8 +278,8 @@ public class JavaDBtoObj {
                 statement.setString(1, urun.getUrunAdi());
                 statement.setDouble(2, urun.getUrunFiyati());
                 statement.setInt(3, urun.getUrunAdedi());
-                //statement.setInt(4, urun.getUrunDurumu());
-                statement.setString(4, urun.getUrunDurumuStr());
+                statement.setInt(4, urun.getUrunDurumu());
+                //statement.setString(4, urun.getUrunDurumuStr());
                 statement.setString(5, urun.getUrunAciklamasi());
                 statement.setInt(6, siparis.getSiparis_id());
 

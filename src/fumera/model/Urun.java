@@ -49,9 +49,9 @@ public class Urun {
     }
 
     public int getUrunDurumu() {
-        if( urunDurumu.equals("Hazırlanıyor"))
+        if( urunDurumu.equalsIgnoreCase("Hazırlanıyor"))
             return 1;
-        else if( urunDurumu.equals("Tamamlandı"))
+        else if( urunDurumu.equalsIgnoreCase("Tamamlandı"))
             return 2;
         else
             return 0;

@@ -31,6 +31,11 @@ public class GirisFormu extends javax.swing.JFrame {
         initComponents();
         
         connection = JavaConnector.ConnectDB();
+        if( connection == null) {
+            Object[] options = {"Tamam"};
+            JOptionPane.showOptionDialog( GirisFormu.this, "Bağlantı Yok!", "Giriş Onayı", JOptionPane.WARNING_MESSAGE, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+            System.exit(0);
+        }
     }
 
     /**
@@ -148,8 +153,26 @@ public class GirisFormu extends javax.swing.JFrame {
             if( resultset.next()){
                 Object[] options = {"Tamam"};
                 JOptionPane.showOptionDialog( GirisFormu.this, "Giriş Başarılı!", "Giriş Onayı", JOptionPane.INFORMATION_MESSAGE, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+                int userLevel = 0;
+                    switch( resultset.getString("level")) {
+                        case "admin":
+                            userLevel = 1;
+                            break;
+                        case "mod":
+                            userLevel = 2;
+                            break;
+                        case "user":
+                            userLevel = 3;
+                            break;
+                        case "watcher":
+                            userLevel = 4;
+                            break;
+                        case "demo":
+                            userLevel = 5;
+                            break;
+                    }
                 close();
-                SiparisEkranı se = new SiparisEkranı();
+                SiparisEkranı se = new SiparisEkranı( userLevel);
                 se.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/viewer/icon.png")));
                 this.setVisible(false);
                 se.setLocationRelativeTo( null);
@@ -182,8 +205,26 @@ public class GirisFormu extends javax.swing.JFrame {
                 if( resultset.next()){
                     Object[] options = {"Tamam"};
                     JOptionPane.showOptionDialog( GirisFormu.this, "Giriş Başarılı!", "Giriş Onayı", JOptionPane.INFORMATION_MESSAGE, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+                    int userLevel = 0;
+                    switch( resultset.getString("level")) {
+                        case "admin":
+                            userLevel = 1;
+                            break;
+                        case "mod":
+                            userLevel = 2;
+                            break;
+                        case "user":
+                            userLevel = 3;
+                            break;
+                        case "watcher":
+                            userLevel = 4;
+                            break;
+                        case "demo":
+                            userLevel = 5;
+                            break;
+                    }
                     close();
-                    SiparisEkranı se = new SiparisEkranı();
+                    SiparisEkranı se = new SiparisEkranı( userLevel);
                     se.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/icons/favicon.png")));
                     this.setVisible(false);
                     se.setLocationRelativeTo( null);

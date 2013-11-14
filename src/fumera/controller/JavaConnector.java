@@ -27,12 +27,17 @@ public class JavaConnector {
     private static final String DBname = "siparis";
     private static final String DBuser = "root";
     private static final String DBpass = "";*/
-    
+    /*
     private static final String DBaddr = "localhost";
     private static final String DBname = "siparis_takip";
     private static final String DBuser = "root";
-    private static final String DBpass = "";
+    private static final String DBpass = ""; */
     
+//    private static final String DBaddr = "193.140.224.43";
+    private static final String DBaddr = "192.168.0.111:3306";
+    private static final String DBname = "siparis_takip";
+    private static final String DBuser = "siparis";
+    private static final String DBpass = "vDAyMJbEUFsxzb5r";
     /*
     private static Connection conn = null; //Bağlantı nesnemiz
     private static String url = "jdbc:mysql://localhost:3306/";//veritabanının adresi ve portu

@@ -24,9 +24,13 @@ public class SiparisEkranı extends javax.swing.JFrame {
 
     // DATA LAYER
     private static ArrayList<Siparis> siparisler = new ArrayList<>();
+    
     private static ArrayList<Siparis> aktifSiparisler = new ArrayList<>();
     private static ArrayList<Siparis> tamamlanmisSiparisler = new ArrayList<>();
+    private static ArrayList<Siparis> teklifler = new ArrayList<>();
     private static ArrayList<Siparis> silinmisSiparisler = new ArrayList<>();
+    
+    private static int userMod;
     
     //================================================
     // GUI VARIABLES
@@ -41,7 +45,10 @@ public class SiparisEkranı extends javax.swing.JFrame {
      */
     
     // CONSTRUCTOR
-    public SiparisEkranı() {
+    public SiparisEkranı( int mod) {
+        
+        userMod = mod;
+        
         initComponents();
         SiparisleriAyir();
         SetTablePropertiesAndEdits();
@@ -50,9 +57,6 @@ public class SiparisEkranı extends javax.swing.JFrame {
     
     // This function sets the table and their editable cells' properties
     private void SetTablePropertiesAndEdits() {
-        
-        // Yükleniyor penceresini düzenle
-        progressMonitor.setMaximum( 100);
         
         // Ürün düzenleme kısmında ürünün Hazırlanıyor mu yoksa Tamamlanmış mı olduğunu ayarlamak için ComboBox
         urunComboBox.addItem("Hazırlanıyor");
@@ -92,12 +96,21 @@ public class SiparisEkranı extends javax.swing.JFrame {
         silinmisSiparis_tablosu.setShowVerticalLines( true);
         silinmisSiparis_tablosu.setRowSelectionAllowed( true);
         silinmisSiparis_tablosu.getColumnModel().getColumn( 5).setCellRenderer( new MultiLineTableCellRenderer());
+        // Teklifleri gösterirken
+        // kutucukları göster,
+        // Sadece satır seçimi yaptır
+        // Ürünleri alt alta göster
+        teklif_tablosu.setShowHorizontalLines( true);
+        teklif_tablosu.setShowVerticalLines( true);
+        teklif_tablosu.setRowSelectionAllowed( true);
+        teklif_tablosu.getColumnModel().getColumn( 5).setCellRenderer( new MultiLineTableCellRenderer());
     }
     
     // Listeleri temizleyerek yeniden ayarla
     private void SiparisleriSifirla(){
         // Sipariş listelerini temizle
         siparisler.clear();
+        teklifler.clear();
         aktifSiparisler.clear();
         tamamlanmisSiparisler.clear();
         silinmisSiparisler.clear();
@@ -109,6 +122,8 @@ public class SiparisEkranı extends javax.swing.JFrame {
         modelTamamlanmis.setRowCount(0);
         DefaultTableModel modelSilinmis = (DefaultTableModel) silinmisSiparis_tablosu.getModel();
         modelSilinmis.setRowCount(0);
+        DefaultTableModel modelTeklif = (DefaultTableModel) teklif_tablosu.getModel();
+        modelTeklif.setRowCount(0);
     }
     
     private void SiparisleriAyir(){
@@ -125,6 +140,9 @@ public class SiparisEkranı extends javax.swing.JFrame {
                     break;
                 case 3:
                     silinmisSiparisler.add( siparisler.get(i));
+                    break;
+                case 4:
+                    teklifler.add( siparisler.get(i));
                     break;
             }
         }
@@ -164,7 +182,9 @@ public class SiparisEkranı extends javax.swing.JFrame {
             
             String urunStr = "";
             for( int j = 0; j < tamamlanmisSiparisler.get(i).getUrunler().size(); j++){
-                urunStr += tamamlanmisSiparisler.get(i).getUrunler().get(j).getUrunAdi() + "\n";
+                urunStr += tamamlanmisSiparisler.get(i).getUrunler().get(j).getUrunAdi();
+                if( j < tamamlanmisSiparisler.get(i).getUrunler().size() -1)
+                    urunStr += "\r\n";
             }
             
             modelTamamlanmis.insertRow(tamamlanmisSiparis_tablosu.getRowCount(), new Object[]{
@@ -182,7 +202,9 @@ public class SiparisEkranı extends javax.swing.JFrame {
             
             String urunStr = "";
             for( int j = 0; j < silinmisSiparisler.get(i).getUrunler().size(); j++){
-                urunStr += silinmisSiparisler.get(i).getUrunler().get(j).getUrunAdi() + "\n";
+                urunStr += silinmisSiparisler.get(i).getUrunler().get(j).getUrunAdi();
+                if( j < silinmisSiparisler.get(i).getUrunler().size() -1)
+                    urunStr += "\r\n";
             }
             
             modelSilinmis.insertRow(silinmisSiparis_tablosu.getRowCount(), new Object[]{
@@ -194,6 +216,25 @@ public class SiparisEkranı extends javax.swing.JFrame {
             urunStr});
         }
         silinmisSiparis_tablosu.revalidate();
+        
+        DefaultTableModel modelTeklif = (DefaultTableModel) teklif_tablosu.getModel();
+        for( int i = 0; i < teklifler.size(); i++) {
+            String urunStr = "";
+            for( int j = 0; j < teklifler.get(i).getUrunler().size(); j++ ){
+                urunStr += teklifler.get(i).getUrunler().get(j).getUrunAdi();
+                if( j < teklifler.get(i).getUrunler().size() -1)
+                    urunStr += "\r\n";
+            }
+            
+            modelTeklif.insertRow( teklif_tablosu.getRowCount(), new Object[]{
+            teklifler.get(i).getFirma().getFirma_adi(),
+            teklifler.get(i).getSiparisi_isteyen(),
+            teklifler.get(i).getSiparisi_alan(),
+            teklifler.get(i).getSiparis_tarih(),
+            teklifler.get(i).getSiparis_istenen_tarih(),
+            urunStr});
+        }
+        teklif_tablosu.revalidate();
         
         currentSiparis = 0;
     }
@@ -211,6 +252,8 @@ public class SiparisEkranı extends javax.swing.JFrame {
         yeniSiparis_siparisiIsteyen.setText("");
         yeniSiparis_siparisiAlan.setText("");
         yeniSiparis_siparisAciklamasi.setText("");
+        yeniSiparis_Siparis_Teklif.setSelected( false);
+        yeniSiparis_Siparis_Teklif.setText("Yeni Sipariş");
     }
     
     private void siparisGoruntuleTemizle(){
@@ -287,7 +330,7 @@ public class SiparisEkranı extends javax.swing.JFrame {
         yeniSiparis_siparisTarihi = new datechooser.beans.DateChooserCombo();
         yeniSiparis_siparisIstenenTarih = new datechooser.beans.DateChooserCombo();
         sg_aciklama4 = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        yeniSiparis_Siparis_Teklif = new javax.swing.JToggleButton();
         yeniSiparis_urunlerPaneli = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
         yeniSiparis_urunTablosu = new javax.swing.JTable();
@@ -296,6 +339,9 @@ public class SiparisEkranı extends javax.swing.JFrame {
         yeniSiparis_UrunSil = new javax.swing.JButton();
         yeniSiparis_Temizle = new javax.swing.JButton();
         yeniSiparis_Kaydet = new javax.swing.JButton();
+        tekliflerPaneli = new javax.swing.JPanel();
+        tekflifScrollPane = new javax.swing.JScrollPane();
+        teklif_tablosu = new javax.swing.JTable();
         aktifSiparislerPaneli = new javax.swing.JPanel();
         aktifSiparisScrollPane = new javax.swing.JScrollPane();
         aktifSiparis_tablosu = new javax.swing.JTable();
@@ -489,8 +535,13 @@ public class SiparisEkranı extends javax.swing.JFrame {
     sg_aciklama4.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
     sg_aciklama4.setText("Teklif?");
 
-    jToggleButton1.setText("Yeni Sipariş");
-    jToggleButton1.setToolTipText("Yeni Teklif veya Yeni Sipariş ayarını bu buton ile yapabilirsiniz.");
+    yeniSiparis_Siparis_Teklif.setText("Yeni Sipariş");
+    yeniSiparis_Siparis_Teklif.setToolTipText("Yeni Teklif veya Yeni Sipariş ayarını bu buton ile yapabilirsiniz. [Varsayılan: Yeni Sipariş]");
+    yeniSiparis_Siparis_Teklif.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            yeniSiparis_Siparis_TeklifActionPerformed(evt);
+        }
+    });
 
     javax.swing.GroupLayout yeniSiparis_FirmaPaneliLayout = new javax.swing.GroupLayout(yeniSiparis_FirmaPaneli);
     yeniSiparis_FirmaPaneli.setLayout(yeniSiparis_FirmaPaneliLayout);
@@ -513,7 +564,7 @@ public class SiparisEkranı extends javax.swing.JFrame {
                 .addComponent(sg_aciklama4))
             .addGap(18, 18, 18)
             .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 791, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 781, Short.MAX_VALUE)
                 .addComponent(yeniSiparis_siparisiAlan)
                 .addComponent(yeniSiparis_siparisiIsteyen)
                 .addComponent(yeniSiparis_fax)
@@ -522,12 +573,9 @@ public class SiparisEkranı extends javax.swing.JFrame {
                 .addComponent(yeniSiparis_ePosta)
                 .addComponent(yeniSiparis_ilgiliAdi)
                 .addComponent(yeniSiparis_firmaAdi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(yeniSiparis_FirmaPaneliLayout.createSequentialGroup()
-                    .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jToggleButton1)
-                        .addComponent(yeniSiparis_siparisIstenenTarih, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(yeniSiparis_siparisTarihi, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addComponent(yeniSiparis_Siparis_Teklif)
+                .addComponent(yeniSiparis_siparisIstenenTarih, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(yeniSiparis_siparisTarihi, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addContainerGap())
     );
 
@@ -583,13 +631,11 @@ public class SiparisEkranı extends javax.swing.JFrame {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(sg_aciklama4)
-                .addComponent(jToggleButton1))
+                .addComponent(yeniSiparis_Siparis_Teklif))
             .addGap(0, 0, 0))
     );
 
     yeniSiparis_FirmaPaneliLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel19, jLabel20, jLabel21, jLabel22, jLabel23, jLabel24, jLabel27, jLabel28, jLabel29, jLabel30, sg_aciklama2});
-
-    sg_aciklama4.getAccessibleContext().setAccessibleName("Teklif?");
 
     yeniSiparis_urunlerPaneli.setBorder(javax.swing.BorderFactory.createTitledBorder("Ürünler"));
 
@@ -622,6 +668,11 @@ public class SiparisEkranı extends javax.swing.JFrame {
     yeniSiparis_urunTablosu.setFillsViewportHeight(true);
     yeniSiparis_urunTablosu.setName("Yeni Sipariş Ürünler"); // NOI18N
     yeniSiparis_urunTablosu.setRowHeight(20);
+    yeniSiparis_urunTablosu.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+        public void propertyChange(java.beans.PropertyChangeEvent evt) {
+            yeniSiparis_urunTablosuPropertyChange(evt);
+        }
+    });
     jScrollPane9.setViewportView(yeniSiparis_urunTablosu);
 
     javax.swing.GroupLayout yeniSiparis_urunlerPaneliLayout = new javax.swing.GroupLayout(yeniSiparis_urunlerPaneli);
@@ -726,6 +777,51 @@ public class SiparisEkranı extends javax.swing.JFrame {
     );
 
     siparisSekmeleri.addTab("Yeni Sipariş Girişi", yeniSiparisGirisPaneli);
+
+    teklif_tablosu.setAutoCreateRowSorter(true);
+    teklif_tablosu.setModel(new javax.swing.table.DefaultTableModel(
+        new Object [][] {
+
+        },
+        new String [] {
+            "Firma Adı", "Siparişi İsteyen", "Siparişi Alan", "Sipariş Alınma Tarihi", "Sipariş İstenen Tarih", "Ürunler"
+        }
+    ) {
+        Class[] types = new Class [] {
+            java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
+        };
+        boolean[] canEdit = new boolean [] {
+            false, false, false, false, false, false
+        };
+
+        public Class getColumnClass(int columnIndex) {
+            return types [columnIndex];
+        }
+
+        public boolean isCellEditable(int rowIndex, int columnIndex) {
+            return canEdit [columnIndex];
+        }
+    });
+    teklif_tablosu.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            teklif_tablosuMouseClicked(evt);
+        }
+    });
+    tekflifScrollPane.setViewportView(teklif_tablosu);
+    teklif_tablosu.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
+    javax.swing.GroupLayout tekliflerPaneliLayout = new javax.swing.GroupLayout(tekliflerPaneli);
+    tekliflerPaneli.setLayout(tekliflerPaneliLayout);
+    tekliflerPaneliLayout.setHorizontalGroup(
+        tekliflerPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(tekflifScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE)
+    );
+    tekliflerPaneliLayout.setVerticalGroup(
+        tekliflerPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(tekflifScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE)
+    );
+
+    siparisSekmeleri.addTab("Teklifler", tekliflerPaneli);
 
     aktifSiparis_tablosu.setAutoCreateRowSorter(true);
     aktifSiparis_tablosu.setModel(new javax.swing.table.DefaultTableModel(
@@ -1048,7 +1144,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
     siparisGoruntule_siparisTamamlanmaTarihi.setShowOneMonth(true);
 
     jLabel40.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-    jLabel40.setText("Sipariş Durumui:");
+    jLabel40.setText("Sipariş Durumu:");
 
     siparisGoruntule_Durum.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Hazırlanıyor", "Tamamlandı", "Silindi", "Teklif" }));
 
@@ -1188,6 +1284,11 @@ new datechooser.view.appearance.ViewAppearance("custom",
     siparisGoruntule_urunTablosu.setFillsViewportHeight(true);
     siparisGoruntule_urunTablosu.setName("Yeni Sipariş Ürünler"); // NOI18N
     siparisGoruntule_urunTablosu.setRowHeight(20);
+    siparisGoruntule_urunTablosu.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+        public void propertyChange(java.beans.PropertyChangeEvent evt) {
+            siparisGoruntule_urunTablosuPropertyChange(evt);
+        }
+    });
     jScrollPane11.setViewportView(siparisGoruntule_urunTablosu);
 
     javax.swing.GroupLayout siparisGoruntule_urunlerPaneliLayout = new javax.swing.GroupLayout(siparisGoruntule_urunlerPaneli);
@@ -1434,7 +1535,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
         .addComponent(siparisSekmeleri)
     );
 
-    siparisSekmeleri.getAccessibleContext().setAccessibleName("Aktif Siparişler");
+    siparisSekmeleri.getAccessibleContext().setAccessibleName("Silinmiş Siparişler");
 
     pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1479,16 +1580,18 @@ new datechooser.view.appearance.ViewAppearance("custom",
 
     private void yeniSiparis_yeniUrunEkleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yeniSiparis_yeniUrunEkleActionPerformed
         // TODO add your handling code here:
+        if ( yeniSiparis_urunTablosu.getRowCount() != 0 && yeniSiparis_urunTablosu.getCellEditor() == null )
+            System.out.println("zaaaaaaaa");
         DefaultTableModel model = (DefaultTableModel) yeniSiparis_urunTablosu.getModel();
-        model.insertRow(yeniSiparis_urunTablosu.getRowCount(), new Object[]{ "", 0, urunComboBox.getItemAt(0), 0, 0, ""});
+        model.insertRow(yeniSiparis_urunTablosu.getRowCount(), new Object[]{ null, null, urunComboBox.getItemAt(0), null, null, null});
         yeniSiparis_urunTablosu.revalidate();
     }//GEN-LAST:event_yeniSiparis_yeniUrunEkleActionPerformed
 
     private void yeniSiparis_TemizleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yeniSiparis_TemizleActionPerformed
         // TODO add your handling code here:
         Object[] options = {"Evet, temizle!", "Hayır, temizleme!"};
-        int result  = JOptionPane.showOptionDialog(null, "Yeni Sipariş Girdilerini"
-                + " 'Temizlemek' İstediğinize Emin misiniz?", "Sipariş Girdilerini Temizle!", 
+        int result  = JOptionPane.showOptionDialog(null, "Seçili Ürün Girdisini"
+                + " 'Silmek' İstediğinize Emin misiniz?", "Seçili Ürün Girdisini Sil!", 
                 JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[1]);
         if( result == 0) {
             yeniSiparisTemizle();
@@ -1515,27 +1618,58 @@ new datechooser.view.appearance.ViewAppearance("custom",
 
     private void yeniSiparis_KaydetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yeniSiparis_KaydetActionPerformed
         // TODO add your handling code here:
+        yeniSiparis_urunTablosu.revalidate();
+        progressMonitor.setNote("Yeni Sipariş Alınıyor...");
         progressMonitor.setProgress(0);
+        
         Siparis yeniSiparis;
         Firma yeniFirma;
-        ArrayList<Urun> yeniUrunler = new ArrayList<Urun>();
+        ArrayList<Urun> yeniUrunler = new ArrayList<>();
+        
         double toplam = 0;
         yeniFirma = new Firma( yeniSiparis_firmaAdi.getText(), yeniSiparis_ilgiliAdi.getText(),
                 yeniSiparis_ePosta.getText(), yeniSiparis_telefon.getText(), yeniSiparis_gsm.getText(), yeniSiparis_fax.getText());
         
+        
         //System.out.println( yeniFirma.toString());
+        /////////////////////////////
+        progressMonitor.setNote("Sipariş Oluşturuluyor...");
+        progressMonitor.setProgress(15);
+        
+        //System.out.println( yeniSiparis_urunTablosu.getRowCount());
         
         for( int i = 0; i < yeniSiparis_urunTablosu.getRowCount(); i++){
-            yeniUrunler.add( new Urun( 
-                    yeniSiparis_urunTablosu.getValueAt(i, 0).toString(),
-                    Double.parseDouble(yeniSiparis_urunTablosu.getValueAt(i, 1).toString()), 
-                    Integer.parseInt(yeniSiparis_urunTablosu.getValueAt(i, 3).toString()),
-                    yeniSiparis_urunTablosu.getValueAt(i, 2).toString(), 
-                    yeniSiparis_urunTablosu.getValueAt(i, 5).toString()));
-                    toplam += Double.parseDouble(yeniSiparis_urunTablosu.getValueAt(i, 4).toString());
-            //System.out.println(yeniUrunler.get(i).toString());
+            
+            String urunAdi = (String) yeniSiparis_urunTablosu.getValueAt(i, 0);
+            
+            int urunAdedi;
+            if( yeniSiparis_urunTablosu.getValueAt(i, 3) == null)
+                urunAdedi = 0;
+            else
+                urunAdedi = (int) yeniSiparis_urunTablosu.getValueAt(i, 3);
+            
+            double urunFiyati;
+            if( yeniSiparis_urunTablosu.getValueAt(i, 1) == null)
+                urunFiyati = 0;
+            else
+                urunFiyati = (double) yeniSiparis_urunTablosu.getValueAt(i, 1);
+            
+            String urunDurumu = (String) yeniSiparis_urunTablosu.getValueAt(i, 2);
+            String urunAciklamasi = (String) yeniSiparis_urunTablosu.getValueAt(i, 5);
+            
+            Urun urun = new Urun( urunAdi, urunFiyati, urunAdedi, urunDurumu, urunAciklamasi );
+            yeniUrunler.add( urun);
+
+            toplam += urunAdedi * urunFiyati;
+            System.out.println(yeniUrunler.get(i).toString());
         }
+        /////////////////////////////
+        progressMonitor.setNote("Ürünler işleniyor...");
+        progressMonitor.setProgress(35);
         
+        int durum = 0;
+        if( yeniSiparis_Siparis_Teklif.getText().equalsIgnoreCase("Teklif"))
+            durum = 1;
         /*
          * Siparis(int siparis_id, String durum, String siparisi_isteyen, String siparisi_alan, String aciklama, Date siparis_tarih, Date siparis_istenen_tarih,
             Date bitis_tarih, Firma firma, ArrayList<Urun> urunler, double toplam)
@@ -1553,17 +1687,27 @@ new datechooser.view.appearance.ViewAppearance("custom",
                 yeniUrunler,
                 toplam);
         
-        System.out.println( yeniSiparis);
-        JavaDBtoObj.insertYeniSiparisToDB(yeniSiparis);
+        //System.out.println( yeniSiparis);
         
+        /////////////////////////////
+        progressMonitor.setNote("Kaydediliyor...");
+        progressMonitor.setProgress(50);
+        JavaDBtoObj.insertYeniSiparisToDB(yeniSiparis, durum);
+        
+        /////////////////////////////
+        progressMonitor.setNote("Tablolar güncelleniyor...");
+        progressMonitor.setProgress(75);
         yeniSiparisTemizle();
         
         SiparisleriSifirla();
         SiparisleriAyir();
         UpdateTable();
 
-        siparisSekmeleri.setSelectedIndex(1);
-        
+        if( durum == 0)
+            siparisSekmeleri.setSelectedIndex(2);
+        else
+            siparisSekmeleri.setSelectedIndex(1);
+        /////////////////////////////
         progressMonitor.setProgress(100);
     }//GEN-LAST:event_yeniSiparis_KaydetActionPerformed
 
@@ -1638,6 +1782,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
     private void siparisGoruntule_KaydetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siparisGoruntule_KaydetActionPerformed
         // TODO add your handling code here:
         progressMonitor.setProgress(0);
+        progressMonitor.setNote("Sipariş Düzenleniyor...");
         
         Siparis siparisDuzenle;
         Firma firmaDuzenle;
@@ -1647,7 +1792,9 @@ new datechooser.view.appearance.ViewAppearance("custom",
                 siparisGoruntule_ePosta.getText(), siparisGoruntule_telefon.getText(), siparisGoruntule_gsm.getText(), siparisGoruntule_fax.getText());
         
         //System.out.println( yeniFirma.toString());
-        
+        ///////////////////////////////////
+        progressMonitor.setNote("Ürünler işleniyor...");
+        progressMonitor.setProgress(15);
         for( int i = 0; i < siparisGoruntule_urunTablosu.getRowCount(); i++){
             urunlerDuzenle.add( new Urun( 
                     siparisGoruntule_urunTablosu.getValueAt(i, 0).toString(),
@@ -1673,6 +1820,11 @@ new datechooser.view.appearance.ViewAppearance("custom",
                 yeniDurum = "Teklif";
                 break;
         }
+        
+        ///////////////////////////////////
+        progressMonitor.setNote("İşleniyor...");
+        progressMonitor.setProgress(15);
+        
         if( siparisGoruntule_Durum.getSelectedIndex() == 1) {
             siparisDuzenle = new Siparis(
                     currentSiparis,
@@ -1700,29 +1852,37 @@ new datechooser.view.appearance.ViewAppearance("custom",
                     urunlerDuzenle,
                     toplamDuzenle);
         }
-        
+        ///////////////////////////////////
+        progressMonitor.setNote("Kaydediliyor...");
+        progressMonitor.setProgress(50);
         JavaDBtoObj.updateSiparisToDB(siparisDuzenle);
+
+        ///////////////////////////////////
+        progressMonitor.setNote("Tablolar güncelleniyor...");
+        progressMonitor.setProgress(75);
         
         siparisGoruntuleTemizle();
         SiparisleriSifirla();
         SiparisleriAyir();
         UpdateTable();
         
+        ///////////////////////////////////
         switch(siparisDuzenle.getDurumInt()){
             case 1:
-                siparisSekmeleri.setSelectedIndex(1);
-                break;
-            case 2:
                 siparisSekmeleri.setSelectedIndex(2);
                 break;
+            case 2:
+                siparisSekmeleri.setSelectedIndex(3);
+                break;
             case 3:
-                siparisSekmeleri.setSelectedIndex(4);
+                siparisSekmeleri.setSelectedIndex(5);
                 break;
             case 4:
+                siparisSekmeleri.setSelectedIndex(1);
                 break;
         }
         siparisGoruntuleEnable( false);
-        
+        ///////////////////////////////////
         progressMonitor.setProgress(100);
     }//GEN-LAST:event_siparisGoruntule_KaydetActionPerformed
 
@@ -1732,12 +1892,20 @@ new datechooser.view.appearance.ViewAppearance("custom",
             Object[] options = {"Evet, sil", "Hayır, silme"};
             int sonuc = JOptionPane.showOptionDialog(null, "Siparişi Silmek İstediğinize Emin misiniz?", "Sipariş Silme Onayı", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[1]);
             if( sonuc == 0){
+                progressMonitor.setNote("Siliniyor...");
+                progressMonitor.setProgress(0);
                 JavaDBtoObj.SiparisiSil( currentSiparis);
+                progressMonitor.setProgress(25);
                 SiparisleriSifirla();
                 SiparisleriAyir();
+                progressMonitor.setProgress(50);
+                progressMonitor.setNote("Tablolar güncelleniyor...");
                 UpdateTable();
                 siparisGoruntuleTemizle();
-                siparisSekmeleri.setSelectedIndex(4);
+                progressMonitor.setNote("Arayüze işleniyor...");
+                progressMonitor.setProgress(75);
+                siparisSekmeleri.setSelectedIndex(5);
+                progressMonitor.setProgress(100);
             }
         }
         else
@@ -1761,6 +1929,52 @@ new datechooser.view.appearance.ViewAppearance("custom",
         }
     }//GEN-LAST:event_siparisGoruntule_DurumItemStateChanged
 
+    private void yeniSiparis_Siparis_TeklifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yeniSiparis_Siparis_TeklifActionPerformed
+        // TODO add your handling code here:
+        if( yeniSiparis_Siparis_Teklif.getText().equalsIgnoreCase("Teklif"))
+            yeniSiparis_Siparis_Teklif.setText("Yeni Sipariş");
+        else
+            yeniSiparis_Siparis_Teklif.setText("Teklif");
+    }//GEN-LAST:event_yeniSiparis_Siparis_TeklifActionPerformed
+
+    private void yeniSiparis_urunTablosuPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_yeniSiparis_urunTablosuPropertyChange
+        // TODO add your handling code here:
+        if( yeniSiparis_urunTablosu.getEditingColumn()  == 1 || yeniSiparis_urunTablosu.getEditingColumn() == 3) {
+            int adet = 0;
+            float fiyat = 0;
+            if( yeniSiparis_urunTablosu.getValueAt( yeniSiparis_urunTablosu.getSelectedRow(), 3) != null 
+                    &&  yeniSiparis_urunTablosu.getValueAt( yeniSiparis_urunTablosu.getSelectedRow(), 1) != null ){
+                float toplam = (int)yeniSiparis_urunTablosu.getValueAt( yeniSiparis_urunTablosu.getSelectedRow(), 3) 
+                        * (float)yeniSiparis_urunTablosu.getValueAt( yeniSiparis_urunTablosu.getSelectedRow(), 1);
+                yeniSiparis_urunTablosu.setValueAt( toplam, yeniSiparis_urunTablosu.getSelectedRow(), 4);
+                yeniSiparis_urunTablosu.revalidate();
+            }
+        } 
+    }//GEN-LAST:event_yeniSiparis_urunTablosuPropertyChange
+
+    private void siparisGoruntule_urunTablosuPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_siparisGoruntule_urunTablosuPropertyChange
+        // TODO add your handling code here:
+        if( siparisGoruntule_urunTablosu.getEditingColumn()  == 1 || siparisGoruntule_urunTablosu.getEditingColumn() == 3) {
+            int adet = 0;
+            float fiyat = 0;
+            if( siparisGoruntule_urunTablosu.getValueAt( siparisGoruntule_urunTablosu.getSelectedRow(), 3) != null 
+                    &&  siparisGoruntule_urunTablosu.getValueAt( siparisGoruntule_urunTablosu.getSelectedRow(), 1) != null ){
+                float toplam = (int)siparisGoruntule_urunTablosu.getValueAt( siparisGoruntule_urunTablosu.getSelectedRow(), 3) 
+                        * (float)siparisGoruntule_urunTablosu.getValueAt( siparisGoruntule_urunTablosu.getSelectedRow(), 1);
+                siparisGoruntule_urunTablosu.setValueAt( toplam, siparisGoruntule_urunTablosu.getSelectedRow(), 4);
+                siparisGoruntule_urunTablosu.revalidate();
+            }
+        }
+    }//GEN-LAST:event_siparisGoruntule_urunTablosuPropertyChange
+
+    private void teklif_tablosuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_teklif_tablosuMouseClicked
+        // TODO add your handling code here:
+        siparisGoruntuleEnable( false);
+        if( evt.getClickCount() >= 2) {
+            siparisGoruntule( teklif_tablosu.getSelectedRow(), 4);
+        }
+    }//GEN-LAST:event_teklif_tablosuMouseClicked
+
     private void siparisGoruntule( int id, int type){
         
         Siparis siparis = null;
@@ -1774,6 +1988,9 @@ new datechooser.view.appearance.ViewAppearance("custom",
                 break;
             case 3:
                 siparis = silinmisSiparisler.get(id);
+                break;
+            case 4:
+                siparis = teklifler.get(id);
                 break;
         }
         
@@ -1825,10 +2042,11 @@ new datechooser.view.appearance.ViewAppearance("custom",
         }
         siparisGoruntule_urunTablosu.revalidate();
         
+        
         siparisGoruntule_siparisTarihi.setEnabled( false);
         siparisGoruntule_siparisIstenenTarih.setEnabled( false);
         siparisGoruntule_siparisTamamlanmaTarihi.setEnabled( false);
-        siparisSekmeleri.setSelectedIndex(3);
+        siparisSekmeleri.setSelectedIndex(4);
     }
     
     /**
@@ -1856,7 +2074,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new SiparisEkranı().setVisible(true);
+                new SiparisEkranı( userMod).setVisible(true);
             }
         });
     }
@@ -1902,7 +2120,6 @@ new datechooser.view.appearance.ViewAppearance("custom",
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel sg_aciklama2;
     private javax.swing.JLabel sg_aciklama3;
     private javax.swing.JLabel sg_aciklama4;
@@ -1937,9 +2154,13 @@ new datechooser.view.appearance.ViewAppearance("custom",
     private javax.swing.JScrollPane tamamlanmisSiparisScrollPane;
     private javax.swing.JTable tamamlanmisSiparis_tablosu;
     private javax.swing.JPanel tamamlanmısSiparisPaneli;
+    private javax.swing.JScrollPane tekflifScrollPane;
+    private javax.swing.JTable teklif_tablosu;
+    private javax.swing.JPanel tekliflerPaneli;
     private javax.swing.JPanel yeniSiparisGirisPaneli;
     private javax.swing.JPanel yeniSiparis_FirmaPaneli;
     private javax.swing.JButton yeniSiparis_Kaydet;
+    private javax.swing.JToggleButton yeniSiparis_Siparis_Teklif;
     private javax.swing.JButton yeniSiparis_Temizle;
     private javax.swing.JButton yeniSiparis_UrunSil;
     private javax.swing.JPanel yeniSiparis_butons;
