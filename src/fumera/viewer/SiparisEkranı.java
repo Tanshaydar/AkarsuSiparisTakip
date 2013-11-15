@@ -130,6 +130,7 @@ public class SiparisEkranı extends javax.swing.JFrame {
         modelTeklif.setRowCount(0);
     }
     
+    // SİPARİŞLERİ TÜRÜNE GÖRE AYIR
     private void SiparisleriAyir(){
 
         siparisler = JavaDBtoObj.getSiparislerFromDB();
@@ -423,12 +424,6 @@ public class SiparisEkranı extends javax.swing.JFrame {
         yeniSiparis_siparisAciklamasi.setMinimumSize(new java.awt.Dimension(200, 19));
         jScrollPane8.setViewportView(yeniSiparis_siparisAciklamasi);
 
-        yeniSiparis_ilgiliAdi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                yeniSiparis_ilgiliAdiActionPerformed(evt);
-            }
-        });
-
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel19.setText("Firma:");
 
@@ -437,12 +432,6 @@ public class SiparisEkranı extends javax.swing.JFrame {
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel20.setText("Tel:");
-
-        yeniSiparis_ePosta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                yeniSiparis_ePostaActionPerformed(evt);
-            }
-        });
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel21.setText("E-Posta:");
@@ -457,11 +446,6 @@ public class SiparisEkranı extends javax.swing.JFrame {
         jLabel24.setText("GSM:");
 
         yeniSiparis_firmaAdi.setMinimumSize(new java.awt.Dimension(200, 20));
-        yeniSiparis_firmaAdi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                yeniSiparis_firmaAdiActionPerformed(evt);
-            }
-        });
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel27.setText("Siparişi İsteyen:");
@@ -474,18 +458,6 @@ public class SiparisEkranı extends javax.swing.JFrame {
 
         jLabel30.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel30.setText("İstenen Teslim Tarihi:");
-
-        yeniSiparis_siparisiIsteyen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                yeniSiparis_siparisiIsteyenActionPerformed(evt);
-            }
-        });
-
-        yeniSiparis_siparisiAlan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                yeniSiparis_siparisiAlanActionPerformed(evt);
-            }
-        });
 
         yeniSiparis_siparisTarihi.setCurrentView(new datechooser.view.appearance.AppearancesList("Swing",
             new datechooser.view.appearance.ViewAppearance("custom",
@@ -632,8 +604,8 @@ public class SiparisEkranı extends javax.swing.JFrame {
                 .addComponent(jLabel30))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(sg_aciklama2))
+                .addComponent(sg_aciklama2)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(yeniSiparis_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(sg_aciklama4)
@@ -689,7 +661,7 @@ public class SiparisEkranı extends javax.swing.JFrame {
     );
     yeniSiparis_urunlerPaneliLayout.setVerticalGroup(
         yeniSiparis_urunlerPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+        .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
     );
 
     yeniSiparis_yeniUrunEkle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -853,6 +825,7 @@ public class SiparisEkranı extends javax.swing.JFrame {
             return canEdit [columnIndex];
         }
     });
+    aktifSiparis_tablosu.setColumnSelectionAllowed(true);
     aktifSiparis_tablosu.setRowHeight(20);
     aktifSiparis_tablosu.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
     aktifSiparis_tablosu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -935,11 +908,6 @@ public class SiparisEkranı extends javax.swing.JFrame {
     siparisGoruntule_fax.setEditable(false);
 
     siparisGoruntule_ilgiliAdi.setEditable(false);
-    siparisGoruntule_ilgiliAdi.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            siparisGoruntule_ilgiliAdiActionPerformed(evt);
-        }
-    });
 
     jLabel25.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
     jLabel25.setText("Firma:");
@@ -951,11 +919,6 @@ public class SiparisEkranı extends javax.swing.JFrame {
     jLabel26.setText("Tel:");
 
     siparisGoruntule_ePosta.setEditable(false);
-    siparisGoruntule_ePosta.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            siparisGoruntule_ePostaActionPerformed(evt);
-        }
-    });
 
     jLabel31.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
     jLabel31.setText("E-Posta:");
@@ -973,11 +936,6 @@ public class SiparisEkranı extends javax.swing.JFrame {
 
     siparisGoruntule_firmaAdi.setEditable(false);
     siparisGoruntule_firmaAdi.setMinimumSize(new java.awt.Dimension(200, 20));
-    siparisGoruntule_firmaAdi.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            siparisGoruntule_firmaAdiActionPerformed(evt);
-        }
-    });
 
     jLabel35.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
     jLabel35.setText("Siparişi İsteyen:");
@@ -992,18 +950,8 @@ public class SiparisEkranı extends javax.swing.JFrame {
     jLabel38.setText("İstenen Teslim Tarihi:");
 
     siparisGoruntule_siparisiIsteyen.setEditable(false);
-    siparisGoruntule_siparisiIsteyen.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            siparisGoruntule_siparisiIsteyenActionPerformed(evt);
-        }
-    });
 
     siparisGoruntule_siparisiAlan.setEditable(false);
-    siparisGoruntule_siparisiAlan.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            siparisGoruntule_siparisiAlanActionPerformed(evt);
-        }
-    });
 
     siparisGoruntule_siparisTarihi.setCurrentView(new datechooser.view.appearance.AppearancesList("Swing",
         new datechooser.view.appearance.ViewAppearance("custom",
@@ -1254,8 +1202,8 @@ new datechooser.view.appearance.ViewAppearance("custom",
                 .addComponent(siparisGoruntule_Durum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(siparisGoruntule_FirmaPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(sg_aciklama3))
+                .addComponent(sg_aciklama3)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addContainerGap())
     );
 
@@ -1305,7 +1253,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
     );
     siparisGoruntule_urunlerPaneliLayout.setVerticalGroup(
         siparisGoruntule_urunlerPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+        .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
     );
 
     siparisGoruntule_yeniUrunEkle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -1595,22 +1543,6 @@ new datechooser.view.appearance.ViewAppearance("custom",
         }
     }//GEN-LAST:event_aktifSiparis_tablosuMouseClicked
 
-    private void yeniSiparis_ilgiliAdiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yeniSiparis_ilgiliAdiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_yeniSiparis_ilgiliAdiActionPerformed
-
-    private void yeniSiparis_firmaAdiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yeniSiparis_firmaAdiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_yeniSiparis_firmaAdiActionPerformed
-
-    private void yeniSiparis_siparisiIsteyenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yeniSiparis_siparisiIsteyenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_yeniSiparis_siparisiIsteyenActionPerformed
-
-    private void yeniSiparis_siparisiAlanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yeniSiparis_siparisiAlanActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_yeniSiparis_siparisiAlanActionPerformed
-
     private void yeniSiparis_yeniUrunEkleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yeniSiparis_yeniUrunEkleActionPerformed
         // TODO add your handling code here:
         String eksik = "";
@@ -1661,10 +1593,6 @@ new datechooser.view.appearance.ViewAppearance("custom",
             yeniSiparisTemizle();
         }
     }//GEN-LAST:event_yeniSiparis_TemizleActionPerformed
-
-    private void yeniSiparis_ePostaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yeniSiparis_ePostaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_yeniSiparis_ePostaActionPerformed
 
     private void yeniSiparis_UrunSilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yeniSiparis_UrunSilActionPerformed
         // TODO add your handling code here:
@@ -1821,26 +1749,6 @@ new datechooser.view.appearance.ViewAppearance("custom",
             siparisGoruntule( silinmisSiparis_tablosu.getSelectedRow(), 3);
         }
     }//GEN-LAST:event_silinmisSiparis_tablosuMouseClicked
-
-    private void siparisGoruntule_ilgiliAdiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siparisGoruntule_ilgiliAdiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_siparisGoruntule_ilgiliAdiActionPerformed
-
-    private void siparisGoruntule_ePostaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siparisGoruntule_ePostaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_siparisGoruntule_ePostaActionPerformed
-
-    private void siparisGoruntule_firmaAdiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siparisGoruntule_firmaAdiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_siparisGoruntule_firmaAdiActionPerformed
-
-    private void siparisGoruntule_siparisiIsteyenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siparisGoruntule_siparisiIsteyenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_siparisGoruntule_siparisiIsteyenActionPerformed
-
-    private void siparisGoruntule_siparisiAlanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siparisGoruntule_siparisiAlanActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_siparisGoruntule_siparisiAlanActionPerformed
 
     private void siparisGoruntule_yeniUrunEkleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siparisGoruntule_yeniUrunEkleActionPerformed
         // TODO add your handling code here:
@@ -2074,7 +1982,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
             }
         }
         else
-            JOptionPane.showMessageDialog( SiparisEkranı.this, "Sipariş Seçmediniz!", "Hata", JOptionPane.INFORMATION_MESSAGE, null);
+            JOptionPane.showMessageDialog( SiparisEkranı.this, "Sipariş Seçmediniz!", "Hata!", JOptionPane.INFORMATION_MESSAGE, null);
     }//GEN-LAST:event_siparisGoruntule_SilActionPerformed
 
     private void siparisGoruntule_DuzenleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siparisGoruntule_DuzenleActionPerformed
@@ -2086,7 +1994,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
         if( currentSiparis != 0)
             siparisGoruntuleEnable( true);
         else
-            JOptionPane.showMessageDialog( SiparisEkranı.this, "Sipariş Seçmediniz!", "Hata", JOptionPane.INFORMATION_MESSAGE, null);
+            JOptionPane.showMessageDialog( SiparisEkranı.this, "Sipariş Seçmediniz!", "Hata!", JOptionPane.INFORMATION_MESSAGE, null);
     }//GEN-LAST:event_siparisGoruntule_DuzenleActionPerformed
 
     private void siparisGoruntule_DurumItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_siparisGoruntule_DurumItemStateChanged
