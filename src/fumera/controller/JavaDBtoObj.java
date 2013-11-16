@@ -24,14 +24,10 @@ public class JavaDBtoObj {
     public static ArrayList<Siparis> getSiparislerFromDB(){
         Connection connection = JavaConnector.ConnectDB();
         ResultSet resultsetSiparis = null;
-//        ResultSet resultsetFirma = null;
         ResultSet resultsetUrun = null;
         PreparedStatement statementSiparis = null;
-//        PreparedStatement statementFirma = null;
         PreparedStatement statementUrun = null;
 
-//        String sqlSiparis = "SELECT * FROM siparis";
-//        String sqlFirma = "SELECT * FROM firma WHERE siparis_id=?";
         String sqlSiparisAndFirma = "SELECT * FROM siparis LEFT JOIN firma ON siparis.siparis_id = firma.siparis_id";
         String sqlUrun = "SELECT * FROM urun WHERE siparis_id=?";
         
@@ -54,12 +50,14 @@ public class JavaDBtoObj {
             }
             
         } catch (SQLException e){
+            FileLogger.hata( e.toString());
             JOptionPane.showMessageDialog(null, e);
         } finally {
             try {
                 resultsetSiparis.close();
                 statementSiparis.close();
             } catch (SQLException e) {
+                FileLogger.hata( e.toString());
                 JOptionPane.showMessageDialog(null, e);
             }
         }
@@ -81,13 +79,15 @@ public class JavaDBtoObj {
                 
                 siparis.setUrunler(urunListesi);
                 
-            } catch (Exception e) {
+            } catch (SQLException e) {
+                FileLogger.hata( e.toString());
                 JOptionPane.showMessageDialog(null, e);
             } finally {
                 try {
                     resultsetUrun.close();
                     statementUrun.close();
-                } catch (Exception e) {
+                } catch (SQLException e) {
+                    FileLogger.hata( e.toString());
                     JOptionPane.showMessageDialog(null, e);
                 }
             }
@@ -133,12 +133,13 @@ public class JavaDBtoObj {
             }
             
         } catch (SQLException e) {
+            FileLogger.hata( e.toString());
             JOptionPane.showMessageDialog(null, e);
         } finally {
             try {
                 statement.close();
             } catch (SQLException e) {
-                System.out.println(e);
+                FileLogger.hata( e.toString());
             }
         }
         
@@ -157,11 +158,13 @@ public class JavaDBtoObj {
             
             statement.executeUpdate();
         } catch (SQLException e) {
+            FileLogger.hata( e.toString());
             JOptionPane.showMessageDialog(null, e);
         } finally {
             try {
                 statement.close();
             } catch (SQLException e) {
+                FileLogger.hata( e.toString());
             }
         }
         for( int i = 0; i < siparis.getUrunler().size(); i++){
@@ -179,12 +182,13 @@ public class JavaDBtoObj {
 
                 statement.executeUpdate();
             } catch (SQLException e) {
+                FileLogger.hata( e.toString());
                 JOptionPane.showMessageDialog(null, e);
             } finally {
                 try {
                     statement.close();
                 } catch (SQLException e) {
-                    System.out.println(e);
+                    FileLogger.hata( e.toString());
                 }
             }
         }
@@ -219,12 +223,13 @@ public class JavaDBtoObj {
             
             statement.executeUpdate();
         } catch (SQLException e) {
+            FileLogger.hata( e.toString());
             JOptionPane.showMessageDialog(null, e);
         } finally {
             try {
                 statement.close();
             } catch (SQLException e) {
-                System.out.println(e);
+                FileLogger.hata( e.toString());
             }
         }
         
@@ -243,12 +248,13 @@ public class JavaDBtoObj {
             
             statement.executeUpdate();
         } catch (SQLException e) {
+            FileLogger.hata( e.toString());
             JOptionPane.showMessageDialog(null, e);
         } finally {
             try {
                 statement.close();
             } catch (SQLException e) {
-                System.out.println(e);
+                FileLogger.hata( e.toString());
             }
         }
         
@@ -259,12 +265,13 @@ public class JavaDBtoObj {
             statement.setInt(1, siparis.getSiparis_id());           
             statement.executeUpdate();
         } catch (SQLException e) {
+            FileLogger.hata( e.toString());
             JOptionPane.showMessageDialog(null, e);
         } finally {
             try {
                 statement.close();
             } catch (SQLException e) {
-                System.out.println(e);
+                FileLogger.hata( e.toString());
             }
         }
         
@@ -285,12 +292,13 @@ public class JavaDBtoObj {
 
                 statement.executeUpdate();
             } catch (SQLException e) {
+                FileLogger.hata( e.toString());
                 JOptionPane.showMessageDialog(null, e);
             } finally {
                 try {
                     statement.close();
                 } catch (SQLException e) {
-                    System.out.println(e);
+                    FileLogger.hata( e.toString());
                 }
             }
         }
@@ -310,12 +318,13 @@ public class JavaDBtoObj {
             
             statement.executeUpdate();
         } catch (SQLException e) {
+            FileLogger.hata( e.toString());
             JOptionPane.showMessageDialog(null, e);
         } finally {
             try {
                 statement.close();
             } catch (SQLException e) {
-                System.out.println(e);
+                FileLogger.hata( e.toString());
             }
         }
     }

@@ -15,13 +15,13 @@ import javax.swing.JOptionPane;
  * @author Tansel
  */
 public class JavaConnector {
-
+    
     Connection connection = null;
-    /*
+
     private static final String DBaddr = "sql2.freesqldatabase.com";
     private static final String DBname = "sql27141";
     private static final String DBuser = "sql27141";
-    private static final String DBpass = "jS1*rN2%25";*/
+    private static final String DBpass = "jS1*rN2%25";
     /*
     private static final String DBaddr = "localhost";
     private static final String DBname = "siparis";
@@ -33,11 +33,11 @@ public class JavaConnector {
     private static final String DBuser = "root";
     private static final String DBpass = ""; */
     
-//    private static final String DBaddr = "193.140.224.43";
+    /*
     private static final String DBaddr = "192.168.0.111:3306";
     private static final String DBname = "siparis_takip";
     private static final String DBuser = "siparis";
-    private static final String DBpass = "vDAyMJbEUFsxzb5r";
+    private static final String DBpass = "vDAyMJbEUFsxzb5r"; */
     /*
     private static Connection conn = null; //Bağlantı nesnemiz
     private static String url = "jdbc:mysql://localhost:3306/";//veritabanının adresi ve portu
@@ -55,22 +55,11 @@ public class JavaConnector {
             //JOptionPane.showMessageDialog(null, "Bağlandı!", "Sunucu Bağlantısı", JOptionPane.INFORMATION_MESSAGE, null);
             return connection;
         } catch (ClassNotFoundException | SQLException | HeadlessException e) {
+            FileLogger.hata( e.toString());
             JOptionPane.showMessageDialog(null, e, "Sunucu Bağlantısı", JOptionPane.WARNING_MESSAGE, null);
             return null;
         }
     }
-    
-    /*
-    public static Connection ConnectDB() {
-        try {
-            Class.forName(driver);
-            conn = DriverManager.getConnection(url + dbName + properties, userName, password);//bağlantı açılıyor
-        } catch (ClassNotFoundException | SQLException e) {
-            System.out.println(e);
-        }
-        return conn;
-
-    }*/
     
     public static String DBname(){
         return DBname;

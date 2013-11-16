@@ -4,6 +4,7 @@
  */
 package fumera.viewer;
 
+import fumera.controller.FileLogger;
 import fumera.controller.JavaDBtoObj;
 import fumera.model.Firma;
 import fumera.model.Siparis;
@@ -1521,8 +1522,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        /*JOptionPane.showMessageDialog( SiparisEkranı.this, "Fumera Ar-Ge Yazılım Ltd. Şti. "
-                + "\n Yazılım Departmanı\nTansel Altınel\naltinel@fumera.com.tr", "Hakkında", JOptionPane.INFORMATION_MESSAGE, null); */
+
         Fumera_Hakkinda hakkinda = new Fumera_Hakkinda();
         hakkinda.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/icons/favicon.png")));
         hakkinda.setDefaultCloseOperation(EXIT_ON_CLOSE); 
@@ -2148,7 +2148,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SiparisEkranı.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            FileLogger.hata( ex.toString());
         }
         //</editor-fold>
 

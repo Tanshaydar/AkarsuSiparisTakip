@@ -4,6 +4,7 @@
  */
 package fumera.viewer;
 
+import fumera.controller.FileLogger;
 import fumera.controller.JavaConnector;
 import fumera.model.User;
 import java.awt.HeadlessException;
@@ -168,12 +169,14 @@ public class GirisFormu extends javax.swing.JFrame {
                 
             }
         } catch (SQLException | HeadlessException e) {
+            FileLogger.hata( e.toString());
             JOptionPane.showMessageDialog( GirisFormu.this, "Kullanıcı adı ya da şifre hatalı!");
         } finally {
             try {
                 resultset.close();
                 statement.close();
-            } catch (Exception e) {
+            } catch (SQLException e) {
+                FileLogger.hata( e.toString());
             }
         }
     }//GEN-LAST:event_cmd_loginActionPerformed
@@ -205,12 +208,14 @@ public class GirisFormu extends javax.swing.JFrame {
 
                 }
             } catch (SQLException | HeadlessException e) {
+                FileLogger.hata( e.toString());
                 JOptionPane.showMessageDialog( GirisFormu.this, "Kullanıcı adı ya da şifre hatalı!");
             } finally {
                 try {
                     resultset.close();
                     statement.close();
-                } catch (Exception e) {
+                } catch (SQLException e) {
+                    FileLogger.hata( e.toString());
                 }
             }
         }
