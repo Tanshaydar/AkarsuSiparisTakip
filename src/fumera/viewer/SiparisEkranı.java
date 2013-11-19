@@ -66,6 +66,7 @@ public class SiparisEkranı extends javax.swing.JFrame {
         // Ürün düzenleme kısmında ürünün Hazırlanıyor mu yoksa Tamamlanmış mı olduğunu ayarlamak için ComboBox
         urunComboBox.addItem("Hazırlanıyor");
         urunComboBox.addItem("Tamamlandı");
+        urunComboBox.addItem("Özel");
         
         // Ürün girerken ve Düzenlerken bu combobox'u tabloya ekliyoruz
         yeniSiparis_urunTablosu.getColumnModel().getColumn(2).setCellEditor( new DefaultCellEditor(urunComboBox));
@@ -826,9 +827,7 @@ public class SiparisEkranı extends javax.swing.JFrame {
             return canEdit [columnIndex];
         }
     });
-    aktifSiparis_tablosu.setColumnSelectionAllowed(true);
-    aktifSiparis_tablosu.setRowHeight(20);
-    aktifSiparis_tablosu.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+    aktifSiparis_tablosu.setCellSelectionEnabled(false);
     aktifSiparis_tablosu.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseClicked(java.awt.event.MouseEvent evt) {
             aktifSiparis_tablosuMouseClicked(evt);
@@ -1759,7 +1758,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
         }
         
         boolean boslukVar = false;
-        
+        System.out.println( siparisGoruntule_urunTablosu.getRowCount());
         if( siparisGoruntule_urunTablosu.getRowCount() != 0) {
             int rows = siparisGoruntule_urunTablosu.getRowCount() - 1;
             if( siparisGoruntule_urunTablosu.getValueAt(rows, 0) == null) {
@@ -1782,7 +1781,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
                             "Hata!", JOptionPane.WARNING_MESSAGE, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
         } else {
             DefaultTableModel model = (DefaultTableModel) siparisGoruntule_urunTablosu.getModel();
-            model.insertRow(siparisGoruntule_urunTablosu.getRowCount(), new Object[]{ "", 0, urunComboBox.getItemAt(0), 0, 0, ""});
+            model.insertRow(siparisGoruntule_urunTablosu.getRowCount(), new Object[]{ null, null, urunComboBox.getItemAt(0), null, null, null});
             siparisGoruntule_urunTablosu.revalidate();
         }
     }//GEN-LAST:event_siparisGoruntule_yeniUrunEkleActionPerformed
