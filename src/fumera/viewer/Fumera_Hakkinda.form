@@ -26,17 +26,15 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="jScrollPane1" max="32767" attributes="0"/>
-                  <Component id="jLabel1" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="tamam_kapat" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="jScrollPane1" max="32767" attributes="0"/>
+                      <Component id="jLabel1" max="32767" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="tamam_kapat" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -50,7 +48,7 @@
               <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="tamam_kapat" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -91,7 +89,7 @@
               <Color blue="f0" green="f0" red="f0" type="rgb"/>
             </Property>
             <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xd;&#xa;  &lt;head&gt;&#xd;&#xa;&#xd;&#xa;  &lt;/head&gt;&#xd;&#xa;  &lt;body&gt;&#xd;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xd;&#xa;&lt;center&gt;&#xa;&lt;h3&gt;Akarsu G&#xfc;&#xe7; ve Aktar&#x131;m Sistemleri&lt;/h3&gt;&#xa;Sipari&#x15f; Takip Yaz&#x131;l&#x131;m&#x131; v1.16.11.13&lt;br /&gt;&lt;br /&gt;&#xa;Fumera Ar-Ge Yaz&#x131;l&#x131;m&lt;br /&gt;M&#xfc;h. &#x130;ml. San. ve Tic. Ltd. &#x15e;ti.&lt;br /&gt;&lt;/center&gt;&#xa;Web: &lt;a href=&quot;http://fumera.com.tr/&quot;&gt;http://fumera.com.tr&lt;/a&gt;&lt;br /&gt;&#xa;Mail: &lt;a href=&quot;mailto:info@fumera.com.tr&quot;&gt;info@fumera.com.tr&lt;/a&gt;&#xa;    &lt;/p&gt;&#xd;&#xa;  &lt;/body&gt;&#xd;&#xa;&lt;/html&gt;&#xd;&#xa;"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xd;&#xa;  &lt;head&gt;&#xd;&#xa;&#xd;&#xa;  &lt;/head&gt;&#xd;&#xa;  &lt;body&gt;&#xd;&#xa;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xd;&#xa;&lt;center&gt;&#xa;&lt;h3&gt;Akarsu G&#xfc;&#xe7; ve Aktar&#x131;m Sistemleri&lt;/h3&gt;&#xa;Sipari&#x15f; Takip Yaz&#x131;l&#x131;m&#x131;&lt;br /&gt; v1.0.22.11.13&lt;br /&gt;&lt;br /&gt;&#xa;Fumera Ar-Ge Yaz&#x131;l&#x131;m&lt;br /&gt;M&#xfc;h. &#x130;ml. San. ve Tic. Ltd. &#x15e;ti.&lt;br /&gt;&lt;/center&gt;&#xa;Web: &lt;a href=&quot;http://fumera.com.tr/&quot;&gt;http://fumera.com.tr&lt;/a&gt;&lt;br /&gt;&#xa;Mail: &lt;a href=&quot;mailto:info@fumera.com.tr&quot;&gt;info@fumera.com.tr&lt;/a&gt;&#xa;    &lt;/p&gt;&#xd;&#xa;  &lt;/body&gt;&#xd;&#xa;&lt;/html&gt;&#xd;&#xa;"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Default Cursor"/>
             </Property>

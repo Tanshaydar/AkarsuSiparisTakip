@@ -827,7 +827,6 @@ public class SiparisEkranı extends javax.swing.JFrame {
             return canEdit [columnIndex];
         }
     });
-    aktifSiparis_tablosu.setCellSelectionEnabled(false);
     aktifSiparis_tablosu.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseClicked(java.awt.event.MouseEvent evt) {
             aktifSiparis_tablosuMouseClicked(evt);
@@ -1472,6 +1471,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
 
     Yardim.setText("Yardım");
 
+    jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.ALT_MASK));
     jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/yardim.png"))); // NOI18N
     jMenuItem2.setText("Yardım");
     jMenuItem2.addActionListener(new java.awt.event.ActionListener() {

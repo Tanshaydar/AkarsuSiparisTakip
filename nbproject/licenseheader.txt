@@ -1,0 +1,33 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}©Fumera Ar-Ge Yazýlým Müh. Ýml. San. ve Tic. Ltd. Þti. | Copyright 2012-2013
+${licensePrefix}All rights reserved.
+${licensePrefix}
+${licensePrefix}Redistribution and use in source and binary forms, with or without 
+${licensePrefix}modification, are permitted provided that the following conditions 
+${licensePrefix}are met: 
+${licensePrefix}
+${licensePrefix}1. Redistributions of source code must retain the above copyright 
+${licensePrefix}notice, this list of conditions, and the following disclaimer. 
+${licensePrefix}
+${licensePrefix}2. Redistributions in binary form must reproduce the above copyright 
+${licensePrefix}notice, this list of conditions, and the following disclaimer in the 
+${licensePrefix}documentation and/or other materials provided with the distribution. 
+${licensePrefix}
+${licensePrefix}3. The name of the author may not be used to endorse or promote products 
+${licensePrefix}derived from this software without specific prior written permission. 
+${licensePrefix}
+${licensePrefix}THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR 
+${licensePrefix}IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES 
+${licensePrefix}OF TITLE, NON-INFRINGEMENT, MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
+${licensePrefix}PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY 
+${licensePrefix}DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES 
+${licensePrefix}(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; 
+${licensePrefix}LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED 
+${licensePrefix}AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR 
+${licensePrefix}TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+${licensePrefix}OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+<#if licenseLast??>
+${licenseLast}
+</#if>

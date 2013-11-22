@@ -58,7 +58,7 @@ public class Fumera_Hakkinda extends javax.swing.JFrame {
         jTextPane1.setEditable(false);
         jTextPane1.setBackground(new java.awt.Color(240, 240, 240));
         jTextPane1.setContentType("text/html"); // NOI18N
-        jTextPane1.setText("<html>\r\n  <head>\r\n\r\n  </head>\r\n  <body>\r\n    <p style=\"margin-top: 0\">\r\n<center>\n<h3>Akarsu Güç ve Aktarım Sistemleri</h3>\nSipariş Takip Yazılımı v1.16.11.13<br /><br />\nFumera Ar-Ge Yazılım<br />Müh. İml. San. ve Tic. Ltd. Şti.<br /></center>\nWeb: <a href=\"http://fumera.com.tr/\">http://fumera.com.tr</a><br />\nMail: <a href=\"mailto:info@fumera.com.tr\">info@fumera.com.tr</a>\n    </p>\r\n  </body>\r\n</html>\r\n");
+        jTextPane1.setText("<html>\r\n  <head>\r\n\r\n  </head>\r\n  <body>\r\n    <p style=\"margin-top: 0\">\r\n<center>\n<h3>Akarsu Güç ve Aktarım Sistemleri</h3>\nSipariş Takip Yazılımı<br /> v1.0.22.11.13<br /><br />\nFumera Ar-Ge Yazılım<br />Müh. İml. San. ve Tic. Ltd. Şti.<br /></center>\nWeb: <a href=\"http://fumera.com.tr/\">http://fumera.com.tr</a><br />\nMail: <a href=\"mailto:info@fumera.com.tr\">info@fumera.com.tr</a>\n    </p>\r\n  </body>\r\n</html>\r\n");
         jTextPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTextPane1.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jTextPane1.setEnabled(false);
@@ -70,13 +70,11 @@ public class Fumera_Hakkinda extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tamam_kapat)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tamam_kapat)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane1)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -88,7 +86,7 @@ public class Fumera_Hakkinda extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tamam_kapat)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
