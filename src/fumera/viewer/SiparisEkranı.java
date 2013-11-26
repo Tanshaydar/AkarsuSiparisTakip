@@ -1617,7 +1617,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
         if( yeniSiparis_urunTablosu.isEditing()){
             yeniSiparis_urunTablosu.getCellEditor().stopCellEditing();
         }
-        
+
         String eksik = "";
         boolean boslukVar = false;
         if ( yeniSiparis_urunTablosu.getRowCount() != 0) {
@@ -1637,10 +1637,45 @@ new datechooser.view.appearance.ViewAppearance("custom",
             }
         }
 
-        if( boslukVar) {
-            Object[] options = {"Tamam"};
-                    JOptionPane.showOptionDialog( SiparisEkranı.this, "Ürün Bilgileri Eksik!" + eksik,
-                            "Hata!", JOptionPane.WARNING_MESSAGE, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+        String cokUzunStr = "";
+        boolean cokUzun = false;
+        
+        if(yeniSiparis_firmaAdi.getText().length() > 100) {
+            cokUzun = true;
+            cokUzunStr += "\n\r - Firma Adı";
+        }
+        if(yeniSiparis_ilgiliAdi.getText().length() > 100) {
+            cokUzun = true;
+            cokUzunStr += "\n\r - İlgili Adı";
+        }
+        if(yeniSiparis_ePosta.getText().length() > 50) {
+            cokUzun = true;
+            cokUzunStr += "\n\r - E-Posta";
+        }
+        if(yeniSiparis_telefon.getText().length() > 20) {
+            cokUzun = true;
+            cokUzunStr += "\n\r - Telefon";
+        }
+        if(yeniSiparis_gsm.getText().length() > 20) {
+            cokUzun = true;
+            cokUzunStr += "\n\r - GSM";
+        }
+        if(yeniSiparis_fax.getText().length() > 20) {
+            cokUzun = true;
+            cokUzunStr += "\n\r - Fax";
+        }
+        
+        if( boslukVar || cokUzun) {
+            if( boslukVar) {
+                Object[] options = {"Tamam"};
+                        JOptionPane.showOptionDialog( SiparisEkranı.this, "Ürün Bilgileri Eksik!" + eksik,
+                                "Hata!", JOptionPane.WARNING_MESSAGE, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+            }
+            if( cokUzun) {
+                Object[] options = {"Tamam"};
+                        JOptionPane.showOptionDialog( SiparisEkranı.this, "Girilen veri çok uzun!" + cokUzunStr,
+                                "Hata!", JOptionPane.WARNING_MESSAGE, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+            }
         } else {
             yeniSiparis_urunTablosu.revalidate();
             progressMonitor.setNote("Yeni Sipariş Alınıyor...");
@@ -1841,10 +1876,44 @@ new datechooser.view.appearance.ViewAppearance("custom",
             }
         }
         
-        if( boslukVar){
-            Object[] options = {"Tamam"};
-                    JOptionPane.showOptionDialog( SiparisEkranı.this, "Ürün Bilgileri Eksik!" + eksik,
-                            "Hata!", JOptionPane.WARNING_MESSAGE, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+        String cokUzunStr = "";
+        boolean cokUzun = false;
+        if(siparisGoruntule_firmaAdi.getText().length() > 100) {
+            cokUzun = true;
+            cokUzunStr += "\n\r - Firma Adı";
+        }
+        if(siparisGoruntule_ilgiliAdi.getText().length() > 100) {
+            cokUzun = true;
+            cokUzunStr += "\n\r - İlgili Adı";
+        }
+        if(siparisGoruntule_ePosta.getText().length() > 50) {
+            cokUzun = true;
+            cokUzunStr += "\n\r - E-Posta";
+        }
+        if(siparisGoruntule_telefon.getText().length() > 20) {
+            cokUzun = true;
+            cokUzunStr += "\n\r - Telefon";
+        }
+        if(siparisGoruntule_gsm.getText().length() > 20) {
+            cokUzun = true;
+            cokUzunStr += "\n\r - GSM";
+        }
+        if(siparisGoruntule_fax.getText().length() > 20) {
+            cokUzun = true;
+            cokUzunStr += "\n\r - Fax";
+        }
+        
+        if( boslukVar || cokUzun){
+            if( boslukVar) {
+                Object[] options = {"Tamam"};
+                        JOptionPane.showOptionDialog( SiparisEkranı.this, "Ürün Bilgileri Eksik!" + eksik,
+                                "Hata!", JOptionPane.WARNING_MESSAGE, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+            }
+            if(cokUzun) {
+                Object[] options = {"Tamam"};
+                        JOptionPane.showOptionDialog( SiparisEkranı.this, "Girilen veri çok uzun!" + cokUzunStr,
+                                "Hata!", JOptionPane.WARNING_MESSAGE, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+            }
         } else {
 
             progressMonitor.setProgress(0);

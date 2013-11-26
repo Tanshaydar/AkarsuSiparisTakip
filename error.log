@@ -26,3 +26,7 @@ java.sql.SQLException: Access denied for user 'siparis'@'193.140.224.106' (using
 com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
 
 The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+26/11/2013 17:10:16
+com.mysql.jdbc.MysqlDataTruncation: Data truncation: Data too long for column 'tel' at row 1
+26/11/2013 17:12:38
+java.sql.SQLException: Data truncated for column 'urun_durumu' at row 1
