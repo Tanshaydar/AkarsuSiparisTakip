@@ -30,3 +30,15 @@ The last packet sent successfully to the server was 0 milliseconds ago. The driv
 com.mysql.jdbc.MysqlDataTruncation: Data truncation: Data too long for column 'tel' at row 1
 26/11/2013 17:12:38
 java.sql.SQLException: Data truncated for column 'urun_durumu' at row 1
+27/11/2013 17:58:34
+java.sql.SQLException: Access denied for user 'sql27141'@'193.140.224.106' (using password: YES)
+27/11/2013 18:05:35
+java.sql.SQLException: Access denied for user 'sql27141'@'193.140.224.106' (using password: YES)
+27/11/2013 18:06:56
+java.sql.SQLException: Access denied for user 'sql27141'@'193.140.224.106' (using password: YES)
+27/11/2013 18:07:20
+java.sql.SQLException: Access denied for user 'sql27141'@'193.140.224.106' (using password: YES)
+27/11/2013 18:08:00
+java.sql.SQLException: Access denied for user 'sql27141'@'193.140.224.106' (using password: YES)
+27/11/2013 18:10:07
+java.sql.SQLException: Access denied for user 'sql27141'@'193.140.224.106' (using password: YES)

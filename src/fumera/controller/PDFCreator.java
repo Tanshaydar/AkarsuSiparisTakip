@@ -30,7 +30,13 @@
 
 package fumera.controller;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import fumera.model.Siparis;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 /**
  *
@@ -38,7 +44,21 @@ import fumera.model.Siparis;
  */
 public class PDFCreator {
     
+    private String name = "";
+    
     public PDFCreator( Siparis siparis){
+        Document document = new Document();
+        name = siparis.getSiparis_id() + "_" + siparis.getSiparis_tarih().toString();
         
+        try {
+            PdfWriter.getInstance( document, new FileOutputStream( name + ".pdf"));
+            document.open();
+            document.addAuthor("Tansel Altınel");
+            document.addCreationDate();
+            document.add( new Paragraph("Test"));
+            document.close();
+        } catch (FileNotFoundException | DocumentException e) {
+            FileLogger.hata( e.toString());
+        }
     }
 }

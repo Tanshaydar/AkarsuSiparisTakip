@@ -47,7 +47,6 @@ public class JavaConnector {
     private static final String DBuser = "sql27141";
     private static final String DBpass = "jS1*rN2%25";
     */
-
     private static final String DBaddr = "193.140.224.43:3306";
     private static final String DBname = "siparis_utf";
     private static final String DBuser = "siparis";
@@ -60,7 +59,9 @@ public class JavaConnector {
             Class.forName("com.mysql.jdbc.Driver");
             /*Connection connection = DriverManager.getConnection("jdbc:mysql://" + Settings.getDBaddress() + "/" + Settings.getDBname() 
             + "?useUnicode=true&characterEncoding=utf8", Settings.getDBuser(), Settings.getDBpassword());*/
-            Connection connection = DriverManager.getConnection("jdbc:mysql://" + DBaddr + "/" + DBname + "?useUnicode=true&characterEncoding=utf8",DBuser, DBpass);
+            Connection connection = DriverManager.getConnection("jdbc:mysql://" + DBaddr + "/" + DBname + "?useUnicode=true&characterEncoding=utf8", DBuser, DBpass);
+            
+      //       Connection connection = DriverManager.getConnection("jdbc:mysql://"+DBaddr+"/"+DBname+"?user="+DBuser+"&password="+DBpass + "?useUnicode=true&characterEncoding=utf8");
             return connection;
         } catch (ClassNotFoundException | SQLException | HeadlessException e) {
             FileLogger.hata( e.toString());
