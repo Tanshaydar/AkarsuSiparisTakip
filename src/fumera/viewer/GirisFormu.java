@@ -1,5 +1,5 @@
 /*
- * �Fumera Ar-Ge Yazılım Müh. İml. San. ve Tic. Ltd. Şti. | Copyright 2012-2013
+ * Fumera Ar-Ge Yazılım Müh. İml. San. ve Tic. Ltd. Şti. | Copyright 2012-2013
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without 
@@ -32,7 +32,9 @@ package fumera.viewer;
 
 import fumera.controller.FileLogger;
 import fumera.controller.JavaConnector;
+import fumera.controller.Settings;
 import fumera.model.User;
+import java.awt.Dialog;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
@@ -98,6 +100,7 @@ public class GirisFormu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sipariş Takip Sistemi Giriş");
         setAlwaysOnTop(true);
+        setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Giriş", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 1, 18), new java.awt.Color(51, 153, 255))); // NOI18N
 
@@ -182,8 +185,10 @@ public class GirisFormu extends javax.swing.JFrame {
         });
         jMenu2.add(girisFrameAlwaysOnTop);
 
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/server.png"))); // NOI18N
         jMenu3.setText("Sunucu");
 
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/settings_1.png"))); // NOI18N
         jMenuItem2.setText("Bağlantı Ayarları");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,7 +263,7 @@ public class GirisFormu extends javax.swing.JFrame {
                 User user = new User( resultset.getInt("user_id"), resultset.getString("username"),
                         resultset.getString("password"), resultset.getString("level"), resultset.getInt("firma"));
                 close();
-                SiparisEkranı se = new SiparisEkranı( user);
+                SiparisEkrani se = new SiparisEkrani( user);
                 se.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/viewer/icon.png")));
                 this.setVisible(false);
                 se.setLocationRelativeTo( null);
@@ -297,7 +302,7 @@ public class GirisFormu extends javax.swing.JFrame {
                     User user = new User( resultset.getInt("user_id"), resultset.getString("username"),
                         resultset.getString("password"), resultset.getString("level"), resultset.getInt("firma"));
                     close();
-                    SiparisEkranı se = new SiparisEkranı( user);
+                    SiparisEkrani se = new SiparisEkrani( user);
                     se.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/icons/favicon.png")));
                     this.setVisible(false);
                     se.setLocationRelativeTo( null);
@@ -320,17 +325,32 @@ public class GirisFormu extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
+        ServerOptions options = new ServerOptions();
+        options.setIconImage( Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/icons/settings.png")));
+        options.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        /*options.removeNotify();
+        options.setUndecorated(true);  
+        options.addNotify();*/
+        options.getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);
+        options.setModalExclusionType(Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
+        options.setAlwaysOnTop( true);
+        options.pack();
+        options.setLocationRelativeTo( GirisFormu.this);
+        options.setVisible( true);
+        options.setFields( Settings.getDBaddress(), Settings.getDBname(), Settings.getDBuser(), Settings.getDBpassword());
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
         Fumera_Hakkinda hakkinda = new Fumera_Hakkinda();
         hakkinda.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/icons/favicon.png")));
-        hakkinda.setDefaultCloseOperation(EXIT_ON_CLOSE); 
-        hakkinda.removeNotify();
+        hakkinda.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); 
+        /*hakkinda.removeNotify();
         hakkinda.setUndecorated(true);  
-        hakkinda.addNotify();
+        hakkinda.addNotify();*/
         hakkinda.getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);
+        hakkinda.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+        hakkinda.setAlwaysOnTop( true);
         hakkinda.pack();
         hakkinda.setLocationRelativeTo( GirisFormu.this);
         hakkinda.setVisible( true);

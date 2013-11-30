@@ -44,11 +44,17 @@
             </MenuItem>
             <Menu class="javax.swing.JMenu" name="jMenu3">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/fumera/icons/server.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Sunucu"/>
               </Properties>
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/fumera/icons/settings_1.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Ba&#x11f;lant&#x131; Ayarlar&#x131;"/>
                   </Properties>
                   <Events>
@@ -95,6 +101,7 @@
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="Sipari&#x15f; Takip Sistemi Giri&#x15f;"/>
     <Property name="alwaysOnTop" type="boolean" value="true"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>

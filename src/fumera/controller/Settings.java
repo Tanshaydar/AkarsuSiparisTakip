@@ -35,13 +35,15 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
 /**
  *
  * @author Tansel
  */
 public class Settings {
- 
+    
     private static final Properties settings = new Properties();
     private static final String settingsFile = "settings.fum";
     
@@ -50,16 +52,33 @@ public class Settings {
     private static final String DBuser = "DBuser";
     private static final String DBpass = "DBpass";
     
-    public Settings(){}
+    public Settings(){
+    }
+    
+    private static String encode( String str){
+        BASE64Encoder encoder = new BASE64Encoder();
+        str = new String( encoder.encodeBuffer( str.getBytes()));
+        return str;
+    }
+    private static String decode( String str){
+        BASE64Decoder decoder = new BASE64Decoder();
+        try {
+            str = new String( decoder.decodeBuffer( str));
+        } catch (Exception e) {
+            FileLogger.hata( e.toString());
+        }
+        return str;
+    }
     
     private static void checkFile(){
+
         File file = new File( settingsFile);
         if( !file.exists()){
             try {
-                settings.setProperty( DBaddress, "sql2.freesqldatabase.com");
-                settings.setProperty( DBname, "sql27141");
-                settings.setProperty( DBuser, "sql27141");
-                settings.setProperty( DBpass, "jS1*rN2%25");
+                settings.setProperty( DBaddress, encode("sql2.freesqldatabase.com"));
+                settings.setProperty( DBname, encode("sql27141"));
+                settings.setProperty( DBuser, encode("sql27141"));
+                settings.setProperty( DBpass, encode("jS1*rN2%25"));
 
                 settings.store( new FileOutputStream( settingsFile), null);
 
@@ -72,10 +91,10 @@ public class Settings {
     public static void setSettings( String address, String name, String user, String pass){
         checkFile();
         try {
-            settings.setProperty( DBaddress, address);
-            settings.setProperty( DBname, name);
-            settings.setProperty( DBuser, user);
-            settings.setProperty( DBpass, pass);
+            settings.setProperty( DBaddress, encode(address));
+            settings.setProperty( DBname, encode(name));
+            settings.setProperty( DBuser, encode(user));
+            settings.setProperty( DBpass, encode(pass));
             
             settings.store( new FileOutputStream( settingsFile), null);
             
@@ -88,7 +107,7 @@ public class Settings {
         checkFile();
         try {
             settings.load( new FileInputStream( settingsFile));
-            return settings.getProperty(DBaddress);
+            return decode(settings.getProperty(DBaddress));
         } catch (IOException e) {
             FileLogger.hata( e.toString());
         }
@@ -98,7 +117,7 @@ public class Settings {
         checkFile();
         try {
             settings.load( new FileInputStream( settingsFile));
-            return settings.getProperty(DBname);
+            return decode(settings.getProperty(DBname));
         } catch (IOException e) {
             FileLogger.hata( e.toString());
         }
@@ -108,7 +127,7 @@ public class Settings {
         checkFile();
         try {
             settings.load( new FileInputStream( settingsFile));
-            return settings.getProperty(DBuser);
+            return decode(settings.getProperty(DBuser));
         } catch (IOException e) {
             FileLogger.hata( e.toString());
         }
@@ -118,7 +137,7 @@ public class Settings {
         checkFile();
         try {
             settings.load( new FileInputStream( settingsFile));
-            return settings.getProperty(DBpass);
+            return decode(settings.getProperty(DBpass));
         } catch (IOException e) {
             FileLogger.hata( e.toString());
         }

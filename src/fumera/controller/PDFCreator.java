@@ -30,13 +30,27 @@
 
 package fumera.controller;
 
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import fumera.model.Siparis;
+import java.awt.Color;
+import java.awt.Toolkit;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -44,18 +58,88 @@ import java.io.FileOutputStream;
  */
 public class PDFCreator {
     
-    private String name = "";
-    
-    public PDFCreator( Siparis siparis){
+    public PDFCreator( Siparis siparis, String fileName, String directory){
+
+        // Text values
+        Font font;
+        BaseColor colorMagenta = new BaseColor(79, 129, 189);
+        BaseColor colorGrey = new BaseColor(153, 153, 153);
+        
+        // File
+        System.out.println(directory + File.separator + fileName + ".pdf");
+        
+        // Document
         Document document = new Document();
-        name = siparis.getSiparis_id() + "_" + siparis.getSiparis_tarih().toString();
         
         try {
-            PdfWriter.getInstance( document, new FileOutputStream( name + ".pdf"));
+            //////////////////////
+            PdfWriter.getInstance( document, new FileOutputStream( directory + File.separator + fileName + ".pdf"));
             document.open();
-            document.addAuthor("Tansel Altınel");
+            document.addAuthor("Mustafa Akarsu");
             document.addCreationDate();
-            document.add( new Paragraph("Test"));
+            
+            /////////////////////
+            // HEADER
+            PdfPTable headerTable = new PdfPTable( 2);
+            font = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL, colorGrey);
+            Image image = null;
+            try {
+                image = Image.getInstance( getClass().getResource("/fumera/icons/logo/logo.png"));
+                image.scaleAbsolute(333f, 100f);
+            } catch (    BadElementException | IOException e) {
+                FileLogger.hata( e.toString());
+                System.out.println( e.toString());
+            }
+            PdfPCell imageCell = new PdfPCell( image);
+            imageCell.setHorizontalAlignment( Element.ALIGN_LEFT);
+            imageCell.setBorder( Rectangle.NO_BORDER);
+            PdfPCell contactCell = new PdfPCell( new Paragraph("info@akarsuguc.com.tr\r\nwww.akarsuguc.com.tr", font));
+            contactCell.setHorizontalAlignment( Element.ALIGN_RIGHT);
+            contactCell.setBorder( Rectangle.NO_BORDER);
+            headerTable.addCell( imageCell);
+            headerTable.addCell( contactCell);
+            /////////////////////
+            /////////////////////
+            // Firma Bilgileri
+            
+            /////////////////////
+            /////////////////////
+            // Tarih
+            
+            /////////////////////
+            /////////////////////
+            // Teklif veya Sipariş
+            
+            /////////////////////
+            /////////////////////
+            // Ürünler
+            
+            /////////////////////
+            /////////////////////
+            // Teklif / Sipariş Bilgileri & Toplam vs
+            
+            /////////////////////
+            /////////////////////
+            // Yalnız: bilmem kaç lira
+            
+            /////////////////////
+            /////////////////////
+            // Saygılarımla vs
+            
+            /////////////////////
+            /////////////////////
+            // Adres
+            PdfPTable footerTable = new PdfPTable( 1);
+            font = new Font(Font.FontFamily.TIMES_ROMAN, 11, Font.NORMAL, colorMagenta);
+            String address = "1233 Sokak ( Eski 56 Sok. ) No:86 Ostim OSB / Ankara\r\n" +
+                            "Telefon : 0312 385 32 37 - 385 32 38 Fax : 0312 386 35 49";
+            PdfPCell footerCell = new PdfPCell( new Paragraph(address, font));
+            footerCell.setHorizontalAlignment( Element.ALIGN_CENTER);
+            footerCell.setBorder( Rectangle.NO_BORDER);
+            footerTable.addCell( footerCell);
+            /////////////////////
+            document.add( headerTable);
+            document.add( footerTable);
             document.close();
         } catch (FileNotFoundException | DocumentException e) {
             FileLogger.hata( e.toString());

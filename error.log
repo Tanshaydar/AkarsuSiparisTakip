@@ -1,44 +1,6 @@
-16/11/2013 17:06:04
-java.sql.SQLException: Access denied for user 'sql27141'@'193.140.224.106' (using password: NO)
-16/11/2013 17:06:12
-java.sql.SQLException: Access denied for user 'sql27141'@'193.140.224.106' (using password: NO)
-21/11/2013 19:33:15
-com.microsoft.sqlserver.jdbc.SQLServerException: The TCP/IP connection to the host 192.168.0.111, port 3306 has failed. Error: "The driver received an unexpected pre-login response. Verify the connection properties and check that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. This driver can be used only with SQL Server 2000 or later.". ClientConnectionId:c8ad599f-b820-4e54-8d23-9e1d9e811ca2
-22/11/2013 10:08:26
-com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
-
-The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
-22/11/2013 10:11:08
-com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
-
-The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
-22/11/2013 13:23:15
-java.io.FileNotFoundException: settings.fum (The system cannot find the file specified)
-22/11/2013 13:23:15
-java.io.FileNotFoundException: settings.fum (The system cannot find the file specified)
-22/11/2013 13:23:17
-com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
-
-The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
-22/11/2013 14:10:50
-java.sql.SQLException: Access denied for user 'siparis'@'193.140.224.106' (using password: YES)
-22/11/2013 15:05:28
-com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
-
-The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
-26/11/2013 17:10:16
-com.mysql.jdbc.MysqlDataTruncation: Data truncation: Data too long for column 'tel' at row 1
-26/11/2013 17:12:38
-java.sql.SQLException: Data truncated for column 'urun_durumu' at row 1
-27/11/2013 17:58:34
-java.sql.SQLException: Access denied for user 'sql27141'@'193.140.224.106' (using password: YES)
-27/11/2013 18:05:35
-java.sql.SQLException: Access denied for user 'sql27141'@'193.140.224.106' (using password: YES)
-27/11/2013 18:06:56
-java.sql.SQLException: Access denied for user 'sql27141'@'193.140.224.106' (using password: YES)
-27/11/2013 18:07:20
-java.sql.SQLException: Access denied for user 'sql27141'@'193.140.224.106' (using password: YES)
-27/11/2013 18:08:00
-java.sql.SQLException: Access denied for user 'sql27141'@'193.140.224.106' (using password: YES)
-27/11/2013 18:10:07
-java.sql.SQLException: Access denied for user 'sql27141'@'193.140.224.106' (using password: YES)
+30/11/2013 18:11:20
+java.sql.SQLException: Access denied for user 'sql27141'@'epo.ebb.hun.edu.tr' (using password: YES)
+30/11/2013 19:58:35
+java.sql.SQLException: Access denied for user 'sql27141'@'epo.ebb.hun.edu.tr' (using password: YES)
+30/11/2013 21:29:20
+java.io.FileNotFoundException: C:\fumera\icons\logo\logo.png (The system cannot find the path specified)
