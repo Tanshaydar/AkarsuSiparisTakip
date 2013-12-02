@@ -1,5 +1,5 @@
 /*
- * Fumera Ar-Ge Yaz�l�m M�h. �ml. San. ve Tic. Ltd. �ti. | Copyright 2012-2013
+ * Fumera Ar-Ge Yazılım Müh. İml. San. ve Tic. Ltd. Şti. | Copyright 2012-2013
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without 
@@ -134,6 +134,7 @@ public class UserInformation extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(levelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -147,22 +148,16 @@ public class UserInformation extends javax.swing.JFrame {
                             .addComponent(kullaniciSIFRE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(kullaniciADI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(kullaniciISMI, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(levelInfo)
-                            .addComponent(kullaniciSEVIYE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(iptal)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(kullaniciDuzenle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(kullaniciKaydet))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(0, 0, 0)))
-                        .addContainerGap())))
+                            .addComponent(kullaniciSEVIYE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 78, Short.MAX_VALUE)
+                        .addComponent(iptal)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(kullaniciDuzenle)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(kullaniciKaydet))
+                    .addComponent(jLabel7))
+                .addContainerGap())
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel4, jLabel6});
@@ -235,19 +230,19 @@ public class UserInformation extends javax.swing.JFrame {
         */
         switch( kullaniciSEVIYE.getSelectedIndex()){
             case 1:
-                levelInfo.setText("");
+                levelInfo.setText("Tüm Kullanıcı ve Sipariş bilgilerini düzenleyebilir.");
                 break;
             case 2:
-                levelInfo.setText("");
+                levelInfo.setText("Sipariş ekleme ve düzenleme yapabilir.");
                 break;
             case 3:
-                levelInfo.setText("");
+                levelInfo.setText("Sipariş ekleyip kendi siparişlerini düzenleyebilir.");
                 break;
             case 4:
-                levelInfo.setText("");
+                levelInfo.setText("Sipariş bilgilerini görüntüleyip çıktı alabilir.");
                 break;
             case 5:
-                levelInfo.setText("");
+                levelInfo.setText("Demo: Demo sürüm haklarına sahiptir.");
                 break;
         }
     }//GEN-LAST:event_kullaniciSEVIYEItemStateChanged

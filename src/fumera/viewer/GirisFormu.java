@@ -39,10 +39,17 @@ import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 
@@ -183,18 +190,22 @@ public class GirisFormu extends javax.swing.JFrame {
 
         KullaniciEkle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/add_user.png"))); // NOI18N
         KullaniciEkle.setText("Kullanıcı Ekle");
+        KullaniciEkle.setEnabled(false);
         Kullanicilar.add(KullaniciEkle);
 
         KullaniciDuzenle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/edit_user.png"))); // NOI18N
         KullaniciDuzenle.setText("Kullanıcı Düzenle");
+        KullaniciDuzenle.setEnabled(false);
         Kullanicilar.add(KullaniciDuzenle);
 
         MevcutKullanici.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/mevcut_kullanici.png"))); // NOI18N
         MevcutKullanici.setText("Mevcut Kullanıcı");
+        MevcutKullanici.setEnabled(false);
         Kullanicilar.add(MevcutKullanici);
 
         KullaniciStatistics.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/kullanici_istatistikleri.png"))); // NOI18N
         KullaniciStatistics.setText("Kullanıcı İstatistikleri");
+        KullaniciStatistics.setEnabled(false);
         Kullanicilar.add(KullaniciStatistics);
 
         jMenuBar1.add(Kullanicilar);
@@ -236,6 +247,11 @@ public class GirisFormu extends javax.swing.JFrame {
 
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/guncelleme.png"))); // NOI18N
         jMenuItem3.setText("Güncellemeleri Denetle");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         Yardim.add(jMenuItem3);
 
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/hatabildir.png"))); // NOI18N
@@ -399,9 +415,24 @@ public class GirisFormu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void girisFrameAlwaysOnTopItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_girisFrameAlwaysOnTopItemStateChanged
-        // TODO add your handling code here:
         GirisFormu.this.setAlwaysOnTop( girisFrameAlwaysOnTop.getState());
     }//GEN-LAST:event_girisFrameAlwaysOnTopItemStateChanged
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        try {
+            URL update = new URL("http://www.fumera.com.tr/dosyalar/siparis_takip_1.txt");
+            BufferedReader in = new BufferedReader( new InputStreamReader( update.openStream()));
+            String inputLine;
+            while( ( inputLine = in.readLine()) != null ) {
+                System.out.println( inputLine);
+            }
+            in.close();
+        } catch ( IOException e) {
+            FileLogger.hata(e.toString());
+        }
+        
+        
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     public void close(){
         WindowEvent windowClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);

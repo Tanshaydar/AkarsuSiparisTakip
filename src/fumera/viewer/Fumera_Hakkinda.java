@@ -30,6 +30,8 @@
 
 package fumera.viewer;
 
+import fumera.controller.Information;
+
 /**
  *
  * @author Tansel
@@ -43,6 +45,18 @@ public class Fumera_Hakkinda extends javax.swing.JFrame {
         initComponents();
     }
 
+    private String aboutText(){
+        String about = "<html>\r\n  <head>\r\n\r\n  </head>\r\n  <body>\r\n    "
+                + "<p style=\"margin-top: 0\">\r\n<center>\n<h3>Akarsu Güç ve "
+                + "Aktarım Sistemleri</h3>\nSipariş Takip Yazılımı<br /> "
+                + Information.version
+                + "<br /><br />\nFumera Ar-Ge Yazılım<br />"
+                + "Müh. İml. San. ve Tic. Ltd. Şti.<br /></center>\n"
+                + "Web: <a href=\"http://fumera.com.tr/\">http://fumera.com.tr</a>"
+                + "<br />\nMail: <a href=\"mailto:info@fumera.com.tr\">"
+                + "info@fumera.com.tr</a>\n    </p>\r\n  </body>\r\n</html>\r\n";
+        return about;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -79,7 +93,7 @@ public class Fumera_Hakkinda extends javax.swing.JFrame {
         jTextPane1.setEditable(false);
         jTextPane1.setBackground(new java.awt.Color(240, 240, 240));
         jTextPane1.setContentType("text/html"); // NOI18N
-        jTextPane1.setText("<html>\r\n  <head>\r\n\r\n  </head>\r\n  <body>\r\n    <p style=\"margin-top: 0\">\r\n<center>\n<h3>Akarsu Güç ve Aktarım Sistemleri</h3>\nSipariş Takip Yazılımı<br /> v1.0.01.12.13<br /><br />\nFumera Ar-Ge Yazılım<br />Müh. İml. San. ve Tic. Ltd. Şti.<br /></center>\nWeb: <a href=\"http://fumera.com.tr/\">http://fumera.com.tr</a><br />\nMail: <a href=\"mailto:info@fumera.com.tr\">info@fumera.com.tr</a>\n    </p>\r\n  </body>\r\n</html>\r\n");
+        jTextPane1.setText(aboutText());
         jTextPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTextPane1.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jTextPane1.setEnabled(false);
