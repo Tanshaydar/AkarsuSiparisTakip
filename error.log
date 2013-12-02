@@ -4,3 +4,13 @@ java.sql.SQLException: Access denied for user 'sql27141'@'epo.ebb.hun.edu.tr' (u
 java.sql.SQLException: Access denied for user 'sql27141'@'epo.ebb.hun.edu.tr' (using password: YES)
 30/11/2013 21:29:20
 java.io.FileNotFoundException: C:\fumera\icons\logo\logo.png (The system cannot find the path specified)
+02/12/2013 16:00:55
+com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+02/12/2013 16:03:48
+java.sql.SQLException: Access denied for user 'sql27141'@'epo.ebb.hun.edu.tr' (using password: YES)
+02/12/2013 16:07:35
+com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.

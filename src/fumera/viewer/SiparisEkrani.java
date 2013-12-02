@@ -41,6 +41,7 @@ import fumera.model.Urun;
 import fumera.model.User;
 import java.awt.Dialog;
 import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.DefaultCellEditor;
@@ -445,7 +446,7 @@ public class SiparisEkrani extends javax.swing.JFrame {
         Dosya = new javax.swing.JMenu();
         Yazdir = new javax.swing.JMenuItem();
         PDF = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        cikisYap = new javax.swing.JMenuItem();
         Cikis = new javax.swing.JMenuItem();
         Kullanicilar = new javax.swing.JMenu();
         KullaniciEkle = new javax.swing.JMenuItem();
@@ -458,6 +459,8 @@ public class SiparisEkrani extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         Yardim = new javax.swing.JMenu();
         YardimSeysi = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         Hakkinda = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1661,10 +1664,15 @@ new datechooser.view.appearance.ViewAppearance("custom",
     });
     Dosya.add(PDF);
 
-    jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK));
-    jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/disabled.png"))); // NOI18N
-    jMenuItem2.setText("Hesaptan Çıkış Yap");
-    Dosya.add(jMenuItem2);
+    cikisYap.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK));
+    cikisYap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/disabled.png"))); // NOI18N
+    cikisYap.setText("Hesaptan Çıkış Yap");
+    cikisYap.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            cikisYapActionPerformed(evt);
+        }
+    });
+    Dosya.add(cikisYap);
 
     Cikis.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
     Cikis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/exit.png"))); // NOI18N
@@ -1682,6 +1690,11 @@ new datechooser.view.appearance.ViewAppearance("custom",
 
     KullaniciEkle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/add_user.png"))); // NOI18N
     KullaniciEkle.setText("Kullanıcı Ekle");
+    KullaniciEkle.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            KullaniciEkleActionPerformed(evt);
+        }
+    });
     Kullanicilar.add(KullaniciEkle);
 
     KullaniciDuzenle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/edit_user.png"))); // NOI18N
@@ -1690,6 +1703,11 @@ new datechooser.view.appearance.ViewAppearance("custom",
 
     MevcutKullanici.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/mevcut_kullanici.png"))); // NOI18N
     MevcutKullanici.setText("Mevcut Kullanıcı");
+    MevcutKullanici.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            MevcutKullaniciActionPerformed(evt);
+        }
+    });
     Kullanicilar.add(MevcutKullanici);
 
     KullaniciStatistics.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/kullanici_istatistikleri.png"))); // NOI18N
@@ -1739,6 +1757,14 @@ new datechooser.view.appearance.ViewAppearance("custom",
     });
     Yardim.add(YardimSeysi);
 
+    jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/guncelleme.png"))); // NOI18N
+    jMenuItem3.setText("Güncellemeleri Denetle");
+    Yardim.add(jMenuItem3);
+
+    jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/hatabildir.png"))); // NOI18N
+    jMenuItem6.setText("Hata Bildir");
+    Yardim.add(jMenuItem6);
+
     Hakkinda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/favicon.png"))); // NOI18N
     Hakkinda.setText("Hakkında");
     Hakkinda.addActionListener(new java.awt.event.ActionListener() {
@@ -1779,13 +1805,9 @@ new datechooser.view.appearance.ViewAppearance("custom",
 
     private void HakkindaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HakkindaActionPerformed
         // TODO add your handling code here:
-
         Fumera_Hakkinda hakkinda = new Fumera_Hakkinda();
         hakkinda.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/icons/favicon.png")));
         hakkinda.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); 
-        /*hakkinda.removeNotify();
-        hakkinda.setUndecorated(true);  
-        hakkinda.addNotify();*/
         hakkinda.getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);
         hakkinda.pack();
         hakkinda.setLocationRelativeTo( SiparisEkrani.this);
@@ -2468,6 +2490,39 @@ new datechooser.view.appearance.ViewAppearance("custom",
         options.setFields( Settings.getDBaddress(), Settings.getDBname(), Settings.getDBuser(), Settings.getDBpassword());
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void cikisYapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cikisYapActionPerformed
+        // TODO add your handling code here:
+        GirisFormu gf = new GirisFormu();
+        gf.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/icons/favicon.png")));
+        this.setVisible(false);
+        gf.setLocationRelativeTo( null);
+        gf.setVisible( true);
+        this.dispose();
+    }//GEN-LAST:event_cikisYapActionPerformed
+
+    private void KullaniciEkleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KullaniciEkleActionPerformed
+        // TODO add your handling code here:
+        UserInformation userInformation = new UserInformation();
+        userInformation.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/icons/add_user.png")));
+        userInformation.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); 
+        userInformation.getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);
+        userInformation.pack();
+        userInformation.setLocationRelativeTo( SiparisEkrani.this);
+        userInformation.setVisible( true);
+    }//GEN-LAST:event_KullaniciEkleActionPerformed
+
+    private void MevcutKullaniciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MevcutKullaniciActionPerformed
+        // TODO add your handling code here:
+        UserInformation userInformation = new UserInformation();
+        userInformation.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/icons/mevcut_kullanici.png")));
+        userInformation.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); 
+        userInformation.getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);
+        userInformation.pack();
+        userInformation.setLocationRelativeTo( SiparisEkrani.this);
+        userInformation.enableEdit( false);
+        userInformation.setVisible( true);
+    }//GEN-LAST:event_MevcutKullaniciActionPerformed
+
     private void siparisGoruntule( int id, int type){
         
         Siparis siparis = null;
@@ -2590,6 +2645,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
     private javax.swing.JScrollPane aktifSiparisScrollPane;
     private javax.swing.JTable aktifSiparis_tablosu;
     private javax.swing.JPanel aktifSiparislerPaneli;
+    private javax.swing.JMenuItem cikisYap;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -2619,7 +2675,8 @@ new datechooser.view.appearance.ViewAppearance("custom",
     private javax.swing.JLabel jLabel40;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane8;

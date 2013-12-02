@@ -43,7 +43,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 
@@ -87,14 +86,21 @@ public class GirisFormu extends javax.swing.JFrame {
         cmd_login = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        Dosya = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        Kullanicilar = new javax.swing.JMenu();
+        KullaniciEkle = new javax.swing.JMenuItem();
+        KullaniciDuzenle = new javax.swing.JMenuItem();
+        MevcutKullanici = new javax.swing.JMenuItem();
+        KullaniciStatistics = new javax.swing.JMenuItem();
+        Ayarlar = new javax.swing.JMenu();
         girisFrameAlwaysOnTop = new javax.swing.JCheckBoxMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
+        Yardim = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -159,7 +165,7 @@ public class GirisFormu extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/logo/logo.png"))); // NOI18N
 
-        jMenu1.setText("Dosya");
+        Dosya.setText("Dosya");
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/exit.png"))); // NOI18N
@@ -169,11 +175,31 @@ public class GirisFormu extends javax.swing.JFrame {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        Dosya.add(jMenuItem1);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(Dosya);
 
-        jMenu2.setText("Ayarlar");
+        Kullanicilar.setText("Kullanıcılar");
+
+        KullaniciEkle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/add_user.png"))); // NOI18N
+        KullaniciEkle.setText("Kullanıcı Ekle");
+        Kullanicilar.add(KullaniciEkle);
+
+        KullaniciDuzenle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/edit_user.png"))); // NOI18N
+        KullaniciDuzenle.setText("Kullanıcı Düzenle");
+        Kullanicilar.add(KullaniciDuzenle);
+
+        MevcutKullanici.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/mevcut_kullanici.png"))); // NOI18N
+        MevcutKullanici.setText("Mevcut Kullanıcı");
+        Kullanicilar.add(MevcutKullanici);
+
+        KullaniciStatistics.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/kullanici_istatistikleri.png"))); // NOI18N
+        KullaniciStatistics.setText("Kullanıcı İstatistikleri");
+        Kullanicilar.add(KullaniciStatistics);
+
+        jMenuBar1.add(Kullanicilar);
+
+        Ayarlar.setText("Ayarlar");
 
         girisFrameAlwaysOnTop.setSelected(true);
         girisFrameAlwaysOnTop.setText("En Önde Tut");
@@ -183,7 +209,7 @@ public class GirisFormu extends javax.swing.JFrame {
                 girisFrameAlwaysOnTopItemStateChanged(evt);
             }
         });
-        jMenu2.add(girisFrameAlwaysOnTop);
+        Ayarlar.add(girisFrameAlwaysOnTop);
 
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/server.png"))); // NOI18N
         jMenu3.setText("Sunucu");
@@ -197,16 +223,24 @@ public class GirisFormu extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem2);
 
-        jMenu2.add(jMenu3);
+        Ayarlar.add(jMenu3);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(Ayarlar);
 
-        jMenu4.setText("Yardım");
+        Yardim.setText("Yardım");
 
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.ALT_MASK));
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/yardim.png"))); // NOI18N
         jMenuItem4.setText("Yardım");
-        jMenu4.add(jMenuItem4);
+        Yardim.add(jMenuItem4);
+
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/guncelleme.png"))); // NOI18N
+        jMenuItem3.setText("Güncellemeleri Denetle");
+        Yardim.add(jMenuItem3);
+
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/hatabildir.png"))); // NOI18N
+        jMenuItem6.setText("Hata Bildir");
+        Yardim.add(jMenuItem6);
 
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/favicon.png"))); // NOI18N
         jMenuItem5.setText("Hakkında");
@@ -215,9 +249,9 @@ public class GirisFormu extends javax.swing.JFrame {
                 jMenuItem5ActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem5);
+        Yardim.add(jMenuItem5);
 
-        jMenuBar1.add(jMenu4);
+        jMenuBar1.add(Yardim);
 
         setJMenuBar(jMenuBar1);
 
@@ -307,11 +341,14 @@ public class GirisFormu extends javax.swing.JFrame {
                     this.setVisible(false);
                     se.setLocationRelativeTo( null);
                     se.setVisible( true);
+                    this.dispose();
 
+                } else {
+                    JOptionPane.showMessageDialog( GirisFormu.this, "Kullanıcı adı ya da şifre hatalı!");
                 }
             } catch (SQLException | HeadlessException e) {
                 FileLogger.hata( e.toString());
-                JOptionPane.showMessageDialog( GirisFormu.this, "Kullanıcı adı ya da şifre hatalı!");
+                JOptionPane.showMessageDialog( GirisFormu.this, "Bağlantı Hatası!");
             } finally {
                 try {
                     resultset.close();
@@ -410,20 +447,27 @@ public class GirisFormu extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu Ayarlar;
+    private javax.swing.JMenu Dosya;
+    private javax.swing.JMenuItem KullaniciDuzenle;
+    private javax.swing.JMenuItem KullaniciEkle;
+    private javax.swing.JMenuItem KullaniciStatistics;
+    private javax.swing.JMenu Kullanicilar;
+    private javax.swing.JMenuItem MevcutKullanici;
+    private javax.swing.JMenu Yardim;
     private javax.swing.JButton cmd_login;
     private javax.swing.JCheckBoxMenuItem girisFrameAlwaysOnTop;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField password_field;
     private javax.swing.JTextField username_field;
