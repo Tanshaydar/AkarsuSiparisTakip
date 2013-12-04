@@ -83,13 +83,16 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="KullaniciEkleActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="KullaniciDuzenle">
+            <MenuItem class="javax.swing.JMenuItem" name="KullaniciListesi">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/fumera/icons/edit_user.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Kullan&#x131;c&#x131; D&#xfc;zenle"/>
+                <Property name="text" type="java.lang.String" value="Kullan&#x131;c&#x131; Listesi"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="KullaniciListesiActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="MevcutKullanici">
               <Properties>
@@ -174,15 +177,18 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="YardimSeysiActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
+            <MenuItem class="javax.swing.JMenuItem" name="guncellemeDenetle">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/fumera/icons/guncelleme.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="G&#xfc;ncellemeleri Denetle"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guncellemeDenetleActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
+            <MenuItem class="javax.swing.JMenuItem" name="hataBildir">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/fumera/icons/hatabildir.png"/>
@@ -236,7 +242,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="siparisSekmeleri" alignment="0" pref="774" max="32767" attributes="0"/>
+          <Component id="siparisSekmeleri" alignment="0" pref="633" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -960,7 +966,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane9" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPane9" alignment="0" pref="271" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -2534,7 +2540,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane11" alignment="0" pref="412" max="32767" attributes="0"/>
+                      <Component id="jScrollPane11" alignment="0" pref="271" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>

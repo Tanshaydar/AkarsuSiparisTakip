@@ -30,6 +30,14 @@
 
 package fumera.viewer;
 
+import fumera.controller.Information;
+import fumera.controller.JavaDBtoObj;
+import fumera.model.User;
+import java.awt.Toolkit;
+import javax.swing.JOptionPane;
+import javax.swing.JRootPane;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+
 /**
  *
  * @author Tansel
@@ -39,16 +47,47 @@ public class UserInformation extends javax.swing.JFrame {
     /**
      * Creates new form UserInformation
      */
+    
+    private int userID = 0;
+    
     public UserInformation() {
         initComponents();
+        kullaniciSEVIYE.setSelectedIndex(2);
+        if( Information.getUserLevel() != 1)
+            kullaniciSEVIYE.setEnabled( false);
+    }
+    
+    public UserInformation( User user) {
+        initComponents();
+        kullaniciSEVIYE.setSelectedIndex(2);
+        userID = user.getUserID();
+        setInfo( user);
+        if( Information.getUserLevel() != 1)
+            kullaniciSEVIYE.setEnabled( false);
+    }
+    
+    private void setInfo( User user){
+        kullaniciISMI.setText( user.getUserRealName());
+        kullaniciADI.setText( user.getUserName());
+        kullaniciSEVIYE.setSelectedIndex( user.getUserLevelInt() - 1);
+        kullaniciSIFRE.setText( user.getUserPass());
+        kullaniciSIFREtekrar.setText( user.getUserPass());
     }
     
     public void enableEdit( boolean editable){
         kullaniciADI.setEditable(editable);
         kullaniciISMI.setEditable(editable);
-        kullaniciSEVIYE.setEnabled(editable);
+        if( Information.getUserLevel() == 1)
+            kullaniciSEVIYE.setEnabled(editable);
         kullaniciSIFRE.setEditable(editable);
         kullaniciSIFREtekrar.setEditable(editable);
+        kullaniciKaydet.setEnabled( editable);
+    }
+    
+    public void setButtonText(){
+        kullaniciKaydet.setText("Kaydet");
+        kullaniciDuzenle.setEnabled( false);
+        kullaniciKaydet.setEnabled( true);
     }
 
     /**
@@ -110,9 +149,19 @@ public class UserInformation extends javax.swing.JFrame {
 
         kullaniciKaydet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/save.png"))); // NOI18N
         kullaniciKaydet.setText("Güncelle");
+        kullaniciKaydet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kullaniciKaydetActionPerformed(evt);
+            }
+        });
 
         kullaniciDuzenle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/edit.png"))); // NOI18N
         kullaniciDuzenle.setText("Düzenle");
+        kullaniciDuzenle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kullaniciDuzenleActionPerformed(evt);
+            }
+        });
 
         iptal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/disabled.png"))); // NOI18N
         iptal.setText("İptal");
@@ -132,37 +181,42 @@ public class UserInformation extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(101, 101, 101)
+                .addComponent(iptal)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(kullaniciDuzenle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(kullaniciKaydet)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(levelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(kullaniciSIFREtekrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(kullaniciSIFRE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(kullaniciADI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(kullaniciISMI, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(kullaniciSEVIYE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 78, Short.MAX_VALUE)
-                        .addComponent(iptal)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(kullaniciDuzenle)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(kullaniciKaydet))
-                    .addComponent(jLabel7))
-                .addContainerGap())
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(kullaniciSIFRE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(kullaniciSEVIYE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(kullaniciSIFREtekrar)
+                                    .addComponent(kullaniciADI)
+                                    .addComponent(kullaniciISMI)))
+                            .addComponent(jLabel7))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(levelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(10, 10, 10))))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel4, jLabel6});
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {kullaniciADI, kullaniciISMI, kullaniciSIFRE, kullaniciSIFREtekrar});
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {iptal, kullaniciDuzenle, kullaniciKaydet});
 
@@ -229,23 +283,65 @@ public class UserInformation extends javax.swing.JFrame {
             Demo
         */
         switch( kullaniciSEVIYE.getSelectedIndex()){
-            case 1:
+            case 0:
                 levelInfo.setText("Tüm Kullanıcı ve Sipariş bilgilerini düzenleyebilir.");
                 break;
-            case 2:
+            case 1:
                 levelInfo.setText("Sipariş ekleme ve düzenleme yapabilir.");
                 break;
-            case 3:
+            case 2:
                 levelInfo.setText("Sipariş ekleyip kendi siparişlerini düzenleyebilir.");
                 break;
-            case 4:
+            case 3:
                 levelInfo.setText("Sipariş bilgilerini görüntüleyip çıktı alabilir.");
                 break;
-            case 5:
+            case 4:
                 levelInfo.setText("Demo: Demo sürüm haklarına sahiptir.");
                 break;
         }
     }//GEN-LAST:event_kullaniciSEVIYEItemStateChanged
+
+    private void kullaniciKaydetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kullaniciKaydetActionPerformed
+        // TODO add your handling code here:
+        if( kullaniciKaydet.getText().equals("Kaydet") ) {
+            if( kullaniciSIFRE.getText().equals( kullaniciSIFREtekrar.getText())) {
+                User userCurrent = new User( userID, kullaniciISMI.getText(),
+                        kullaniciADI.getText(), kullaniciSIFRE.getText(), kullaniciSEVIYE.getSelectedIndex(), 0);
+                userCurrent.setUserLevel( kullaniciSEVIYE.getSelectedIndex());
+                JavaDBtoObj.inserYeniUserToDB(userCurrent);
+                iptalActionPerformed( null);
+                UserList userList = new UserList();
+                userList.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/icons/edit_user.png")));
+                userList.setDefaultCloseOperation(DISPOSE_ON_CLOSE); 
+                userList.getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);
+                userList.pack();
+                userList.setLocationRelativeTo( null);
+                userList.setVisible( true);
+            } else {
+                Object[] options = {"Tamam"};
+                JOptionPane.showOptionDialog( UserInformation.this, "İki şifre birbirinden farklı!", "Şifre", JOptionPane.WARNING_MESSAGE,
+                        JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+            }
+        } else {
+            if( kullaniciSIFRE.getText().equals( kullaniciSIFREtekrar.getText())) {
+                User userCurrent = new User( userID, kullaniciISMI.getText(),
+                        kullaniciADI.getText(), kullaniciSIFRE.getText(), kullaniciSEVIYE.getSelectedIndex(), 0);
+                userCurrent.setUserLevel( kullaniciSEVIYE.getSelectedIndex());
+                JavaDBtoObj.updateUserToDB(userCurrent);
+                iptalActionPerformed( null);
+            } else {
+                Object[] options = {"Tamam"};
+                JOptionPane.showOptionDialog( UserInformation.this, "İki şifre birbirinden farklı!", "Şifre", JOptionPane.WARNING_MESSAGE,
+                        JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+            }
+        }
+        
+    }//GEN-LAST:event_kullaniciKaydetActionPerformed
+
+    private void kullaniciDuzenleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kullaniciDuzenleActionPerformed
+        // TODO add your handling code here:
+        enableEdit( true);
+    }//GEN-LAST:event_kullaniciDuzenleActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

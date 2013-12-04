@@ -33,6 +33,7 @@ package fumera.controller;
 import fumera.model.Firma;
 import fumera.model.Siparis;
 import fumera.model.Urun;
+import fumera.model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -122,7 +123,6 @@ public class JavaDBtoObj {
         return siparisListesi;
     }
     
-
     public static void insertYeniSiparisToDB( Siparis siparis, int durum){
         Connection connection = JavaConnector.ConnectDB();
         ResultSet resultsetLastId = null;
@@ -132,8 +132,8 @@ public class JavaDBtoObj {
         try {
 
             statement = connection.prepareStatement( "INSERT INTO " + JavaConnector.DBname() + ".siparis "
-                    + "( siparis_id, siparisi_isteyen, siparisi_alan, durum, aciklama, siparis_tarih, istenen_tarih, bitis_tarih, toplam) VALUES"
-                    + "(?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+                    + "( siparis_id, siparisi_isteyen, siparisi_alan, durum, aciklama, siparis_tarih, istenen_tarih, bitis_tarih, toplam, user_id) VALUES"
+                    + "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             statement.setNull(1, java.sql.Types.INTEGER);
             statement.setString(2, siparis.getSiparisi_isteyen());
             statement.setString(3, siparis.getSiparisi_alan());
@@ -147,6 +147,7 @@ public class JavaDBtoObj {
                     siparis.getSiparis_istenen_tarih().getMonth(), siparis.getSiparis_istenen_tarih().getDay()));
             statement.setNull(8, java.sql.Types.DATE);
             statement.setDouble(9, siparis.getToplam());
+            statement.setInt( 10, Information.getUserID());
             
             statement.executeUpdate();
             resultsetLastId = statement.getGeneratedKeys();
@@ -288,7 +289,7 @@ public class JavaDBtoObj {
         // ÖNCE SİL
         try {
             statement = connection.prepareStatement( "DELETE FROM urun WHERE urun.siparis_id=?;");
-            statement.setInt(1, siparis.getSiparis_id());           
+            statement.setInt(1, siparis.getSiparis_id());
             statement.executeUpdate();
         } catch (SQLException e) {
             FileLogger.hata( e.toString());
@@ -353,5 +354,103 @@ public class JavaDBtoObj {
                 FileLogger.hata( e.toString());
             }
         }
+    }
+    
+    public static void inserYeniUserToDB( User user){
+        Connection connection = JavaConnector.ConnectDB();
+        PreparedStatement statement = null;
+        
+        try {
+            statement = connection.prepareStatement("INSERT INTO " + JavaConnector.DBname() + ".users "
+                    + "(user_id, userRealName, username, password, level, firma) VALUES ( ?, ?, ?, ?, ?, ?)");
+            statement.setNull( 1, java.sql.Types.INTEGER);
+            statement.setString( 2, user.getUserRealName());
+            statement.setString( 3, user.getUserName());
+            statement.setString( 4, user.getUserPass());
+            statement.setString( 5, user.getUserLevel());
+            System.out.println("Level: " + user.getUserLevelInt());
+            statement.setInt( 6, 0);
+            statement.executeUpdate();
+       } catch (SQLException e) {
+           FileLogger.hata( e.toString());
+           JOptionPane.showMessageDialog(null, e);
+        } finally{
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                FileLogger.hata( e.toString());
+            }
+        }
+    }
+    public static void updateUserToDB( User user){
+        Connection connection = JavaConnector.ConnectDB();
+        PreparedStatement statement = null;
+        
+        try {
+            statement = connection.prepareStatement("UPDATE " + JavaConnector.DBname() + ".users"
+                    + " SET userRealName=?, username=?, password=?, level=? WHERE users.user_id=?;");
+            statement.setString( 1, user.getUserRealName());
+            statement.setString( 2, user.getUserName());
+            statement.setString( 3, user.getUserPass());
+            statement.setInt(4, user.getUserLevelInt());
+            System.out.println("Level: " + user.getUserLevelInt());
+            statement.setInt( 5, user.getUserID());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            FileLogger.hata( e.toString());
+           JOptionPane.showMessageDialog(null, e);
+        } finally {
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                FileLogger.hata( e.toString());
+            }
+        }
+    }
+    public static void UserSil( int userID){
+        Connection connection = JavaConnector.ConnectDB();
+        PreparedStatement statement = null;
+        
+        try {
+            statement = connection.prepareStatement( "DELETE FROM " + JavaConnector.DBname() + ".users WHERE users.user_id=?;");
+            statement.setInt(1, userID);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            FileLogger.hata( e.toString());
+            JOptionPane.showMessageDialog(null, e);
+        } finally {
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                FileLogger.hata( e.toString());
+            }
+        }
+    }
+    
+    public static ArrayList<User> getUsersFromDB(){
+        ArrayList<User> users = new ArrayList<User>();
+        
+        Connection connection = JavaConnector.ConnectDB();
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        
+        try {
+            statement = connection.prepareStatement("SELECT * FROM " + JavaConnector.DBname() + ".users");
+            result = statement.executeQuery();
+            while( result.next()){
+                users.add( new User( result.getInt("user_id"), result.getString("userRealName"), result.getString("username"),
+                        result.getString("password"), result.getString("level"), result.getInt("firma")));
+            }
+        } catch (SQLException e) {
+            FileLogger.hata( e.toString());
+        } finally {
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                FileLogger.hata( e.toString());
+            }
+        }
+                
+        return users;
     }
 }

@@ -31,6 +31,7 @@
 package fumera.viewer;
 
 import fumera.controller.FileLogger;
+import fumera.controller.Information;
 import fumera.controller.JavaDBtoObj;
 import fumera.controller.LocaleTranslations;
 import fumera.controller.PDFCreator;
@@ -39,9 +40,15 @@ import fumera.model.Firma;
 import fumera.model.Siparis;
 import fumera.model.Urun;
 import fumera.model.User;
+import java.awt.Desktop;
 import java.awt.Dialog;
 import java.awt.Toolkit;
-import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.DefaultCellEditor;
@@ -92,6 +99,10 @@ public class SiparisEkrani extends javax.swing.JFrame {
         SiparisleriAyir();
         SetTablePropertiesAndEdits();
         UpdateTable();
+        
+        if( Information.getUserLevel() != 1) {
+            siparisSekmeleri.setEnabledAt( 5,  false);
+        }
     }
     
     // This function sets the table and their editable cells' properties
@@ -450,7 +461,7 @@ public class SiparisEkrani extends javax.swing.JFrame {
         Cikis = new javax.swing.JMenuItem();
         Kullanicilar = new javax.swing.JMenu();
         KullaniciEkle = new javax.swing.JMenuItem();
-        KullaniciDuzenle = new javax.swing.JMenuItem();
+        KullaniciListesi = new javax.swing.JMenuItem();
         MevcutKullanici = new javax.swing.JMenuItem();
         KullaniciStatistics = new javax.swing.JMenuItem();
         Ayarlar = new javax.swing.JMenu();
@@ -459,8 +470,8 @@ public class SiparisEkrani extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         Yardim = new javax.swing.JMenu();
         YardimSeysi = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        guncellemeDenetle = new javax.swing.JMenuItem();
+        hataBildir = new javax.swing.JMenuItem();
         Hakkinda = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -802,7 +813,7 @@ public class SiparisEkrani extends javax.swing.JFrame {
     );
     yeniSiparis_urunlerPaneliLayout.setVerticalGroup(
         yeniSiparis_urunlerPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jScrollPane9)
+        .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
     );
 
     gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1479,7 +1490,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
     );
     siparisGoruntule_urunlerPaneliLayout.setVerticalGroup(
         siparisGoruntule_urunlerPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
+        .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
     );
 
     gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1697,9 +1708,14 @@ new datechooser.view.appearance.ViewAppearance("custom",
     });
     Kullanicilar.add(KullaniciEkle);
 
-    KullaniciDuzenle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/edit_user.png"))); // NOI18N
-    KullaniciDuzenle.setText("Kullanıcı Düzenle");
-    Kullanicilar.add(KullaniciDuzenle);
+    KullaniciListesi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/edit_user.png"))); // NOI18N
+    KullaniciListesi.setText("Kullanıcı Listesi");
+    KullaniciListesi.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            KullaniciListesiActionPerformed(evt);
+        }
+    });
+    Kullanicilar.add(KullaniciListesi);
 
     MevcutKullanici.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/mevcut_kullanici.png"))); // NOI18N
     MevcutKullanici.setText("Mevcut Kullanıcı");
@@ -1757,13 +1773,18 @@ new datechooser.view.appearance.ViewAppearance("custom",
     });
     Yardim.add(YardimSeysi);
 
-    jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/guncelleme.png"))); // NOI18N
-    jMenuItem3.setText("Güncellemeleri Denetle");
-    Yardim.add(jMenuItem3);
+    guncellemeDenetle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/guncelleme.png"))); // NOI18N
+    guncellemeDenetle.setText("Güncellemeleri Denetle");
+    guncellemeDenetle.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            guncellemeDenetleActionPerformed(evt);
+        }
+    });
+    Yardim.add(guncellemeDenetle);
 
-    jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/hatabildir.png"))); // NOI18N
-    jMenuItem6.setText("Hata Bildir");
-    Yardim.add(jMenuItem6);
+    hataBildir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/hatabildir.png"))); // NOI18N
+    hataBildir.setText("Hata Bildir");
+    Yardim.add(hataBildir);
 
     Hakkinda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fumera/icons/favicon.png"))); // NOI18N
     Hakkinda.setText("Hakkında");
@@ -1786,7 +1807,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(siparisSekmeleri, javax.swing.GroupLayout.DEFAULT_SIZE, 774, Short.MAX_VALUE)
+        .addComponent(siparisSekmeleri, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
     );
 
     siparisSekmeleri.getAccessibleContext().setAccessibleName("Siparişler");
@@ -2502,18 +2523,25 @@ new datechooser.view.appearance.ViewAppearance("custom",
 
     private void KullaniciEkleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KullaniciEkleActionPerformed
         // TODO add your handling code here:
-        UserInformation userInformation = new UserInformation();
-        userInformation.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/icons/add_user.png")));
-        userInformation.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); 
-        userInformation.getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);
-        userInformation.pack();
-        userInformation.setLocationRelativeTo( SiparisEkrani.this);
-        userInformation.setVisible( true);
+        if( Information.getUserLevel() == 1) {
+            UserInformation userInformation = new UserInformation();
+            userInformation.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/icons/add_user.png")));
+            userInformation.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); 
+            userInformation.getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);
+            userInformation.pack();
+            userInformation.setLocationRelativeTo( SiparisEkrani.this);
+            userInformation.setVisible( true);
+            userInformation.setButtonText();
+        } else {
+            Object[] options = {"Tamam"};
+            JOptionPane.showOptionDialog( SiparisEkrani.this, "Sadece Yönetici Yeni Kullanıcı Ekleyebilir!", "Hata!", JOptionPane.INFORMATION_MESSAGE,
+                            JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+        }
     }//GEN-LAST:event_KullaniciEkleActionPerformed
 
     private void MevcutKullaniciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MevcutKullaniciActionPerformed
         // TODO add your handling code here:
-        UserInformation userInformation = new UserInformation();
+        UserInformation userInformation = new UserInformation( user);
         userInformation.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/icons/mevcut_kullanici.png")));
         userInformation.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); 
         userInformation.getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);
@@ -2522,6 +2550,47 @@ new datechooser.view.appearance.ViewAppearance("custom",
         userInformation.enableEdit( false);
         userInformation.setVisible( true);
     }//GEN-LAST:event_MevcutKullaniciActionPerformed
+
+    private void guncellemeDenetleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guncellemeDenetleActionPerformed
+        // TODO add your handling code here:
+        String inputLine = "";
+        try {
+            URL update = new URL("http://www.fumera.com.tr/dosyalar/siparis_takip_1.txt");
+            BufferedReader in = new BufferedReader( new InputStreamReader( update.openStream()));
+            while( ( inputLine = in.readLine()) != null ) {
+                System.out.println( inputLine);
+            }
+            in.close();
+        } catch ( IOException e) {
+            FileLogger.hata(e.toString());
+        }
+        
+        if( Information.version.equalsIgnoreCase(inputLine)) {
+            Object[] options = {"Tamam"};
+                    JOptionPane.showOptionDialog( SiparisEkrani.this, "Mevcut Sürümdesiniz!", "Güncelleme Kontrolü", JOptionPane.INFORMATION_MESSAGE,
+                            JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+        } else {
+            Object[] options = {"Tamam"};
+                    JOptionPane.showOptionDialog( SiparisEkrani.this, "Daha Güncel Bir Sürüm Mevcut!", "Güncelleme Kontrolü", JOptionPane.INFORMATION_MESSAGE,
+                            JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+            try {
+                Desktop.getDesktop().browse( new URI("http://fumera.com.tr/dosyalar/"));
+            } catch (IOException | URISyntaxException e) {
+                FileLogger.hata( e.toString());
+            }
+        }
+    }//GEN-LAST:event_guncellemeDenetleActionPerformed
+
+    private void KullaniciListesiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KullaniciListesiActionPerformed
+        // TODO add your handling code here:
+        UserList userList = new UserList();
+        userList.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/icons/edit_user.png")));
+        userList.setDefaultCloseOperation(DISPOSE_ON_CLOSE); 
+        userList.getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);
+        userList.pack();
+        userList.setLocationRelativeTo( SiparisEkrani.this);
+        userList.setVisible( true);
+    }//GEN-LAST:event_KullaniciListesiActionPerformed
 
     private void siparisGoruntule( int id, int type){
         
@@ -2633,8 +2702,8 @@ new datechooser.view.appearance.ViewAppearance("custom",
     private javax.swing.JMenuItem Cikis;
     private javax.swing.JMenu Dosya;
     private javax.swing.JMenuItem Hakkinda;
-    private javax.swing.JMenuItem KullaniciDuzenle;
     private javax.swing.JMenuItem KullaniciEkle;
+    private javax.swing.JMenuItem KullaniciListesi;
     private javax.swing.JMenuItem KullaniciStatistics;
     private javax.swing.JMenu Kullanicilar;
     private javax.swing.JMenuItem MevcutKullanici;
@@ -2646,6 +2715,8 @@ new datechooser.view.appearance.ViewAppearance("custom",
     private javax.swing.JTable aktifSiparis_tablosu;
     private javax.swing.JPanel aktifSiparislerPaneli;
     private javax.swing.JMenuItem cikisYap;
+    private javax.swing.JMenuItem guncellemeDenetle;
+    private javax.swing.JMenuItem hataBildir;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -2675,8 +2746,6 @@ new datechooser.view.appearance.ViewAppearance("custom",
     private javax.swing.JLabel jLabel40;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane8;

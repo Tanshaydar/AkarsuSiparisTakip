@@ -36,4 +36,20 @@ package fumera.controller;
  */
 public class Information {
    public static final String version = "1.0.2.12.13";
+   private static int userLevel = 0;
+   private static int userID = 0;
+   
+   public static void setUserLevel( int level){
+       userLevel = level;
+   }
+   public static int getUserLevel(){
+       return userLevel;
+   }
+   
+   public static void setUserID( int id){
+       userID = id;
+   }
+   public static int getUserID(){
+       return userID;
+   }
 }

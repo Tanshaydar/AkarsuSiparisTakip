@@ -31,9 +31,11 @@
 package fumera.viewer;
 
 import fumera.controller.FileLogger;
+import fumera.controller.Information;
 import fumera.controller.JavaConnector;
 import fumera.controller.Settings;
 import fumera.model.User;
+import java.awt.Desktop;
 import java.awt.Dialog;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
@@ -42,14 +44,13 @@ import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 
@@ -299,7 +300,9 @@ public class GirisFormu extends javax.swing.JFrame {
         // TODO add your handling code here:
         String sql = "SELECT * FROM users WHERE username=? AND password=?";
         
+        
         try {
+            connection = JavaConnector.ConnectDB();
             statement = connection.prepareStatement(sql);
             statement.setString(1, username_field.getText());
             statement.setString(2, password_field.getText());
@@ -310,8 +313,10 @@ public class GirisFormu extends javax.swing.JFrame {
                 Object[] options = {"Tamam"};
                 JOptionPane.showOptionDialog( GirisFormu.this, "Giriş Başarılı!", "Giriş Onayı", JOptionPane.INFORMATION_MESSAGE,
                         JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-                User user = new User( resultset.getInt("user_id"), resultset.getString("username"),
+                User user = new User( resultset.getInt("user_id"), resultset.getString("userRealName"), resultset.getString("username"),
                         resultset.getString("password"), resultset.getString("level"), resultset.getInt("firma"));
+                Information.setUserLevel( user.getUserLevelInt());
+                Information.setUserID( user.getUserID());
                 close();
                 SiparisEkrani se = new SiparisEkrani( user);
                 se.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/viewer/icon.png")));
@@ -349,8 +354,10 @@ public class GirisFormu extends javax.swing.JFrame {
                     Object[] options = {"Tamam"};
                     JOptionPane.showOptionDialog( GirisFormu.this, "Giriş Başarılı!", "Giriş Onayı", JOptionPane.INFORMATION_MESSAGE,
                             JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-                    User user = new User( resultset.getInt("user_id"), resultset.getString("username"),
+                    User user = new User( resultset.getInt("user_id"), resultset.getString("userRealName"), resultset.getString("username"),
                         resultset.getString("password"), resultset.getString("level"), resultset.getInt("firma"));
+                    Information.setUserLevel( user.getUserLevelInt());
+                    Information.setUserID( user.getUserID());
                     close();
                     SiparisEkrani se = new SiparisEkrani( user);
                     se.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/icons/favicon.png")));
@@ -419,10 +426,10 @@ public class GirisFormu extends javax.swing.JFrame {
     }//GEN-LAST:event_girisFrameAlwaysOnTopItemStateChanged
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        String inputLine = "";
         try {
             URL update = new URL("http://www.fumera.com.tr/dosyalar/siparis_takip_1.txt");
             BufferedReader in = new BufferedReader( new InputStreamReader( update.openStream()));
-            String inputLine;
             while( ( inputLine = in.readLine()) != null ) {
                 System.out.println( inputLine);
             }
@@ -431,7 +438,20 @@ public class GirisFormu extends javax.swing.JFrame {
             FileLogger.hata(e.toString());
         }
         
-        
+        if( Information.version.equalsIgnoreCase(inputLine)) {
+            Object[] options = {"Tamam"};
+                    JOptionPane.showOptionDialog( GirisFormu.this, "Mevcut Sürümdesiniz!", "Güncelleme Kontrolü", JOptionPane.INFORMATION_MESSAGE,
+                            JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+        } else {
+            Object[] options = {"Tamam"};
+                    JOptionPane.showOptionDialog( GirisFormu.this, "Daha Güncel Bir Sürüm Mevcut!", "Güncelleme Kontrolü", JOptionPane.INFORMATION_MESSAGE,
+                            JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+            try {
+                Desktop.getDesktop().browse( new URI("http://fumera.com.tr/dosyalar/"));
+            } catch (IOException | URISyntaxException e) {
+                FileLogger.hata( e.toString());
+            }
+        }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     public void close(){

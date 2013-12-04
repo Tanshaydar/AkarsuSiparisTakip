@@ -27,37 +27,48 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+              <Component id="iptal" linkSize="5" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="kullaniciDuzenle" linkSize="5" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="kullaniciKaydet" linkSize="5" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="levelInfo" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel1" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel3" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel4" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel6" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel1" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel2" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel3" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel4" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel6" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="kullaniciSIFRE" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="kullaniciSEVIYE" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="kullaniciSIFREtekrar" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="kullaniciADI" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="kullaniciISMI" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="kullaniciSIFREtekrar" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="kullaniciSIFRE" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="kullaniciADI" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="kullaniciISMI" linkSize="3" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
-                          <Component id="kullaniciSEVIYE" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="78" max="32767" attributes="0"/>
-                      <Component id="iptal" linkSize="5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="kullaniciDuzenle" linkSize="5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="kullaniciKaydet" linkSize="5" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="levelInfo" max="32767" attributes="0"/>
+                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -174,6 +185,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="G&#xfc;ncelle"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="kullaniciKaydetActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="kullaniciDuzenle">
       <Properties>
@@ -182,6 +196,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="D&#xfc;zenle"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="kullaniciDuzenleActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="iptal">
       <Properties>

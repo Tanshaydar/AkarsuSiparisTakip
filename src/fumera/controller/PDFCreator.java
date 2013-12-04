@@ -37,20 +37,17 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import fumera.model.Siparis;
-import java.awt.Color;
-import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -66,10 +63,9 @@ public class PDFCreator {
         BaseColor colorGrey = new BaseColor(153, 153, 153);
         
         // File
-        System.out.println(directory + File.separator + fileName + ".pdf");
         
         // Document
-        Document document = new Document();
+        Document document = new Document( PageSize.A4, 10, 10, 10, 10);
         
         try {
             //////////////////////
@@ -81,11 +77,12 @@ public class PDFCreator {
             /////////////////////
             // HEADER
             PdfPTable headerTable = new PdfPTable( 2);
+            headerTable.setWidthPercentage(99f);
             font = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL, colorGrey);
             Image image = null;
             try {
                 image = Image.getInstance( getClass().getResource("/fumera/icons/logo/logo.png"));
-                image.scaleAbsolute(333f, 100f);
+                
             } catch (    BadElementException | IOException e) {
                 FileLogger.hata( e.toString());
                 System.out.println( e.toString());

@@ -30,11 +30,16 @@
 
 package fumera.controller;
 
+import fumera.viewer.ServerOptions;
+import java.awt.Dialog;
 import java.awt.HeadlessException;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.JRootPane;
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 
 /**
  *
@@ -57,20 +62,38 @@ public class JavaConnector {
         
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            /*Connection connection = DriverManager.getConnection("jdbc:mysql://" + Settings.getDBaddress() + "/" + Settings.getDBname() 
-            + "?useUnicode=true&characterEncoding=utf8", Settings.getDBuser(), Settings.getDBpassword());*/
-            Connection connection = DriverManager.getConnection("jdbc:mysql://" + DBaddr + "/" + DBname + "?useUnicode=true&characterEncoding=utf8", DBuser, DBpass);
+            Connection connection = DriverManager.getConnection("jdbc:mysql://" + Settings.getDBaddress() + "/" + Settings.getDBname() 
+            + "?useUnicode=true&characterEncoding=utf8", Settings.getDBuser(), Settings.getDBpassword());
             
-      //       Connection connection = DriverManager.getConnection("jdbc:mysql://"+DBaddr+"/"+DBname+"?user="+DBuser+"&password="+DBpass + "?useUnicode=true&characterEncoding=utf8");
-            return connection;
+            if( connection.isValid( 10)){        
+               return connection;
+            } else {
+                JOptionPane.showMessageDialog(null, "Bağlantı Hatası!", "Sunucu Bağlantısı", JOptionPane.WARNING_MESSAGE, null);
+                getSettingsScreen();
+                return null;
+            }
         } catch (ClassNotFoundException | SQLException | HeadlessException e) {
             FileLogger.hata( e.toString());
             JOptionPane.showMessageDialog(null, e, "Sunucu Bağlantısı", JOptionPane.WARNING_MESSAGE, null);
+            getSettingsScreen();
             return null;
         }
     }
 
     public static String DBname(){
         return DBname;
+    }
+    
+    private static void getSettingsScreen(){
+        ServerOptions options = new ServerOptions();
+        options.setIconImage( Toolkit.getDefaultToolkit().getImage(JavaConnector.class.getResource("/fumera/icons/settings.png")));
+        options.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        options.getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);
+        options.setModalExclusionType(Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
+        options.setAlwaysOnTop( true);
+        options.pack();
+        options.setLocationRelativeTo( null);
+        options.setVisible( true);
+        options.setFields( Settings.getDBaddress(), Settings.getDBname(), Settings.getDBuser(), Settings.getDBpassword());
     }
 }

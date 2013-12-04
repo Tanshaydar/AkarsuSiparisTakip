@@ -1,5 +1,5 @@
 /*
- * �Fumera Ar-Ge Yazılım Müh. İml. San. ve Tic. Ltd. Şti. | Copyright 2012-2013
+ * Fumera Ar-Ge Yazılım Müh. İml. San. ve Tic. Ltd. Şti. | Copyright 2012-2013
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without 
@@ -37,17 +37,53 @@ package fumera.model;
 public class User {
     
     private int userID;
+    private String userRealName;
     private String userName;
     private String userPass;
     private String userLevel;
     private int firmaID;
+    private int siparisCount;
 
-    public User(int userID, String userName, String userPass, String level, int firmaID) {
+    public User(int userID, String userRealName, String userName, String userPass, String level, int firmaID) {
+        this.userRealName = userRealName;
         this.userID = userID;
         this.userName = userName;
         this.userPass = userPass;
         this.userLevel = level;
         this.firmaID = firmaID;
+    }
+    
+    public User(int userID, String userRealName, String userName, String userPass, int level, int firmaID) {
+        this.userRealName = userRealName;
+        this.userID = userID;
+        this.userName = userName;
+        this.userPass = userPass;
+        switch( level){
+            case 0:
+                userLevel = "admin";
+                break;
+            case 1:
+                userLevel = "mod";
+                break;
+            case 2:
+                userLevel = "user";
+                break;
+            case 3:
+                userLevel = "watcher";
+                break;
+            case 4:
+                userLevel = "demo";
+                break;
+        }
+        this.firmaID = firmaID;
+    }
+    
+    public String getUserRealName(){
+        return userRealName;
+    }
+    
+    public void setUserRealName(String userRealName){
+        this.userRealName = userRealName;
     }
 
     public String getUserName() {
@@ -87,7 +123,31 @@ public class User {
         }
     }
     
-    public void setUserLevel( String level){
-        this.userLevel = level;
+    public void setUserLevel( int level){
+        switch( level){
+            case 0:
+                userLevel = "admin";
+                break;
+            case 1:
+                userLevel = "mod";
+                break;
+            case 2:
+                userLevel = "user";
+                break;
+            case 3:
+                userLevel = "watcher";
+                break;
+            case 4:
+                userLevel = "demo";
+                break;
+        }
+    }
+    
+    public int getUserID(){
+        return userID;
+    }
+    
+    public int getSiparisCount(){
+        return siparisCount;
     }
 }
