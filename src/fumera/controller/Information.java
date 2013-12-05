@@ -35,7 +35,7 @@ package fumera.controller;
  * @author Tansel
  */
 public class Information {
-   public static final String version = "1.0.2.12.13";
+   public static final String version = "1.0.6.12.13";
    private static int userLevel = 0;
    private static int userID = 0;
    
