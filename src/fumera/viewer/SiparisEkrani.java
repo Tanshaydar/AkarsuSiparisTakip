@@ -474,7 +474,6 @@ public class SiparisEkrani extends javax.swing.JFrame {
         hataBildir = new javax.swing.JMenuItem();
         Hakkinda = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Akarsu Sipariş Takip Sistemi");
         setAlwaysOnTop(true);
 
@@ -813,7 +812,7 @@ public class SiparisEkrani extends javax.swing.JFrame {
     );
     yeniSiparis_urunlerPaneliLayout.setVerticalGroup(
         yeniSiparis_urunlerPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+        .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
     );
 
     gridBagConstraints = new java.awt.GridBagConstraints();
@@ -897,6 +896,7 @@ public class SiparisEkrani extends javax.swing.JFrame {
     gridBagConstraints.gridx = 0;
     gridBagConstraints.gridy = 4;
     gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+    gridBagConstraints.ipady = 3;
     gridBagConstraints.anchor = java.awt.GridBagConstraints.BELOW_BASELINE;
     gridBagConstraints.weightx = 1.0;
     yeniSiparisGirisPaneli.add(yeniSiparis_butons, gridBagConstraints);
@@ -1490,7 +1490,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
     );
     siparisGoruntule_urunlerPaneliLayout.setVerticalGroup(
         siparisGoruntule_urunlerPaneliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+        .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
     );
 
     gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1602,6 +1602,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
     gridBagConstraints.gridx = 0;
     gridBagConstraints.gridy = 4;
     gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+    gridBagConstraints.ipady = 3;
     gridBagConstraints.anchor = java.awt.GridBagConstraints.BASELINE;
     gridBagConstraints.weightx = 1.0;
     siparisGoruntulemePaneli.add(siparisGoruntule_butons, gridBagConstraints);
@@ -1873,7 +1874,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
                             "Hata!", JOptionPane.WARNING_MESSAGE, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
         } else {
             DefaultTableModel model = (DefaultTableModel) yeniSiparis_urunTablosu.getModel();
-            model.insertRow(yeniSiparis_urunTablosu.getRowCount(), new Object[]{ null, null, urunComboBox.getItemAt(0), null, null, null});
+            model.insertRow(yeniSiparis_urunTablosu.getRowCount(), new Object[]{ null, null, urunComboBox.getItemAt(0), null, null, ""});
             yeniSiparis_urunTablosu.revalidate();
         }
     }//GEN-LAST:event_yeniSiparis_yeniUrunEkleActionPerformed

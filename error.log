@@ -26,3 +26,5 @@ com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Colu
 java.io.FileNotFoundException: \.pdf (Access is denied)
 04/12/2013 22:15:29
 java.io.FileNotFoundException: \.pdf (Access is denied)
+06/12/2013 19:08:18
+java.sql.SQLException: Data truncated for column 'urun_durumu' at row 1

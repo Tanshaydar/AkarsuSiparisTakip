@@ -53,6 +53,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
+import javax.swing.ProgressMonitor;
 
 /**
  *
@@ -63,6 +64,7 @@ public class GirisFormu extends javax.swing.JFrame {
     Connection connection = null;
     ResultSet resultset = null;
     PreparedStatement statement = null;
+    ProgressMonitor progressMonitor = new ProgressMonitor( GirisFormu.this, "Açılıyor...", " NOT! ", 0, 100);
     /**
      * Creates new form GirisFormu
      */
@@ -298,8 +300,9 @@ public class GirisFormu extends javax.swing.JFrame {
 
     private void cmd_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_loginActionPerformed
         // TODO add your handling code here:
+        progressMonitor.setNote("Giriş yapılıyor...");
+        progressMonitor.setProgress(0);
         String sql = "SELECT * FROM users WHERE username=? AND password=?";
-        
         
         try {
             connection = JavaConnector.ConnectDB();
@@ -308,7 +311,8 @@ public class GirisFormu extends javax.swing.JFrame {
             statement.setString(2, password_field.getText());
             
             resultset = statement.executeQuery();
-            
+            progressMonitor.setNote("Sistem Bilgileri Düzenleniyor...");
+            progressMonitor.setProgress(10);
             if( resultset.next()){
                 Object[] options = {"Tamam"};
                 JOptionPane.showOptionDialog( GirisFormu.this, "Giriş Başarılı!", "Giriş Onayı", JOptionPane.INFORMATION_MESSAGE,
@@ -317,13 +321,14 @@ public class GirisFormu extends javax.swing.JFrame {
                         resultset.getString("password"), resultset.getString("level"), resultset.getInt("firma"));
                 Information.setUserLevel( user.getUserLevelInt());
                 Information.setUserID( user.getUserID());
+                progressMonitor.setProgress(75);
                 close();
                 SiparisEkrani se = new SiparisEkrani( user);
-                se.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/viewer/icon.png")));
+                se.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/icons/favicon.png")));
                 this.setVisible(false);
                 se.setLocationRelativeTo( null);
                 se.setVisible( true);
-                
+                progressMonitor.setProgress(100);
             }
         } catch (SQLException | HeadlessException e) {
             FileLogger.hata( e.toString());
@@ -341,45 +346,7 @@ public class GirisFormu extends javax.swing.JFrame {
     private void password_fieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_password_fieldKeyPressed
         // TODO add your handling code here:
         if( evt.getKeyCode() == KeyEvent.VK_ENTER){
-            String sql = "SELECT * FROM users WHERE username=? AND password=?";
-
-            try {
-                statement = connection.prepareStatement(sql);
-                statement.setString(1, username_field.getText());
-                statement.setString(2, password_field.getText());
-
-                resultset = statement.executeQuery();
-
-                if( resultset.next()){
-                    Object[] options = {"Tamam"};
-                    JOptionPane.showOptionDialog( GirisFormu.this, "Giriş Başarılı!", "Giriş Onayı", JOptionPane.INFORMATION_MESSAGE,
-                            JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-                    User user = new User( resultset.getInt("user_id"), resultset.getString("userRealName"), resultset.getString("username"),
-                        resultset.getString("password"), resultset.getString("level"), resultset.getInt("firma"));
-                    Information.setUserLevel( user.getUserLevelInt());
-                    Information.setUserID( user.getUserID());
-                    close();
-                    SiparisEkrani se = new SiparisEkrani( user);
-                    se.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/fumera/icons/favicon.png")));
-                    this.setVisible(false);
-                    se.setLocationRelativeTo( null);
-                    se.setVisible( true);
-                    this.dispose();
-
-                } else {
-                    JOptionPane.showMessageDialog( GirisFormu.this, "Kullanıcı adı ya da şifre hatalı!");
-                }
-            } catch (SQLException | HeadlessException e) {
-                FileLogger.hata( e.toString());
-                JOptionPane.showMessageDialog( GirisFormu.this, "Bağlantı Hatası!");
-            } finally {
-                try {
-                    resultset.close();
-                    statement.close();
-                } catch (SQLException e) {
-                    FileLogger.hata( e.toString());
-                }
-            }
+            cmd_loginActionPerformed(null);
         }
     }//GEN-LAST:event_password_fieldKeyPressed
 
