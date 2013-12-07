@@ -1,5 +1,5 @@
 /*
- * �Fumera Ar-Ge Yazılım Müh. İml. San. ve Tic. Ltd. Şti. | Copyright 2012-2013
+ * Fumera Ar-Ge Yazılım Müh. İml. San. ve Tic. Ltd. Şti. | Copyright 2012-2013
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without 
@@ -34,6 +34,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Properties;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
@@ -47,10 +48,24 @@ public class Settings {
     private static final Properties settings = new Properties();
     private static final String settingsFile = "settings.fum";
     
+    
+    //===============================================
+    // DATABASE
     private static final String DBaddress = "DBaddress";
     private static final String DBname = "DBname";
     private static final String DBuser = "DBuser";
     private static final String DBpass = "DBpass";
+    
+    //===============================================
+    // GUI
+    private static final int[] aktifColumns = new int[]{0,1,2,3,4,5};
+    private static final int[] bitmisColumns = new int[]{0,1,2,3,4,5};
+    private static final int[] teklifColumns = new int[]{0,1,2,3,4,5};
+    private static final int[] silinmisColumns = new int[]{0,1,2,3,4,5};
+    
+    private static final int[] yeniUrunColumns = new int[]{0,1,2,3,4,5};
+    private static final int[] eskiUrunColumns = new int[]{0,1,2,3,4,5};
+    
     
     public Settings(){
     }
@@ -64,7 +79,7 @@ public class Settings {
         BASE64Decoder decoder = new BASE64Decoder();
         try {
             str = new String( decoder.decodeBuffer( str));
-        } catch (Exception e) {
+        } catch (IOException e) {
             FileLogger.hata( e.toString());
         }
         return str;
@@ -75,10 +90,16 @@ public class Settings {
         File file = new File( settingsFile);
         if( !file.exists()){
             try {
-                settings.setProperty( DBaddress, encode("sql2.freesqldatabase.com"));
-                settings.setProperty( DBname, encode("sql27141"));
-                settings.setProperty( DBuser, encode("sql27141"));
-                settings.setProperty( DBpass, encode("jS1*rN2%25"));
+                settings.setProperty( DBaddress, encode("193.140.224.43:3306"));
+                settings.setProperty( DBname, encode("siparis_utf"));
+                settings.setProperty( DBuser, encode("siparis"));
+                settings.setProperty( DBpass, encode("vDAyMJbEUFsxzb5r"));
+                settings.setProperty( "aktifColumns", encode( Arrays.toString(aktifColumns)));
+                settings.setProperty( "bitmisColumns", encode( Arrays.toString(bitmisColumns)));
+                settings.setProperty( "teklifColumns", encode( Arrays.toString(teklifColumns)));
+                settings.setProperty( "silinmisColumns", encode( Arrays.toString(silinmisColumns)));
+                settings.setProperty( "yeniUrunColumns", encode( Arrays.toString(yeniUrunColumns)));
+                settings.setProperty( "eskiUrunColumns", encode( Arrays.toString(eskiUrunColumns)));
 
                 settings.store( new FileOutputStream( settingsFile), null);
 
@@ -88,7 +109,19 @@ public class Settings {
         }
     }
     
-    public static void setSettings( String address, String name, String user, String pass){
+    private static int[] convertToInt( String str){
+        String[] items = str.replaceAll("\\[", "").replaceAll("\\]", "").split(", ");
+
+        int[] results = new int[items.length];
+
+        for (int i = 0; i < items.length; i++) {
+                results[i] = Integer.parseInt(items[i]);
+        }
+        
+        return results;
+    }
+    
+    public static void setDBSettings( String address, String name, String user, String pass){
         checkFile();
         try {
             settings.setProperty( DBaddress, encode(address));
@@ -99,6 +132,20 @@ public class Settings {
             settings.store( new FileOutputStream( settingsFile), null);
             
         } catch (IOException e) {
+            FileLogger.hata( e.toString());
+        }
+    }
+    
+    public static void setTableSettings( int[] aktif, int[] bitmis, int[] teklif, int[] silinmis, int[] yeni, int[] eski){
+        checkFile();
+        try {
+            settings.setProperty( "aktifColumns", encode( Arrays.toString(aktif)));
+            settings.setProperty( "bitmisColumns", encode( Arrays.toString(bitmis)));
+            settings.setProperty( "teklifColumns", encode( Arrays.toString(teklif)));
+            settings.setProperty( "silinmisColumns", encode( Arrays.toString(silinmis)));
+            settings.setProperty( "yeniUrunColumns", encode( Arrays.toString(yeni)));
+            settings.setProperty( "eskiUrunColumns", encode( Arrays.toString(eski)));
+        } catch (Exception e) {
             FileLogger.hata( e.toString());
         }
     }
@@ -143,4 +190,66 @@ public class Settings {
         }
         return null;
     }
+    
+    public static int[] getAktif(){
+        checkFile();
+        try {
+            settings.load( new FileInputStream( settingsFile));
+            return convertToInt( decode( settings.getProperty( "aktifColumns")));
+        } catch (IOException e) {
+            FileLogger.hata( e.toString());
+        }
+        return null;
+    }
+    public static int[] getBitmis(){
+        checkFile();
+        try {
+            settings.load( new FileInputStream( settingsFile));
+            return convertToInt( decode( settings.getProperty( "bitmisColumns")));
+        } catch (IOException e) {
+            FileLogger.hata( e.toString());
+        }
+        return null;
+    }
+    public static int[] getTeklif(){
+        checkFile();
+        try {
+            settings.load( new FileInputStream( settingsFile));
+            return convertToInt( decode( settings.getProperty( "teklifColumns")));
+        } catch (IOException e) {
+            FileLogger.hata( e.toString());
+        }
+        return null;
+    }
+    public static int[] getSilinmis(){
+        checkFile();
+        try {
+            settings.load( new FileInputStream( settingsFile));
+            return convertToInt( decode( settings.getProperty( "silinmisColumns")));
+        } catch (IOException e) {
+            FileLogger.hata( e.toString());
+        }
+        return null;
+    }
+    public static int[] getYeni(){
+        checkFile();
+        try {
+            settings.load( new FileInputStream( settingsFile));
+            return convertToInt( decode( settings.getProperty( "yeniUrunColumns")));
+        } catch (IOException e) {
+            FileLogger.hata( e.toString());
+        }
+        return null;
+    }
+    public static int[] getEski(){
+        checkFile();
+        try {
+            settings.load( new FileInputStream( settingsFile));
+            return convertToInt( decode( settings.getProperty( "eskiUrunColumns")));
+        } catch (IOException e) {
+            FileLogger.hata( e.toString());
+        }
+        return null;
+    }
+    
 }

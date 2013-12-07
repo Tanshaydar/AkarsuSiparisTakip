@@ -36,6 +36,7 @@ import fumera.controller.JavaDBtoObj;
 import fumera.controller.LocaleTranslations;
 import fumera.controller.PDFCreator;
 import fumera.controller.Settings;
+import fumera.controller.SiparisAdditional;
 import fumera.model.Firma;
 import fumera.model.Siparis;
 import fumera.model.Urun;
@@ -66,13 +67,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class SiparisEkrani extends javax.swing.JFrame {
 
+    //================================================
     // DATA LAYER
     private static ArrayList<Siparis> siparisler = new ArrayList<>();
     
-    private static ArrayList<Siparis> aktifSiparisler = new ArrayList<>();
-    private static ArrayList<Siparis> tamamlanmisSiparisler = new ArrayList<>();
-    private static ArrayList<Siparis> teklifler = new ArrayList<>();
-    private static ArrayList<Siparis> silinmisSiparisler = new ArrayList<>();
+    private static final ArrayList<Siparis> aktifSiparisler = new ArrayList<>();
+    private static final ArrayList<Siparis> tamamlanmisSiparisler = new ArrayList<>();
+    private static final ArrayList<Siparis> teklifler = new ArrayList<>();
+    private static final ArrayList<Siparis> silinmisSiparisler = new ArrayList<>();
     
     private static User user = null;
     
@@ -80,6 +82,14 @@ public class SiparisEkrani extends javax.swing.JFrame {
     // GUI VARIABLES
     JComboBox urunComboBox = new JComboBox();
     ProgressMonitor progressMonitor = new ProgressMonitor( SiparisEkrani.this, "Kaydediliyor...", " NOT! ", 0, 100);
+    private static final String[] aktifTabloSutun = { "Firma Adı", "Siparişi İsteyen", "Siparişi Alan", "Sipariş Alınma Tarihi", "Sipariş İstenen Tarih", "Ürunler"};
+    private static final String[] teklifTabloSutun = { "Firma Adı", "Siparişi İsteyen", "Siparişi Alan", "Sipariş Alınma Tarihi", "Sipariş İstenen Tarih", "Ürunler"};
+    private static final String[] bitmisTabloSutun = { "Firma Adı", "Siparişi İsteyen", "Siparişi Alan", "Sipariş Alınma Tarihi", "Sipariş İstenen Tarih", "Ürunler"};
+    private static final String[] silikTabloSutun = { "Firma Adı", "Siparişi İsteyen", "Siparişi Alan", "Sipariş Alınma Tarihi", "Sipariş İstenen Tarih", "Ürunler"};
+    
+    private static final String[] urunYeniTabloSutun = {"Ürün Adı", "Ürün Fiyatı", "Ürün Durumu", "Ürün Adedi", "Toplam Fiyat", "Ürün Açıklaması"};
+    private static final String[] urunEskiTabloSutun = {"Ürün Adı", "Ürün Fiyatı", "Ürün Durumu", "Ürün Adedi", "Toplam Fiyat", "Ürün Açıklaması"};
+    
     //================================================
     
     private int currentSiparisID = 0;
@@ -89,7 +99,7 @@ public class SiparisEkrani extends javax.swing.JFrame {
      * Creates new form SiparisEkranı
      * @param user
      */
-    
+    //================================================
     // CONSTRUCTOR
     public SiparisEkrani( User user) {
         
@@ -220,13 +230,14 @@ public class SiparisEkrani extends javax.swing.JFrame {
             aktifSiparisler.get(i).getFirma().getFirma_adi(),
             aktifSiparisler.get(i).getSiparisi_isteyen(),
             aktifSiparisler.get(i).getSiparisi_alan(),
-            aktifSiparisler.get(i).getSiparis_tarih(),
-            aktifSiparisler.get(i).getSiparis_istenen_tarih(),
+            Information.dateFormat.format( aktifSiparisler.get(i).getSiparis_tarih()),
+            Information.dateFormat.format( aktifSiparisler.get(i).getSiparis_istenen_tarih()),
             urunStr});
             if( aktifSiparisler.get(i).getAciklama() != null){
                 //Arka plan değişecek
             }
-        }
+        }        
+        SiparisAdditional.setColumnOrder( Settings.getAktif(), aktifSiparis_tablosu.getColumnModel());
         aktifSiparis_tablosu.revalidate();
 
         DefaultTableModel modelTamamlanmis = (DefaultTableModel) tamamlanmisSiparis_tablosu.getModel();
@@ -243,10 +254,11 @@ public class SiparisEkrani extends javax.swing.JFrame {
             tamamlanmisSiparisler.get(i).getFirma().getFirma_adi(),
             tamamlanmisSiparisler.get(i).getSiparisi_isteyen(),
             tamamlanmisSiparisler.get(i).getSiparisi_alan(),
-            tamamlanmisSiparisler.get(i).getSiparis_tarih(),
-            tamamlanmisSiparisler.get(i).getSiparis_istenen_tarih(),
+            Information.dateFormat.format( tamamlanmisSiparisler.get(i).getSiparis_tarih()),
+            Information.dateFormat.format( tamamlanmisSiparisler.get(i).getSiparis_istenen_tarih()),
             urunStr});
         }
+        SiparisAdditional.setColumnOrder( Settings.getBitmis(), tamamlanmisSiparis_tablosu.getColumnModel());
         tamamlanmisSiparis_tablosu.revalidate();
         
         DefaultTableModel modelSilinmis = (DefaultTableModel) silinmisSiparis_tablosu.getModel();
@@ -263,10 +275,11 @@ public class SiparisEkrani extends javax.swing.JFrame {
             silinmisSiparisler.get(i).getFirma().getFirma_adi(),
             silinmisSiparisler.get(i).getSiparisi_isteyen(),
             silinmisSiparisler.get(i).getSiparisi_alan(),
-            silinmisSiparisler.get(i).getSiparis_tarih(),
-            silinmisSiparisler.get(i).getSiparis_istenen_tarih(),
+            Information.dateFormat.format( silinmisSiparisler.get(i).getSiparis_tarih()),
+            Information.dateFormat.format( silinmisSiparisler.get(i).getSiparis_istenen_tarih()),
             urunStr});
         }
+        SiparisAdditional.setColumnOrder( Settings.getSilinmis(), silinmisSiparis_tablosu.getColumnModel());
         silinmisSiparis_tablosu.revalidate();
         
         DefaultTableModel modelTeklif = (DefaultTableModel) teklif_tablosu.getModel();
@@ -282,10 +295,11 @@ public class SiparisEkrani extends javax.swing.JFrame {
             teklifler.get(i).getFirma().getFirma_adi(),
             teklifler.get(i).getSiparisi_isteyen(),
             teklifler.get(i).getSiparisi_alan(),
-            teklifler.get(i).getSiparis_tarih(),
-            teklifler.get(i).getSiparis_istenen_tarih(),
+            Information.dateFormat.format( teklifler.get(i).getSiparis_tarih()),
+            Information.dateFormat.format( teklifler.get(i).getSiparis_istenen_tarih()),
             urunStr});
         }
+        SiparisAdditional.setColumnOrder( Settings.getTeklif(), teklif_tablosu.getColumnModel());
         teklif_tablosu.revalidate();
         
         currentSiparisID = 0;
@@ -474,6 +488,7 @@ public class SiparisEkrani extends javax.swing.JFrame {
         hataBildir = new javax.swing.JMenuItem();
         Hakkinda = new javax.swing.JMenuItem();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Akarsu Sipariş Takip Sistemi");
         setAlwaysOnTop(true);
 
@@ -1859,10 +1874,6 @@ new datechooser.view.appearance.ViewAppearance("custom",
                 boslukVar = true;
                 eksik += "\n\r - Ürün Adı";
             }
-            if( yeniSiparis_urunTablosu.getValueAt(rows, 1) == null){
-                boslukVar = true;
-                eksik += "\n\r - Ürün Fiyatı";
-            }
             if( yeniSiparis_urunTablosu.getValueAt(rows, 3) == null){
                 boslukVar = true;
                 eksik += "\n\r - Ürün Adedi";
@@ -1875,6 +1886,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
         } else {
             DefaultTableModel model = (DefaultTableModel) yeniSiparis_urunTablosu.getModel();
             model.insertRow(yeniSiparis_urunTablosu.getRowCount(), new Object[]{ null, null, urunComboBox.getItemAt(0), null, null, ""});
+            SiparisAdditional.setColumnOrder( Settings.getYeni(), yeniSiparis_urunTablosu.getColumnModel());
             yeniSiparis_urunTablosu.revalidate();
         }
     }//GEN-LAST:event_yeniSiparis_yeniUrunEkleActionPerformed
@@ -1910,6 +1922,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
             DefaultTableModel model = (DefaultTableModel) yeniSiparis_urunTablosu.getModel();
             if( yeniSiparis_urunTablosu.getSelectedRow() != -1)
                 model.removeRow( yeniSiparis_urunTablosu.getSelectedRow());
+            SiparisAdditional.setColumnOrder( Settings.getYeni(), yeniSiparis_urunTablosu.getColumnModel());
             yeniSiparis_urunTablosu.revalidate();
         }
     }//GEN-LAST:event_yeniSiparis_UrunSilActionPerformed
@@ -1928,10 +1941,6 @@ new datechooser.view.appearance.ViewAppearance("custom",
             if( yeniSiparis_urunTablosu.getValueAt(rows, 0) == null){
                 boslukVar = true;
                 eksik += "\n\r - Ürün Adı";
-            }
-            if( yeniSiparis_urunTablosu.getValueAt(rows, 1) == null){
-                boslukVar = true;
-                eksik += "\n\r - Ürün Fiyatı";
             }
             if( yeniSiparis_urunTablosu.getValueAt(rows, 3) == null){
                 boslukVar = true;
@@ -1979,6 +1988,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
                                 "Hata!", JOptionPane.WARNING_MESSAGE, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
             }
         } else {
+            SiparisAdditional.setColumnOrder( Settings.getYeni(), yeniSiparis_urunTablosu.getColumnModel());
             yeniSiparis_urunTablosu.revalidate();
             progressMonitor.setNote("Yeni Sipariş Alınıyor...");
             progressMonitor.setProgress(0);
@@ -2102,10 +2112,6 @@ new datechooser.view.appearance.ViewAppearance("custom",
                 boslukVar = true;
                 eksik += "\n\r - Ürün Adı";
             }
-            if( siparisGoruntule_urunTablosu.getValueAt(rows, 1) == null) {
-                boslukVar = true;
-                eksik += "\n\r - Ürün Fiyatı";
-            }
             if( siparisGoruntule_urunTablosu.getValueAt(rows, 3) == null) {
                 boslukVar = true;
                 eksik += "\n\r - Ürün Adedi";
@@ -2119,6 +2125,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
         } else {
             DefaultTableModel model = (DefaultTableModel) siparisGoruntule_urunTablosu.getModel();
             model.insertRow(siparisGoruntule_urunTablosu.getRowCount(), new Object[]{ null, null, urunComboBox.getItemAt(0), null, null, null});
+            SiparisAdditional.setColumnOrder( Settings.getEski(), siparisGoruntule_urunTablosu.getColumnModel());
             siparisGoruntule_urunTablosu.revalidate();
         }
     }//GEN-LAST:event_siparisGoruntule_yeniUrunEkleActionPerformed
@@ -2131,13 +2138,14 @@ new datechooser.view.appearance.ViewAppearance("custom",
         }
         
         Object[] options = {"Evet, sil!", "Hayır, silme!"};
-        int result  = JOptionPane.showOptionDialog( SiparisEkrani.this, "Yeni Sipariş Girdilerini"
-                + " 'Temizlemek' İstediğinize Emin misiniz?", "Sipariş Girdilerini Temizle!", 
+        int result  = JOptionPane.showOptionDialog( SiparisEkrani.this, "Ürünü"
+                + " 'Silmek' İstediğinize Emin misiniz?", "Sipariş Girdilerini Temizle!", 
                 JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[1]);
         if( result == 0) {
             DefaultTableModel model = (DefaultTableModel) siparisGoruntule_urunTablosu.getModel();
             if( siparisGoruntule_urunTablosu.getSelectedRow() != -1)
                 model.removeRow( siparisGoruntule_urunTablosu.getSelectedRow());
+            SiparisAdditional.setColumnOrder( Settings.getEski(), siparisGoruntule_urunTablosu.getColumnModel());
             siparisGoruntule_urunTablosu.revalidate();
         }
     }//GEN-LAST:event_siparisGoruntule_UrunSilActionPerformed
@@ -2150,6 +2158,8 @@ new datechooser.view.appearance.ViewAppearance("custom",
                 JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[1]);
         if( result == 0) {
             siparisGoruntuleTemizle();
+            currentSiparisID = 0;
+            currentSiparis = null;
         }
     }//GEN-LAST:event_siparisGoruntule_TemizleActionPerformed
 
@@ -2167,10 +2177,6 @@ new datechooser.view.appearance.ViewAppearance("custom",
             if( siparisGoruntule_urunTablosu.getValueAt(rows, 0) == null) {
                 boslukVar = true;
                 eksik += "\n\r - Ürün Adı";
-            }
-            if( siparisGoruntule_urunTablosu.getValueAt(rows, 1) == null) {
-                boslukVar = true;
-                eksik += "\n\r - Ürün Fiyatı";
             }
             if( siparisGoruntule_urunTablosu.getValueAt(rows, 3) == null) {
                 boslukVar = true;
@@ -2232,13 +2238,21 @@ new datechooser.view.appearance.ViewAppearance("custom",
             ///////////////////////////////////
             progressMonitor.setNote("Ürünler işleniyor...");
             progressMonitor.setProgress(15);
+            String urunAciklama = "";
+                
             for( int i = 0; i < siparisGoruntule_urunTablosu.getRowCount(); i++){
+                
+                if( siparisGoruntule_urunTablosu.getValueAt(i, 5) != null)
+                    urunAciklama = siparisGoruntule_urunTablosu.getValueAt(i, 5).toString();
+                else
+                    urunAciklama = "";
+                
                 urunlerDuzenle.add( new Urun( 
                         siparisGoruntule_urunTablosu.getValueAt(i, 0).toString(),
                         Double.parseDouble(siparisGoruntule_urunTablosu.getValueAt(i, 1).toString()), 
                         Integer.parseInt(siparisGoruntule_urunTablosu.getValueAt(i, 3).toString()),
                         siparisGoruntule_urunTablosu.getValueAt(i, 2).toString(), 
-                        siparisGoruntule_urunTablosu.getValueAt(i, 5).toString()));
+                        urunAciklama));
                         toplamDuzenle += Double.parseDouble(siparisGoruntule_urunTablosu.getValueAt(i, 4).toString());
             }
 
@@ -2394,6 +2408,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
                 float toplam = (int)yeniSiparis_urunTablosu.getValueAt( yeniSiparis_urunTablosu.getSelectedRow(), 3) 
                         * (float)yeniSiparis_urunTablosu.getValueAt( yeniSiparis_urunTablosu.getSelectedRow(), 1);
                 yeniSiparis_urunTablosu.setValueAt( toplam, yeniSiparis_urunTablosu.getSelectedRow(), 4);
+                SiparisAdditional.setColumnOrder( Settings.getYeni(), yeniSiparis_urunTablosu.getColumnModel());
                 yeniSiparis_urunTablosu.revalidate();
             }
         } 
@@ -2409,6 +2424,7 @@ new datechooser.view.appearance.ViewAppearance("custom",
                 float toplam = (int)siparisGoruntule_urunTablosu.getValueAt( siparisGoruntule_urunTablosu.getSelectedRow(), 3) 
                         * (float)siparisGoruntule_urunTablosu.getValueAt( siparisGoruntule_urunTablosu.getSelectedRow(), 1);
                 siparisGoruntule_urunTablosu.setValueAt( toplam, siparisGoruntule_urunTablosu.getSelectedRow(), 4);
+                SiparisAdditional.setColumnOrder( Settings.getEski(), siparisGoruntule_urunTablosu.getColumnModel());
                 siparisGoruntule_urunTablosu.revalidate();
             }
         }
@@ -2654,11 +2670,12 @@ new datechooser.view.appearance.ViewAppearance("custom",
             urunGoruntule.insertRow( siparisGoruntule_urunTablosu.getRowCount(), new Object[]{
                 siparis.getUrunler().get(i).getUrunAdi(),
                 siparis.getUrunler().get(i).getUrunFiyati(),
-                siparis.getUrunler().get(i).getUrunDurumu(),
+                urunComboBox.getItemAt( siparis.getUrunler().get(i).getUrunDurumu() - 1),
                 siparis.getUrunler().get(i).getUrunAdedi(),
                 siparis.getUrunler().get(i).getUrunAdedi()*siparis.getUrunler().get(i).getUrunFiyati(),
                 siparis.getUrunler().get(i).getUrunAciklamasi()});
         }
+        SiparisAdditional.setColumnOrder( Settings.getEski(), siparisGoruntule_urunTablosu.getColumnModel());
         siparisGoruntule_urunTablosu.revalidate();
         
         
@@ -2668,6 +2685,14 @@ new datechooser.view.appearance.ViewAppearance("custom",
         siparisSekmeleri.setSelectedIndex(4);
     }
     
+    private void getTableWidths(){
+        /*
+        int[] aktifColumns = new int[aktifSiparis_tablosu.getColumnCount()];
+        for( int i = 0; i < aktifColumns.length; i++){
+            aktifColumns[i] = aktifSiparis_tablosu.getColumnName(i);
+        }*/
+        
+    }
     /**
      * @param args the command line arguments
      */

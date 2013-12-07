@@ -30,29 +30,27 @@
 
 package fumera.controller;
 
-import java.text.SimpleDateFormat;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
  * @author Tansel
  */
-public class Information {
-   public static final String version = "1.0.6.12.13";
-   public static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-   private static int userLevel = 0;
-   private static int userID = 0;
-   
-   public static void setUserLevel( int level){
-       userLevel = level;
-   }
-   public static int getUserLevel(){
-       return userLevel;
-   }
-   
-   public static void setUserID( int id){
-       userID = id;
-   }
-   public static int getUserID(){
-       return userID;
-   }
+public class SiparisAdditional {
+    
+    public static void setColumnOrder(int[] indices, TableColumnModel columnModel) {
+        TableColumn column[] = new TableColumn[indices.length];
+
+        for (int i = 0; i < column.length; i++) {
+            column[i] = columnModel.getColumn(indices[i]);
+        }
+
+        while (columnModel.getColumnCount() > 0) {
+            columnModel.removeColumn(columnModel.getColumn(0));
+        }
+        for (TableColumn column1 : column) {
+            columnModel.addColumn(column1);
+        }
+    }
 }

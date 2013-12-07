@@ -1,5 +1,5 @@
 /*
- * �Fumera Ar-Ge Yazılım Müh. İml. San. ve Tic. Ltd. Şti. | Copyright 2012-2013
+ * Fumera Ar-Ge Yazılım Müh. İml. San. ve Tic. Ltd. Şti. | Copyright 2012-2013
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without 

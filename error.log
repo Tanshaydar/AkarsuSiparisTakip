@@ -28,3 +28,29 @@ java.io.FileNotFoundException: \.pdf (Access is denied)
 java.io.FileNotFoundException: \.pdf (Access is denied)
 06/12/2013 19:08:18
 java.sql.SQLException: Data truncated for column 'urun_durumu' at row 1
+06/12/2013 19:21:12
+com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet successfully received from the server was 62 milliseconds ago.  The last packet sent successfully to the server was 61 milliseconds ago.
+06/12/2013 19:40:34
+java.sql.SQLException: Data truncated for column 'urun_durumu' at row 1
+07/12/2013 03:38:18
+java.lang.NumberFormatException: For input string: " 1"
+07/12/2013 03:38:18
+java.lang.NumberFormatException: For input string: " 2"
+07/12/2013 03:38:18
+java.lang.NumberFormatException: For input string: " 3"
+07/12/2013 03:38:18
+java.lang.NumberFormatException: For input string: " 4"
+07/12/2013 03:38:18
+java.lang.NumberFormatException: For input string: " 5"
+07/12/2013 03:39:44
+java.lang.NumberFormatException: For input string: " 1"
+07/12/2013 03:39:44
+java.lang.NumberFormatException: For input string: " 2"
+07/12/2013 03:39:44
+java.lang.NumberFormatException: For input string: " 3"
+07/12/2013 03:39:44
+java.lang.NumberFormatException: For input string: " 4"
+07/12/2013 03:39:44
+java.lang.NumberFormatException: For input string: " 5"

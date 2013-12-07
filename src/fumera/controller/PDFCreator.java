@@ -32,7 +32,6 @@ package fumera.controller;
 
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -185,7 +184,7 @@ public class PDFCreator {
             blueFont = new Font( base, 13, Font.BOLD, colorMagenta);
             PdfPTable tarihTable = new PdfPTable(1);
             tarihTable.setWidthPercentage( 100f);
-            PdfPCell tarihCell = new PdfPCell( new Paragraph( siparis.getSiparis_tarih().toString(), blueFont));
+            PdfPCell tarihCell = new PdfPCell( new Paragraph( Information.dateFormat.format( siparis.getSiparis_tarih()), blueFont));
             tarihCell.setHorizontalAlignment( Element.ALIGN_RIGHT);
             tarihCell.setBorder( Rectangle.NO_BORDER);
             tarihTable.addCell( tarihCell);
