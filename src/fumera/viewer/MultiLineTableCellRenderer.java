@@ -46,7 +46,7 @@ import javax.swing.table.TableCellRenderer;
  */
 public class MultiLineTableCellRenderer extends JTextArea 
     implements TableCellRenderer {
-    private List<List<Integer>> rowColHeight = new ArrayList<List<Integer>>();
+    private final List<List<Integer>> rowColHeight = new ArrayList<List<Integer>>();
     
     public MultiLineTableCellRenderer() {
       setLineWrap(true);

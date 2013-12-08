@@ -53,4 +53,12 @@ public class SiparisAdditional {
             columnModel.addColumn(column1);
         }
     }
+    
+    public static void setColumnWidths( int[] widths, TableColumnModel columnModel){
+        int size = columnModel.getColumn(0).getWidth() * widths.length;
+        float percentage = (float) size / (float) 100;
+        for( int i = 0; i < widths.length; i++){
+            columnModel.getColumn( i).setWidth( (int) (widths[i] * percentage));
+        }
+    }
 }

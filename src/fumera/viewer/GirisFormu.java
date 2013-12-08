@@ -320,6 +320,7 @@ public class GirisFormu extends javax.swing.JFrame {
                 progressMonitor.setProgress(10);
                 Information.setUserLevel( user.getUserLevelInt());
                 Information.setUserID( user.getUserID());
+                progressMonitor.setNote("Sistem Bilgileri Düzenleniyor...");
                 progressMonitor.setProgress(75);
                 close();
                 SiparisEkrani se = new SiparisEkrani( user);

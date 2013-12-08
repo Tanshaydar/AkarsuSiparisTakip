@@ -44,7 +44,8 @@ import sun.misc.BASE64Encoder;
  * @author Tansel
  */
 public class Settings {
-    
+    //===============================================
+    // SETTING PROPERT & FILE
     private static final Properties settings = new Properties();
     private static final String settingsFile = "settings.fum";
     
@@ -58,6 +59,8 @@ public class Settings {
     
     //===============================================
     // GUI
+    
+    // Table Order
     private static final int[] aktifColumns = new int[]{0,1,2,3,4,5};
     private static final int[] bitmisColumns = new int[]{0,1,2,3,4,5};
     private static final int[] teklifColumns = new int[]{0,1,2,3,4,5};
@@ -66,6 +69,14 @@ public class Settings {
     private static final int[] yeniUrunColumns = new int[]{0,1,2,3,4,5};
     private static final int[] eskiUrunColumns = new int[]{0,1,2,3,4,5};
     
+    // Table widths
+    private static final int[] aktifColumnsW = new int[]{20,20,20,20,20,20};
+    private static final int[] bitmisColumnsW = new int[]{20,20,20,20,20,20};
+    private static final int[] teklifColumnsW = new int[]{20,20,20,20,20,20};
+    private static final int[] silinmisColumnsW = new int[]{20,20,20,20,20,20};
+    
+    private static final int[] yeniUrunColumnsW = new int[]{20,20,20,20,20,20};
+    private static final int[] eskiUrunColumnsW = new int[]{20,20,20,20,20,20};
     
     public Settings(){
     }
@@ -94,6 +105,7 @@ public class Settings {
                 settings.setProperty( DBname, encode("siparis_utf"));
                 settings.setProperty( DBuser, encode("siparis"));
                 settings.setProperty( DBpass, encode("vDAyMJbEUFsxzb5r"));
+                
                 settings.setProperty( "aktifColumns", encode( Arrays.toString(aktifColumns)));
                 settings.setProperty( "bitmisColumns", encode( Arrays.toString(bitmisColumns)));
                 settings.setProperty( "teklifColumns", encode( Arrays.toString(teklifColumns)));
@@ -101,6 +113,13 @@ public class Settings {
                 settings.setProperty( "yeniUrunColumns", encode( Arrays.toString(yeniUrunColumns)));
                 settings.setProperty( "eskiUrunColumns", encode( Arrays.toString(eskiUrunColumns)));
 
+                settings.setProperty( "aktifColumnsW", encode( Arrays.toString(aktifColumnsW)));
+                settings.setProperty( "bitmisColumnsW", encode( Arrays.toString(bitmisColumnsW)));
+                settings.setProperty( "teklifColumnsW", encode( Arrays.toString(teklifColumnsW)));
+                settings.setProperty( "silinmisColumnsW", encode( Arrays.toString(silinmisColumnsW)));
+                settings.setProperty( "yeniUrunColumnsW", encode( Arrays.toString(yeniUrunColumnsW)));
+                settings.setProperty( "eskiUrunColumnsW", encode( Arrays.toString(eskiUrunColumnsW)));
+                
                 settings.store( new FileOutputStream( settingsFile), null);
 
             } catch (IOException e) {
@@ -120,7 +139,7 @@ public class Settings {
         
         return results;
     }
-    
+    //==========================================================================
     public static void setDBSettings( String address, String name, String user, String pass){
         checkFile();
         try {
@@ -136,7 +155,7 @@ public class Settings {
         }
     }
     
-    public static void setTableSettings( int[] aktif, int[] bitmis, int[] teklif, int[] silinmis, int[] yeni, int[] eski){
+    public static void setTableOrder( int[] aktif, int[] bitmis, int[] teklif, int[] silinmis, int[] yeni, int[] eski){
         checkFile();
         try {
             settings.setProperty( "aktifColumns", encode( Arrays.toString(aktif)));
@@ -145,11 +164,30 @@ public class Settings {
             settings.setProperty( "silinmisColumns", encode( Arrays.toString(silinmis)));
             settings.setProperty( "yeniUrunColumns", encode( Arrays.toString(yeni)));
             settings.setProperty( "eskiUrunColumns", encode( Arrays.toString(eski)));
-        } catch (Exception e) {
+            
+            settings.store( new FileOutputStream( settingsFile), null);
+            
+        } catch (IOException e) {
             FileLogger.hata( e.toString());
         }
     }
     
+    public static void setTableWidth( int[] aktif, int[] bitmis, int[] teklif, int[] silinmis, int[] yeni, int[] eski){
+        checkFile();
+        try {
+            settings.setProperty( "aktifColumnsW", encode( Arrays.toString(aktif)));
+            settings.setProperty( "bitmisColumnsW", encode( Arrays.toString(bitmis)));
+            settings.setProperty( "teklifColumnsW", encode( Arrays.toString(teklif)));
+            settings.setProperty( "silinmisColumnsW", encode( Arrays.toString(silinmis)));
+            settings.setProperty( "yeniUrunColumnsW", encode( Arrays.toString(yeni)));
+            settings.setProperty( "eskiUrunColumnsW", encode( Arrays.toString(eski)));
+            
+            settings.store( new FileOutputStream( settingsFile), null);
+        } catch (IOException e) {
+            FileLogger.hata( e.toString());
+        }
+    }
+    //==========================================================================
     public static String getDBaddress(){
         checkFile();
         try {
@@ -190,7 +228,7 @@ public class Settings {
         }
         return null;
     }
-    
+    //==========================================================================
     public static int[] getAktif(){
         checkFile();
         try {
@@ -252,4 +290,65 @@ public class Settings {
         return null;
     }
     
+    //==========================================================================
+        public static int[] getAktifW(){
+        checkFile();
+        try {
+            settings.load( new FileInputStream( settingsFile));
+            return convertToInt( decode( settings.getProperty( "aktifColumnsW")));
+        } catch (IOException e) {
+            FileLogger.hata( e.toString());
+        }
+        return null;
+    }
+    public static int[] getBitmisW(){
+        checkFile();
+        try {
+            settings.load( new FileInputStream( settingsFile));
+            return convertToInt( decode( settings.getProperty( "bitmisColumnsW")));
+        } catch (IOException e) {
+            FileLogger.hata( e.toString());
+        }
+        return null;
+    }
+    public static int[] getTeklifW(){
+        checkFile();
+        try {
+            settings.load( new FileInputStream( settingsFile));
+            return convertToInt( decode( settings.getProperty( "teklifColumnsW")));
+        } catch (IOException e) {
+            FileLogger.hata( e.toString());
+        }
+        return null;
+    }
+    public static int[] getSilinmisW(){
+        checkFile();
+        try {
+            settings.load( new FileInputStream( settingsFile));
+            return convertToInt( decode( settings.getProperty( "silinmisColumnsW")));
+        } catch (IOException e) {
+            FileLogger.hata( e.toString());
+        }
+        return null;
+    }
+    public static int[] getYeniW(){
+        checkFile();
+        try {
+            settings.load( new FileInputStream( settingsFile));
+            return convertToInt( decode( settings.getProperty( "yeniUrunColumnsW")));
+        } catch (IOException e) {
+            FileLogger.hata( e.toString());
+        }
+        return null;
+    }
+    public static int[] getEskiW(){
+        checkFile();
+        try {
+            settings.load( new FileInputStream( settingsFile));
+            return convertToInt( decode( settings.getProperty( "eskiUrunColumnsW")));
+        } catch (IOException e) {
+            FileLogger.hata( e.toString());
+        }
+        return null;
+    }
 }

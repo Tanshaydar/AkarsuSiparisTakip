@@ -1,11 +1,17 @@
-#Sat Dec 07 03:34:43 EET 2013
+#Mon Dec 09 01:36:58 EET 2013
 DBname=c2lwYXJpc191dGY\=\r\n
 teklifColumns=WzAsIDEsIDIsIDMsIDQsIDVd\r\n
 silinmisColumns=WzAsIDEsIDIsIDMsIDQsIDVd\r\n
+yeniUrunColumnsW=WzE3LCAxNywgMTcsIDE3LCAxNywgMTdd\r\n
 DBaddress=MTkzLjE0MC4yMjQuNDM6MzMwNg\=\=\r\n
+silinmisColumnsW=WzE3LCAxNywgMTcsIDE3LCAxNywgMTdd\r\n
 DBuser=c2lwYXJpcw\=\=\r\n
+aktifColumnsW=WzE3LCAxNywgMTcsIDE3LCAxNywgMTdd\r\n
+eskiUrunColumnsW=WzE3LCAxNywgMTcsIDE3LCAxNywgMTdd\r\n
 eskiUrunColumns=WzAsIDEsIDIsIDMsIDQsIDVd\r\n
 bitmisColumns=WzAsIDEsIDIsIDMsIDQsIDVd\r\n
-aktifColumns=WzAsIDEsIDIsIDMsIDQsIDVd\r\n
+aktifColumns=WzIsIDMsIDEsIDUsIDQsIDBd\r\n
 DBpass=dkRBeU1KYkVVRnN4emI1cg\=\=\r\n
 yeniUrunColumns=WzAsIDEsIDIsIDMsIDQsIDVd\r\n
+teklifColumnsW=WzE3LCAxNywgMTcsIDE3LCAxNywgMTdd\r\n
+bitmisColumnsW=WzE3LCAxNywgMTcsIDE3LCAxNywgMTdd\r\n
