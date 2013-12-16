@@ -37,7 +37,7 @@ import java.text.SimpleDateFormat;
  * @author Tansel
  */
 public class Information {
-   public static final String version = "1.0.6.12.13";
+   public static final String version = "1.0.16.12.13";
    public static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
    private static int userLevel = 0;
    private static int userID = 0;

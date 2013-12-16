@@ -1,0 +1,4 @@
+16/12/2013 13:34:19
+java.sql.SQLException: Data truncated for column 'urun_durumu' at row 1
+16/12/2013 14:14:05
+java.lang.NumberFormatException: For input string: "sgf"

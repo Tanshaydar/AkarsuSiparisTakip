@@ -30,6 +30,7 @@
 
 package fumera.controller;
 
+import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
@@ -60,5 +61,13 @@ public class SiparisAdditional {
         for( int i = 0; i < widths.length; i++){
             columnModel.getColumn( i).setWidth( (int) (widths[i] * percentage));
         }
+    }
+    
+    public static int getColumnByName( JTable table, String name){
+        for( int i = 0; i < table.getColumnCount(); ++i) {
+            if( table.getColumnName(i).equals(name))
+                return i;
+        }
+        return -1;
     }
 }

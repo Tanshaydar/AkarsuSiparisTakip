@@ -75,12 +75,16 @@ public class Urun {
     }
 
     public int getUrunDurumu() {
-        if( urunDurumu.equalsIgnoreCase("Hazırlanıyor"))
-            return 1;
-        else if( urunDurumu.equalsIgnoreCase("Tamamlandı"))
-            return 2;
-        else
-            return 0;
+        switch( urunDurumu) {
+            case "Hazırlanıyor":
+                return 1;
+            case "Tamamlandı":
+                return 2;
+            case "Özel":
+                return 3;
+            default:
+                return 1;
+        }
     }
     
     public String getUrunDurumuStr(){

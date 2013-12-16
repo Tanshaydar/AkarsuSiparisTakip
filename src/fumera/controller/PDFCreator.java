@@ -73,7 +73,7 @@ public class PDFCreator {
         private Font blackFont;
         private BaseFont base = null;
     
-    public PDFCreator( Siparis siparis, String fileName, String directory){
+    public PDFCreator( Siparis siparis, String fileName, String directory, int gecerlilik, int odeme, int teslim){
         // Text values
 
         try {
@@ -275,7 +275,64 @@ public class PDFCreator {
             /////////////////////
             /////////////////////
             // Teklif / Sipariş Bilgileri & Toplam vs
+            blackFont = new Font( base, 11, Font.NORMAL, BaseColor.BLACK);
+            PdfPTable teklifToplamTable = new PdfPTable( 4);
+            teklifToplamTable.setWidths( new int[]{2,2,1,1});
+            teklifToplamTable.setWidthPercentage( 100f);
+            PdfPCell gunlerCell1 = new PdfPCell( new Paragraph("Teklif Geçerlilik Süresi: " + gecerlilik + " GÜN", blackFont));
+            gunlerCell1.setBorder( Rectangle.NO_BORDER);
+            PdfPCell gunlerCell2 = new PdfPCell( new Paragraph("Teklif Ödeme Planı: " + odeme + " GÜN", blackFont));
+            gunlerCell2.setBorder( Rectangle.NO_BORDER);
+            PdfPCell gunlerCell3 = new PdfPCell( new Paragraph("Malzeme Teslim Süresi: " + teslim + " GÜN", blackFont));
+            gunlerCell3.setBorder( Rectangle.NO_BORDER);
             
+            PdfPCell placeHolderCell = new PdfPCell( new Paragraph(""));
+            placeHolderCell.setBorder( Rectangle.NO_BORDER);
+            
+            PdfPCell genelToplamCell1 = new PdfPCell( new Paragraph("Toplam", blackFont));
+            genelToplamCell1.setBorder( Rectangle.NO_BORDER);
+            PdfPCell genelToplamCell2 = new PdfPCell( new Paragraph("% 18 K.D.V.", blackFont));
+            genelToplamCell2.setBorder( Rectangle.NO_BORDER);
+            blueFont = new Font( base, 12, Font.BOLD, colorMagenta);
+            PdfPCell genelToplamCell3 = new PdfPCell( new Paragraph("Genel Toplam", blueFont));
+            genelToplamCell3.setBorder( Rectangle.NO_BORDER);
+            
+            PdfPCell toplamKutu1 = new PdfPCell( new Paragraph( "" + siparis.getToplam(), blackFont));
+            toplamKutu1.setBorderColor( colorMagenta);
+            toplamKutu1.setBorderWidth( 2f);
+            toplamKutu1.setHorizontalAlignment( Element.ALIGN_CENTER);
+            toplamKutu1.setVerticalAlignment( Element.ALIGN_MIDDLE);
+            toplamKutu1.setPaddingBottom( 6f);
+            PdfPCell toplamKutu2 = new PdfPCell( new Paragraph( "" + (siparis.getToplam() * 0.18), blackFont));
+            toplamKutu2.setBorderColor( colorMagenta);
+            toplamKutu2.setBorderWidth( 2f);
+            toplamKutu2.setHorizontalAlignment( Element.ALIGN_CENTER);
+            toplamKutu2.setVerticalAlignment( Element.ALIGN_MIDDLE);
+            toplamKutu2.setPaddingBottom( 6f);
+            PdfPCell toplamKutu3 = new PdfPCell( new Paragraph( "" + (siparis.getToplam() * 1.18), blackFont));
+            toplamKutu3.setBorderColor( colorMagenta);
+            toplamKutu3.setBorderWidth( 2f);
+            toplamKutu3.setHorizontalAlignment( Element.ALIGN_CENTER);
+            toplamKutu3.setVerticalAlignment( Element.ALIGN_MIDDLE);
+            toplamKutu3.setPaddingBottom( 6f);
+            
+            teklifToplamTable.addCell( gunlerCell1);
+            teklifToplamTable.addCell( placeHolderCell);
+            teklifToplamTable.addCell( genelToplamCell1);
+            teklifToplamTable.addCell( toplamKutu1);
+            
+            teklifToplamTable.addCell( gunlerCell2);
+            teklifToplamTable.addCell( placeHolderCell);
+            teklifToplamTable.addCell( genelToplamCell2);
+            teklifToplamTable.addCell( toplamKutu2);
+            
+            teklifToplamTable.addCell( gunlerCell3);
+            teklifToplamTable.addCell( placeHolderCell);
+            teklifToplamTable.addCell( genelToplamCell3);
+            teklifToplamTable.addCell( toplamKutu3);
+            
+            
+            teklifToplamTable.setSpacingAfter( 20f);
             /////////////////////
             /////////////////////
             // Yalnız: bilmem kaç lira
@@ -311,6 +368,7 @@ public class PDFCreator {
             document.add( tarihTable);
             document.add( teklifTable);
             document.add( urunTable);
+            document.add( teklifToplamTable);
             document.add( toplamTable);
             document.add( imzaTable);
             //document.add( footerTable);
